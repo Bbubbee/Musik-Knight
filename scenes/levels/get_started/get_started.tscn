@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bkb1l5gt2x1b1"]
+
+[ext_resource type="Script" uid="uid://tnat58o4ofsq" path="res://scenes/levels/get_started/get_started.gd" id="1_t35l0"]
+
+[node name="GetStarted" type="Node2D" unique_id=834580641]
+script = ExtResource("1_t35l0")
+
+[node name="Arrows" type="Node2D" parent="." unique_id=1956703561]
