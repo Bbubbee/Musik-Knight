@@ -1,10 +1,10 @@
 extends Node
 
-func get_lanes(padding: Vector2, lane_count: int):
-	var vp = get_viewport().size 
+func get_lanes(padding: Vector2, lane_count: int) -> Array[int]:
+	var vp = get_viewport().get_visible_rect().size
 	var playable_width: int
 	
-	if (padding.x*2) > vp.x:
+	if (padding.x*2) > vp.x/2:
 		print("Padding is larger than the width of the screen. Removing padding.
 		") 
 		playable_width = vp.x 
@@ -20,11 +20,13 @@ func get_lanes(padding: Vector2, lane_count: int):
 
 	
 	for x in range(1, segments):
-		lanes.append(distance_between_lanes*x)
-	
+		lanes.append(distance_between_lanes*x + padding.x)
 	
 	# Debugging.
 	print("Width of screen: " + str(vp.x))
+	#print("Padding: " + str(padding.x))
 	print("Width of screen with padding: " + str(playable_width))
 	print("Distance between lanes: " + str(distance_between_lanes))
 	print("Lanes: ", str(lanes))
+	
+	return lanes 
