@@ -27,6 +27,6 @@ func get_lanes(padding: Vector2, lane_count: int) -> Array[int]:
 	#print("Padding: " + str(padding.x))
 	print("Width of screen with padding: " + str(playable_width))
 	print("Distance between lanes: " + str(distance_between_lanes))
-	print("Lanes: ", str(lanes))
+	print("Lanes: ", str(lanes) + "\n")
 	
 	return lanes 

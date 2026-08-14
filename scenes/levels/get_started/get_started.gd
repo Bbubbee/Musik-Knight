@@ -10,8 +10,20 @@ func _ready():
 	lanes = ScreenCalculator.get_lanes(Vector2(0, 0), 4) 
 	
 	
-	for x in range(4):
-		var a: Arrow = ARROW.instantiate()
-		a.position.x = lanes[x]
-		a.position.y = 0
-		arrows.add_child(a) 
+func _on_arrow_spawner_timer_timeout() -> void:
+	spawn_arrow()
+	
+
+func spawn_arrow():
+	# Spawn a singular random arrow.
+	var d = randi_range(0, 3) 
+	var x_pos: int
+	
+	x_pos = lanes[d] 
+	
+	var arrow: Arrow = ARROW.instantiate()
+	arrow.position.y = -30
+	arrow.position.x = x_pos
+	arrows.add_child(arrow) 
+	arrow.init(d) 
+	

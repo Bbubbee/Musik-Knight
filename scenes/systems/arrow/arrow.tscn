@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://u8nduxgvfxdr"]
 
 [ext_resource type="Script" uid="uid://bbheuh53qy5dj" path="res://scenes/systems/arrow/arrow.gd" id="1_wkrfx"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6igh6"]
+[ext_resource type="Texture2D" uid="uid://cx1irex1h1ea2" path="res://scenes/systems/arrow/arrowUp.png" id="2_oshrn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0kgqq"]
 radius = 9.0
@@ -10,13 +9,14 @@ radius = 9.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_k3pjg"]
 
 [node name="Arrow" type="RigidBody2D" unique_id=10245467]
+collision_layer = 2
+collision_mask = 0
 gravity_scale = 0.0
-linear_velocity = Vector2(0, 200)
+linear_velocity = Vector2(0, 100)
 script = ExtResource("1_wkrfx")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=2047294846]
-scale = Vector2(20, 20)
-texture = SubResource("PlaceholderTexture2D_6igh6")
+texture = ExtResource("2_oshrn")
 
 [node name="RigidBodyShape" type="CollisionShape2D" parent="." unique_id=201142974]
 shape = SubResource("CircleShape2D_0kgqq")
