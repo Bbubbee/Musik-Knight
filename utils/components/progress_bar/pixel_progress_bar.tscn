@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://beccf3oeappg0"]
+
+[ext_resource type="Texture2D" uid="uid://bi1rxa5k6e48o" path="res://scenes/ui/progress_bar/progress.png" id="1_iqmjf"]
+[ext_resource type="Texture2D" uid="uid://dcj8genqp4ay5" path="res://scenes/ui/progress_bar/over.png" id="2_w1u7i"]
+[ext_resource type="Script" uid="uid://b2a7ar1nmk8ri" path="res://scenes/ui/progress_bar/pixel_progress_bar.gd" id="3_iqmjf"]
+
+[node name="PixelProgressBar" type="TextureProgressBar" unique_id=211127907]
+texture_filter = 1
+offset_right = 47.0
+offset_bottom = 7.0
+mouse_filter = 2
+value = 50.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+texture_under = ExtResource("1_iqmjf")
+texture_over = ExtResource("2_w1u7i")
+texture_progress = ExtResource("1_iqmjf")
+tint_under = Color(0.4406863, 0, 0.45490196, 1)
+tint_over = Color(0.30980393, 0.01568627, 0.22445737, 1)
+tint_progress = Color(1, 0.2313726, 0.97254914, 1)
+script = ExtResource("3_iqmjf")

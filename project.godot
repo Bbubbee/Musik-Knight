@@ -23,8 +23,8 @@ ScreenCalculator="*uid://4vq4xoeg7e1v"
 
 window/size/viewport_width=180
 window/size/viewport_height=270
-window/size/window_width_override=720
-window/size/window_height_override=1080
+window/size/window_width_override=360
+window/size/window_height_override=540
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

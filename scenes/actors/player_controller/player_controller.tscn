@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dh1igm36i5b6e"]
 
 [ext_resource type="Script" uid="uid://ct0k54t4153wi" path="res://scenes/actors/player_controller/player_controller.gd" id="1_p3i1c"]
+[ext_resource type="PackedScene" uid="uid://beccf3oeappg0" path="res://utils/components/progress_bar/pixel_progress_bar.tscn" id="2_6e08y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p3i1c"]
 size = Vector2(244, 32)
@@ -14,3 +15,6 @@ collision_mask = 2
 [node name="DetetectorShape" type="CollisionShape2D" parent="DetectorArea" unique_id=1839110822]
 shape = SubResource("RectangleShape2D_p3i1c")
 debug_color = Color(0.5372549, 1, 0.8047794, 0.41960785)
+
+[node name="PixelProgressBar" parent="." unique_id=211127907 instance=ExtResource("2_6e08y")]
+offset_bottom = 8.0

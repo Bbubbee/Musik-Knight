@@ -15,4 +15,12 @@ autostart = true
 [node name="PlayerController" parent="." unique_id=370596373 instance=ExtResource("2_8nppp")]
 position = Vector2(85, 232)
 
+[node name="PixelProgressBar" parent="PlayerController" index="1" unique_id=211127907]
+offset_left = -15.0
+offset_top = 25.0
+offset_right = 32.0
+offset_bottom = 33.0
+
 [connection signal="timeout" from="ArrowSpawnerTimer" to="." method="_on_arrow_spawner_timer_timeout"]
+
+[editable path="PlayerController"]
