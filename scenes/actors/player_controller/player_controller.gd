@@ -4,25 +4,31 @@ extends Node2D
 
 func _physics_process(_delta: float) -> void:
 	
+	# NOTE: Changed all "elif" to "if" to handle concurrent presses. 
 	if Input.is_action_just_pressed("left"):
 		press_arrow(0)
-	elif Input.is_action_just_pressed("up"):
+	if Input.is_action_just_pressed("up"):
 		press_arrow(1)
-	elif Input.is_action_just_pressed("down"):
+	if Input.is_action_just_pressed("down"):
 		press_arrow(2)
-	elif Input.is_action_just_pressed("right"):
+	if Input.is_action_just_pressed("right"):
 		press_arrow(3)
 
 
-func press_arrow(dir: int = 0):
-	# Check if area is colliding with anything. If not, return. 
-	if not detector_area.has_overlapping_bodies(): 
+"""
+	An arrow has been pressed. Check if any arrows are in the detector area. 
+	@param: dir - the direction of the arrow pressed. 
+"""
+func press_arrow(dir: int = 0) -> void:
+	# Check if detector is colliding with anything. If not, return. 
+	if not detector_area.has_overlapping_areas(): 
 		print("No bodies interacting")
 		return
 	
-	for arrow: Arrow in detector_area.get_overlapping_bodies():
-		if dir == arrow.direction:
-			arrow.queue_free()
+	# An arrow has been pressed and it matches the direction pressed. 
+	# Clear that arrow. 
+	for arrow: ArrowArea in detector_area.get_overlapping_areas():
+		arrow.triggered.emit(dir) 
 	
 	
 	

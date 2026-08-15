@@ -6,8 +6,6 @@ class_name Arrow
 var speed: float
 var direction: int
 
-
-
 func init(d: int, s: float = 100):
 	speed = s
 	direction = d
@@ -23,5 +21,13 @@ func init(d: int, s: float = 100):
 		3: 
 			sprite.rotation_degrees = 90
 			
+"""
+	An ArrowArea was triggered.
+	Check if the correct direction was pressed.
+	If so, clear this arrow.
 	
-	
+	@param: The arrow direction that was triggered.
+"""
+func _on_good_zone_area_triggered(d: int) -> void:
+	if d == direction:
+		queue_free()

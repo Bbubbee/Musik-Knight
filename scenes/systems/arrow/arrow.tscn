@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bbheuh53qy5dj" path="res://scenes/systems/arrow/arrow.gd" id="1_wkrfx"]
 [ext_resource type="Texture2D" uid="uid://cx1irex1h1ea2" path="res://scenes/systems/arrow/arrowUp.png" id="2_oshrn"]
+[ext_resource type="Script" uid="uid://bfubug7kwwcwy" path="res://scenes/systems/arrow/good_zone_area.gd" id="3_yxfaw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0kgqq"]
 radius = 9.0
@@ -10,7 +11,7 @@ radius = 9.0
 radius = 18.027756
 
 [node name="Arrow" type="RigidBody2D" unique_id=10245467]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 0
 gravity_scale = 0.0
 linear_velocity = Vector2(0, 100)
@@ -20,11 +21,16 @@ script = ExtResource("1_wkrfx")
 [node name="Sprite" type="Sprite2D" parent="." unique_id=2047294846]
 texture = ExtResource("2_oshrn")
 
-[node name="RigidBodyShape" type="CollisionShape2D" parent="." unique_id=201142974]
+[node name="PhysicsShape" type="CollisionShape2D" parent="." unique_id=201142974]
 shape = SubResource("CircleShape2D_0kgqq")
 debug_color = Color(1, 0.01171875, 0.01171875, 0.41960785)
 
 [node name="GoodZoneArea" type="Area2D" parent="." unique_id=228933127]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("3_yxfaw")
 
 [node name="GoodZoneShape" type="CollisionShape2D" parent="GoodZoneArea" unique_id=416644686]
 shape = SubResource("CircleShape2D_k3pjg")
+
+[connection signal="triggered" from="GoodZoneArea" to="." method="_on_good_zone_area_triggered"]
