@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://beccf3oeappg0"]
 
-[ext_resource type="Texture2D" uid="uid://bi1rxa5k6e48o" path="res://scenes/ui/progress_bar/progress.png" id="1_iqmjf"]
-[ext_resource type="Texture2D" uid="uid://dcj8genqp4ay5" path="res://scenes/ui/progress_bar/over.png" id="2_w1u7i"]
-[ext_resource type="Script" uid="uid://b2a7ar1nmk8ri" path="res://scenes/ui/progress_bar/pixel_progress_bar.gd" id="3_iqmjf"]
+[ext_resource type="Texture2D" uid="uid://bi1rxa5k6e48o" path="res://utils/components/progress_bar/progress.png" id="1_iqmjf"]
+[ext_resource type="Texture2D" uid="uid://dcj8genqp4ay5" path="res://utils/components/progress_bar/over.png" id="2_w1u7i"]
+[ext_resource type="Script" uid="uid://b2a7ar1nmk8ri" path="res://utils/components/progress_bar/pixel_progress_bar.gd" id="3_iqmjf"]
 
 [node name="PixelProgressBar" type="TextureProgressBar" unique_id=211127907]
 texture_filter = 1
-offset_right = 47.0
-offset_bottom = 7.0
+offset_right = 178.0
+offset_bottom = 18.0
+size_flags_horizontal = 3
 mouse_filter = 2
 value = 50.0
 nine_patch_stretch = true

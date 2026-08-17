@@ -1,0 +1,60 @@
+extends Node2D
+
+@onready var arrows = $Arrows
+
+const ARROW = preload("uid://u8nduxgvfxdr")
+
+var lanes: Array[int]
+
+
+func _ready():
+	lanes = ScreenCalculator.get_lanes(Vector2(0, 0), 4) 
+	
+	Events.attack_break.connect(_on_attack_break) 
+
+
+## Initiate an attack break. [attk]
+func _on_attack_break(attk: Array, caster: String) -> void:	
+	# Spawn an arrow for each part of the attack.
+	for x: Array in attk:
+		# Multi attack: 
+		if x[0] is Array: for y in x[0]: spawn_arrow(y, caster)
+		# Singular attack:
+		else: spawn_arrow(x[0], caster)
+			
+		# Wait a given amount of time until the next attack.
+		await get_tree().create_timer(x[1]).timeout
+		# NOTE: Should this be recursive? 
+	
+	
+## Spawns an arrow in a lane. The arrow will spawn.
+func spawn_arrow(lane: int, caster: String):
+	var x_pos: int = lanes[lane] 
+	var y_pos: int 
+	
+	# Change the move direction of the attack based on the caster.
+	if caster == "p": 
+		y_pos = get_viewport().get_visible_rect().size.y
+		
+	elif caster == "e":
+		y_pos = -30
+
+	# Create the arrow. 
+	var arrow: Arrow = ARROW.instantiate()
+	arrow.position.y = y_pos
+	arrow.position.x = x_pos
+	arrows.add_child(arrow) 
+	arrow.init(lane, caster) 
+
+## An arrow has entered the players damage area.
+func _on_damage_player_area_body_entered(body: Node2D) -> void:
+	# The body is not an arrow.
+	if body is not Arrow: return
+	
+	# The body is an arrow.
+	var arrow = body as Arrow 
+	
+	# Only damage the player if the caster of the arrow is an enemy.
+	# Prevents the player from damaging themselves.
+	if arrow.caster == "e": 
+		arrow.damage_player()

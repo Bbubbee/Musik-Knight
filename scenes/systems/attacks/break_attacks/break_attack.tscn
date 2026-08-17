@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://k2vmw5r2mhsr"]
+
+[ext_resource type="Script" uid="uid://dajijm0srsfbm" path="res://scenes/systems/attacks/break_attacks/break_attack.gd" id="1_tnw6g"]
+
+[node name="BreakAttack" type="Node2D" unique_id=1620012370]
+script = ExtResource("1_tnw6g")

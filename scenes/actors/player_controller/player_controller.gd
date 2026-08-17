@@ -1,5 +1,14 @@
 extends Node2D
+
 @onready var detector_area: Area2D = $DetectorArea
+@onready var pixel_progress_bar: TextureProgressBar = $PixelProgressBar
+
+func _ready() -> void:
+	Events.change_players_health.connect(_on_change_players_health)
+	
+	
+func _on_change_players_health(change: int):
+	pixel_progress_bar.deplete(change)
 
 
 func _physics_process(_delta: float) -> void:
@@ -15,20 +24,31 @@ func _physics_process(_delta: float) -> void:
 		press_arrow(3)
 
 
-"""
-	An arrow has been pressed. Check if any arrows are in the detector area. 
-	@param: dir - the direction of the arrow pressed. 
-"""
+
+## An arrow has been pressed. Check if any arrows are in the detector area. 
+## @param: dir - the direction of the arrow pressed. 
 func press_arrow(dir: int = 0) -> void:
 	# Check if detector is colliding with anything. If not, return. 
-	if not detector_area.has_overlapping_areas(): 
-		print("No bodies interacting")
-		return
+	if not detector_area.has_overlapping_areas(): return
 	
 	# An arrow has been pressed and it matches the direction pressed. 
 	# Clear that arrow. 
 	for arrow: ArrowArea in detector_area.get_overlapping_areas():
 		arrow.triggered.emit(dir) 
 	
-	
+
+# TEMP: Break attack
+func temp_attack_break():	
+	var attk_break = [
+		[[0, 1, 3], 0.5],
+		[[0, 1], 0.5],
+		[2, 0.25],
+		[[1, 2, 0], 0.5]
+	]
+	Events.attack_break.emit(attk_break, "p") 
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):
+		temp_attack_break()
+
 	
