@@ -15,10 +15,14 @@ func init(d: int, c: String, s: float = 100, dmg: int = 5):
 	self.damage = dmg
 	self.caster = c 
 	
+	# Initialise arrow based on wether the caster is a player or enemy.
 	if c == "p": 
 		self.move_direction = -1
+		self.modulate = Color.AQUAMARINE
 	elif c == "e":
 		self.move_direction = 1 
+		self.modulate = Color.INDIAN_RED
+		
 
 	# Set rotation of sprite based on the lane they are in.
 	match d:

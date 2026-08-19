@@ -2,17 +2,27 @@ extends Node2D
 
 @onready var arrows = $Arrows
 
+@export var player: Player
+@export var enemy: Enemy 
+
 const ARROW = preload("uid://u8nduxgvfxdr")
 
 var lanes: Array[int]
-
+var enemies_last_attk 
 
 func _ready():
 	lanes = ScreenCalculator.get_lanes(Vector2(0, 0), 4) 
 	
 	Events.attack_break.connect(_on_attack_break) 
-
-
+	
+	# Initialise the player and enemy.
+	if player and enemy:
+		if player.has_signal("attacked_enemy"):
+			player.attacked_enemy.connect(_on_player_attacked_enemy)
+		if enemy.has_signal("attacked_player"):
+			enemy.attacked_player.connect(_on_enemy_attacked_player)
+	
+	
 ## Initiate an attack break. [attk]
 func _on_attack_break(attk: Array, caster: String) -> void:	
 	# Spawn an arrow for each part of the attack.
@@ -46,7 +56,9 @@ func spawn_arrow(lane: int, caster: String):
 	arrows.add_child(arrow) 
 	arrow.init(lane, caster) 
 
+
 ## An arrow has entered the players damage area.
+## Damage the player. 
 func _on_damage_player_area_body_entered(body: Node2D) -> void:
 	# The body is not an arrow.
 	if body is not Arrow: return
@@ -58,3 +70,11 @@ func _on_damage_player_area_body_entered(body: Node2D) -> void:
 	# Prevents the player from damaging themselves.
 	if arrow.caster == "e": 
 		arrow.damage_player()
+
+
+func _on_enemy_attacked_player() -> void:
+	print("enemy attacked")
+
+
+func _on_player_attacked_enemy() -> void:
+	print("player attacked")

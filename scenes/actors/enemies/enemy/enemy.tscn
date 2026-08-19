@@ -1,6 +1,18 @@
 [gd_scene format=3 uid="uid://d4npp8eq3sf6w"]
 
 [ext_resource type="Script" uid="uid://dg848ovgdynpj" path="res://scenes/actors/enemies/enemy/enemy.gd" id="1_umc6n"]
+[ext_resource type="PackedScene" uid="uid://dw5fdg8s00p7i" path="res://utils/components/state_machines/state_machine.tscn" id="2_wca1c"]
+[ext_resource type="Script" uid="uid://ch76ingdwgwvn" path="res://scenes/actors/enemies/enemy/states/idle.gd" id="3_20wx3"]
+[ext_resource type="Script" uid="uid://dk36wugbm7gae" path="res://scenes/actors/enemies/enemy/states/attacking.gd" id="4_22d5t"]
 
 [node name="Enemy" type="Node2D" unique_id=1493822380]
 script = ExtResource("1_umc6n")
+
+[node name="StateMachine" parent="." unique_id=1348697902 node_paths=PackedStringArray("initial_state") instance=ExtResource("2_wca1c")]
+initial_state = NodePath("Thinking")
+
+[node name="Thinking" type="Node" parent="StateMachine" unique_id=1418791308]
+script = ExtResource("3_20wx3")
+
+[node name="Attacking" type="Node" parent="StateMachine" unique_id=212312955]
+script = ExtResource("4_22d5t")
