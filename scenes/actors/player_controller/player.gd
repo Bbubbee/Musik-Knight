@@ -43,9 +43,11 @@ func press_arrow(dir: int = 0) -> void:
 		arrow.triggered.emit(dir) 
 	
 func attack_basic(dir: int = 0): 
-	attacked_enemy.emit()
+	attacked_enemy.emit(dir)
 
 
+func got_attacked_basic():
+	pass
 
 
 

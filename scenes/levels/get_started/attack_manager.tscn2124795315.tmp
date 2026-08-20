@@ -18,7 +18,6 @@ wait_time = 0.25
 [node name="TempNodes" type="Node2D" parent="." unique_id=1096590630]
 
 [node name="ParryTimer" type="Timer" parent="TempNodes" unique_id=911889878]
-one_shot = true
 
 [node name="DamagePlayerArea" type="Area2D" parent="." unique_id=1803828463]
 collision_layer = 0
@@ -34,9 +33,7 @@ debug_color = Color(0.80078125, 0.115737915, 0.26023924, 0.41960785)
 [node name="FolderActors" type="Node2D" parent="." unique_id=1804533423]
 
 [node name="Enemy" parent="FolderActors" unique_id=1493822380 instance=ExtResource("2_v2uub")]
-position = Vector2(91, 103)
 
 [node name="Player" parent="FolderActors" unique_id=370596373 instance=ExtResource("3_065e5")]
 
-[connection signal="timeout" from="TempNodes/ParryTimer" to="." method="_on_parry_timer_timeout"]
 [connection signal="body_entered" from="DamagePlayerArea" to="." method="_on_damage_player_area_body_entered"]

@@ -64,10 +64,6 @@ func on_child_transition(state: State, new_state_name: String, enter_params = nu
 	# Leave the current state and go to the next. 
 	if current_state: current_state.exit()
 	new_state.enter(enter_params)
-	#new_state.call_deferred("enter", enter_params)
-		# Note: I changed this to call_deferred. 
-		# This could have unintended repurcussions. 
-		# It did! I don't know what it did exactly. It messed with the state transitions. 
 	current_state = new_state
 	
 	finished_transitioning = true

@@ -17,3 +17,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("dev_enemy_atk"):
 		attack_break()
 		
+	if event.is_action_pressed("dev_enemy_atk_2"):
+		transition.emit(self, "attacking") 
+		
