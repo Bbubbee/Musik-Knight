@@ -4,9 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://d4npp8eq3sf6w" path="res://scenes/actors/enemies/enemy/enemy.tscn" id="2_v2uub"]
 [ext_resource type="PackedScene" uid="uid://dh1igm36i5b6e" path="res://scenes/actors/player_controller/player.tscn" id="3_065e5"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xvex2"]
-size = Vector2(312, 48)
-
 [node name="AttackManager" type="Node2D" unique_id=834580641 node_paths=PackedStringArray("player", "enemy")]
 script = ExtResource("1_78vdk")
 player = NodePath("FolderActors/Player")
@@ -20,23 +17,14 @@ wait_time = 0.25
 [node name="ParryTimer" type="Timer" parent="TempNodes" unique_id=911889878]
 one_shot = true
 
-[node name="DamagePlayerArea" type="Area2D" parent="." unique_id=1803828463]
-collision_layer = 0
-collision_mask = 2
-
-[node name="DamgePlayerShape" type="CollisionShape2D" parent="DamagePlayerArea" unique_id=1169811277]
-position = Vector2(100, 310)
-shape = SubResource("RectangleShape2D_xvex2")
-debug_color = Color(0.80078125, 0.115737915, 0.26023924, 0.41960785)
-
 [node name="Arrows" type="Node2D" parent="." unique_id=1956703561]
 
 [node name="FolderActors" type="Node2D" parent="." unique_id=1804533423]
 
 [node name="Enemy" parent="FolderActors" unique_id=1493822380 instance=ExtResource("2_v2uub")]
-position = Vector2(91, 103)
+position = Vector2(379, 282)
+scale = Vector2(0.8, 0.8)
 
 [node name="Player" parent="FolderActors" unique_id=370596373 instance=ExtResource("3_065e5")]
 
 [connection signal="timeout" from="TempNodes/ParryTimer" to="." method="_on_parry_timer_timeout"]
-[connection signal="body_entered" from="DamagePlayerArea" to="." method="_on_damage_player_area_body_entered"]

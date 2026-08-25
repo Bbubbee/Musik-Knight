@@ -8,17 +8,18 @@
 radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k3pjg"]
-radius = 18.027756
+radius = 73.34848
 
 [node name="Arrow" type="RigidBody2D" unique_id=10245467]
 collision_layer = 2
 collision_mask = 0
 gravity_scale = 0.0
-linear_velocity = Vector2(0, 100)
+linear_velocity = Vector2(0, 400)
 linear_damp_mode = 1
 script = ExtResource("1_wkrfx")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=2047294846]
+scale = Vector2(3, 3)
 texture = ExtResource("2_oshrn")
 
 [node name="PhysicsShape" type="CollisionShape2D" parent="." unique_id=201142974]

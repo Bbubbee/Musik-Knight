@@ -6,6 +6,67 @@
 [ext_resource type="Script" uid="uid://dk36wugbm7gae" path="res://scenes/actors/enemies/enemy/states/attacking.gd" id="4_22d5t"]
 [ext_resource type="PackedScene" uid="uid://238esogyd7if" path="res://utils/components/health_component/health_component.tscn" id="5_hmtcp"]
 [ext_resource type="Texture2D" uid="uid://cx1irex1h1ea2" path="res://scenes/systems/arrow/arrowUp.png" id="6_q42u2"]
+[ext_resource type="Texture2D" uid="uid://bc4onbqbemka3" path="res://scenes/actors/enemies/enemy/assets/spritesheet.png" id="7_ysyjw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvex2"]
+atlas = ExtResource("7_ysyjw")
+region = Rect2(0, 0, 1555, 1080)
+
+[sub_resource type="Animation" id="Animation_ysyjw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 1555, 1080)]
+}
+
+[sub_resource type="Animation" id="Animation_rffag"]
+resource_name = "attack_right"
+length = 2.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(1555, 0, 1555, 1080), Rect2(3110, 0, 1555, 1080), Rect2(4665, 0, 1555, 1080), Rect2(6220, 0, 1555, 1080)]
+}
+
+[sub_resource type="Animation" id="Animation_t1tli"]
+resource_name = "idle"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 1555, 1080)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_utf64"]
+_data = {
+&"RESET": SubResource("Animation_ysyjw"),
+&"attack_right": SubResource("Animation_rffag"),
+&"idle": SubResource("Animation_t1tli")
+}
 
 [node name="Enemy" type="Node2D" unique_id=1493822380]
 script = ExtResource("1_umc6n")
@@ -27,5 +88,12 @@ one_shot = true
 [node name="AttackDirSprite" type="Sprite2D" parent="." unique_id=833882621]
 scale = Vector2(2, 2)
 texture = ExtResource("6_q42u2")
+
+[node name="CharacterSprite" type="Sprite2D" parent="." unique_id=391592614]
+texture = SubResource("AtlasTexture_xvex2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1827542258]
+libraries/ = SubResource("AnimationLibrary_utf64")
+autoplay = &"attack_right"
 
 [connection signal="timeout" from="StateMachine/Attacking/AttackTimer" to="StateMachine/Attacking" method="_on_attack_timer_timeout"]

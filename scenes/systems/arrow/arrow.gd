@@ -9,7 +9,7 @@ var damage: int
 var move_direction: int
 var caster: String
 
-func init(d: int, c: String, s: float = 100, dmg: int = 5):
+func init(d: int, c: String, s: float = 325, dmg: int = 5):
 	self.speed = s
 	self.direction = d  # NOTE: The lane the arrow is in determines it's "direction".
 	self.damage = dmg

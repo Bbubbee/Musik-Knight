@@ -104,6 +104,7 @@ func _on_player_attacked_enemy(dir: Constants.DIR) -> void:
 	if dir == attack_to_process:
 		print("Parried!")
 		parry_timer.stop()
+		
 	else:
 		print("scratched enemy ...")
 

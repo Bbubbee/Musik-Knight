@@ -23,8 +23,8 @@ Constants="*uid://ctg4ylgki7m4a"
 
 [display]
 
-window/size/viewport_width=180
-window/size/viewport_height=270
+window/size/viewport_width=720
+window/size/viewport_height=1080
 window/size/window_width_override=360
 window/size/window_height_override=540
 window/stretch/mode="canvas_items"

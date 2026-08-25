@@ -11,6 +11,9 @@ func _ready() -> void:
 	attack_dir_sprite.visible = false
 
 
+func got_parried():
+	pass
+
 
 		
 	

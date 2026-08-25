@@ -63,8 +63,9 @@ func on_child_transition(state: State, new_state_name: String, enter_params = nu
 	
 	# Leave the current state and go to the next. 
 	if current_state: current_state.exit()
-	new_state.enter(enter_params)
 	current_state = new_state
+	
+	new_state.enter(enter_params)
 	
 	finished_transitioning = true
 
