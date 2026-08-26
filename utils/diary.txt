@@ -1,0 +1,16 @@
+
+27/08/26
+Journalling here because I can't be bothered turning on hotspot.
+Once I finally prototyped some animations, progress has been coming along
+very quickly. 
+That was a surprising realisation - art can be part of the prototyping phase.
+When I first started making the animations, I felt sullen. It was because 
+I instinctually believed I was in the "production" phase, and the work
+that I was producing was very poor. Once I was overcome by that realisation, 
+I was able to put aside my insecurities and put on my prototyping hat. That is
+a mindset of speed, chaos, and fun.
+
+What to do next?
+Make temp animations for the player. Maybe I can borrow that attacking sprite
+sheet from that one RPG I made? 
+Give the player a cooldown on their attack.

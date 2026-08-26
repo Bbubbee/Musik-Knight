@@ -1,5 +1,12 @@
 extends State
 
+@onready var animation_player = $"../../AnimationPlayer"
+@onready var thinking_timer = $ThinkingTimer
+
+func enter(_enter_params = null):
+	animation_player.play("idle")
+	thinking_timer.start(1)
+
 
 func attack_break():
 	# Code basic special attack combo.
@@ -20,3 +27,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("dev_enemy_atk_2"):
 		transition.emit(self, "attacking") 
 		
+
+
+func _on_thinking_timer_timeout():
+	transition.emit(self, "attacking") 

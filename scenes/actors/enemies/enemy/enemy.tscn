@@ -5,12 +5,11 @@
 [ext_resource type="Script" uid="uid://ch76ingdwgwvn" path="res://scenes/actors/enemies/enemy/states/idle.gd" id="3_20wx3"]
 [ext_resource type="Script" uid="uid://dk36wugbm7gae" path="res://scenes/actors/enemies/enemy/states/attacking.gd" id="4_22d5t"]
 [ext_resource type="PackedScene" uid="uid://238esogyd7if" path="res://utils/components/health_component/health_component.tscn" id="5_hmtcp"]
-[ext_resource type="Texture2D" uid="uid://cx1irex1h1ea2" path="res://scenes/systems/arrow/arrowUp.png" id="6_q42u2"]
-[ext_resource type="Texture2D" uid="uid://bc4onbqbemka3" path="res://scenes/actors/enemies/enemy/assets/spritesheet.png" id="7_ysyjw"]
+[ext_resource type="Texture2D" uid="uid://cxtfqsgpo53li" path="res://scenes/actors/enemies/enemy/assets/sprite_sheet.png" id="7_ysyjw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xvex2"]
 atlas = ExtResource("7_ysyjw")
-region = Rect2(0, 0, 1555, 1080)
+region = Rect2(0, 0, 1555, 1800)
 
 [sub_resource type="Animation" id="Animation_ysyjw"]
 length = 0.001
@@ -24,13 +23,12 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(0, 0, 1555, 1080)]
+"values": [Rect2(0, 0, 1555, 1800)]
 }
 
-[sub_resource type="Animation" id="Animation_rffag"]
-resource_name = "attack_right"
+[sub_resource type="Animation" id="Animation_utf64"]
+resource_name = "attack_up"
 length = 2.0
-loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -42,7 +40,126 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 1, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Rect2(1555, 0, 1555, 1080), Rect2(3110, 0, 1555, 1080), Rect2(4665, 0, 1555, 1080), Rect2(6220, 0, 1555, 1080)]
+"values": [Rect2(1555, 3600, 1555, 1800), Rect2(3110, 3600, 1555, 1800), Rect2(4665, 3600, 1555, 1800), Rect2(6220, 3600, 1555, 1800)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"set_parriable"
+}, {
+"args": [],
+"method": &"set_parriable"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_uw10i"]
+resource_name = "attack_left"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(1555, 1800, 1555, 1800), Rect2(3110, 1800, 1555, 1800), Rect2(4665, 1800, 1555, 1800), Rect2(6220, 1800, 1555, 1800)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"set_parriable"
+}, {
+"args": [],
+"method": &"set_parriable"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_rffag"]
+resource_name = "attack_right"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(1555, 0, 1555, 1800), Rect2(3110, 0, 1555, 1800), Rect2(4665, 0, 1555, 1800), Rect2(6220, 0, 1555, 1800)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"set_parriable"
+}, {
+"args": [],
+"method": &"set_parriable"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_1br1u"]
+resource_name = "attack_up"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(1555, 5400, 1555, 1800), Rect2(3110, 5400, 1555, 1800), Rect2(4665, 5400, 1555, 1800), Rect2(6220, 5400, 1555, 1800)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"set_parriable"
+}, {
+"args": [],
+"method": &"set_parriable"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_t1tli"]
@@ -58,13 +175,16 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(0, 0, 1555, 1080)]
+"values": [Rect2(0, 0, 1555, 1800)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_utf64"]
 _data = {
 &"RESET": SubResource("Animation_ysyjw"),
+&"attack_down": SubResource("Animation_utf64"),
+&"attack_left": SubResource("Animation_uw10i"),
 &"attack_right": SubResource("Animation_rffag"),
+&"attack_up": SubResource("Animation_1br1u"),
 &"idle": SubResource("Animation_t1tli")
 }
 
@@ -77,23 +197,20 @@ initial_state = NodePath("Thinking")
 [node name="Thinking" type="Node" parent="StateMachine" unique_id=1418791308]
 script = ExtResource("3_20wx3")
 
+[node name="ThinkingTimer" type="Timer" parent="StateMachine/Thinking" unique_id=502423294]
+one_shot = true
+autostart = true
+
 [node name="Attacking" type="Node" parent="StateMachine" unique_id=212312955]
 script = ExtResource("4_22d5t")
 
-[node name="AttackTimer" type="Timer" parent="StateMachine/Attacking" unique_id=570346516]
-one_shot = true
-
 [node name="HealthComponent" parent="." unique_id=810108133 instance=ExtResource("5_hmtcp")]
-
-[node name="AttackDirSprite" type="Sprite2D" parent="." unique_id=833882621]
-scale = Vector2(2, 2)
-texture = ExtResource("6_q42u2")
 
 [node name="CharacterSprite" type="Sprite2D" parent="." unique_id=391592614]
 texture = SubResource("AtlasTexture_xvex2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1827542258]
 libraries/ = SubResource("AnimationLibrary_utf64")
-autoplay = &"attack_right"
 
-[connection signal="timeout" from="StateMachine/Attacking/AttackTimer" to="StateMachine/Attacking" method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Thinking/ThinkingTimer" to="StateMachine/Thinking" method="_on_thinking_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Attacking" method="_on_animation_player_animation_finished"]

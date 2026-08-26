@@ -69,45 +69,27 @@ func _on_damage_player_area_body_entered(body: Node2D) -> void:
 	# Prevents the player from damaging themselves.
 	if arrow.caster == "e": 
 		arrow.damage_player()
-
-@onready var parry_timer: Timer = $TempNodes/ParryTimer
-var attack_to_process
+		
 
 func _on_enemy_attacked_player(dir: Constants.DIR) -> void:
 	if not player: return
 	
 	# Start parry window.
 	player.got_attacked_basic()
-	process_attack_basic(dir)
-	
-	# If parry window expires, deal damage to player. 
 
-
-func process_attack_basic(dir: Constants.DIR):
-	print("Attacked: " + Constants.get_string_from_dir(dir))
-	print("Start parry window")
 	
-	parry_timer.start(1)
-	attack_to_process = dir
-	
-
 func _on_player_attacked_enemy(dir: Constants.DIR) -> void:
 	if not enemy: return
 	
 	# If no parry window, just deal damage normally.
-	if parry_timer.is_stopped():
-		print("Attack enemy")
+	if not enemy.parriable:
+		print("scratched enemy")
 		return
-
+		
 	# There is a parry window. Attemp to parry. If incorrect parry, 
 	# just deal scratch damage
-	if dir == attack_to_process:
-		print("Parried!")
-		parry_timer.stop()
+	if dir == Constants.get_opposite_dir(enemy._attack_dir):
+		enemy.got_parried()
 		
 	else:
 		print("scratched enemy ...")
-
-func _on_parry_timer_timeout() -> void:
-	attack_to_process = null
-	print("Deal damage to player")

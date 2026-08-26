@@ -1,16 +1,17 @@
 extends State
 
-@onready var attack_timer: Timer = $AttackTimer
+
+@onready var animation_player = $"../../AnimationPlayer"
+
 
 func enter(_enter_params = null):
 	var rand_dir = Constants.get_rand_dir()
+	actor._attack_dir = rand_dir
 	actor.attacked_player.emit(rand_dir)
+	animation_player.play("attack_"+Constants.get_string_from_dir(rand_dir))
 	
-	actor.attack_dir_sprite.visible = true
-	actor.attack_dir_sprite.rotation_degrees = Constants.get_rotation_from_dir(rand_dir)
-	attack_timer.start()
 	
 
-func _on_attack_timer_timeout() -> void:
-	actor.attack_dir_sprite.visible = false
+
+func _on_animation_player_animation_finished(anim_name):
 	transition.emit(self, "thinking")

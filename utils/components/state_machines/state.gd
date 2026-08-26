@@ -5,7 +5,7 @@ signal transition  # Use me to transition states.
 
 var actor: Enemy  # Parent of this state. 
 
-# Used if you want to retrive the name of a stet. 
+# Used if you want to retrieve the name of a stet. 
 var state_name: String = ''
 
 ## Note: You can't change states in the enter/exit function! 

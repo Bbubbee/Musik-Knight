@@ -36,3 +36,17 @@ func get_rotation_from_dir(dir: DIR):
 			return 90
 	
 	return 270
+
+
+func get_opposite_dir(dir: DIR) -> DIR:
+	match dir:
+		DIR.LEFT:
+			return DIR.RIGHT
+		DIR.UP: 
+			return DIR.DOWN
+		DIR.DOWN:
+			return DIR.UP
+		DIR.RIGHT:  
+			return DIR.LEFT
+	
+	return DIR.LEFT
