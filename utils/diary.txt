@@ -14,3 +14,25 @@ What to do next?
 Make temp animations for the player. Maybe I can borrow that attacking sprite
 sheet from that one RPG I made? 
 Give the player a cooldown on their attack.
+
+Just gonna journal before my food arrives. How large are these text files? 
+Okay, what's most essential to the game right now? Parried/stun animations for 
+the enemy. I think I'll do that. I don't want the waiter spying my work, 
+but they probably won't give af. Like I've been spamming to myself recently: I 
+am not the main character. I fear that this mantra has become self-denigrating 
+and self-humiliating, although I have discussed this at length in my other
+journal. I work like a man with purpose, for I am a man with purpose. I want
+to make games for the rest of my life. I enjoy the process. I also want to be my
+own boss (although I wouldn't mind working for another if it's in game dev). There
+is my purpose. I also understand the value of time. I don't take it for granted.
+I don't spite it (or the activities that steal it from me). Purpose and the value 
+of time is why I work so hard. 
+
+Let's keep discussing while I wait for my food. What else is most important?
+Player animations and attack cooldown, as I have mentioned above. Let's brainstorm
+that whilst I wait for my food.  
+
+
+28/08/26
+Who should keep track of the number of times an enemy has been parried?
+Attack manager or the enemy itself? I'll try the enemy. 

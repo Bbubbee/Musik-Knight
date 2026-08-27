@@ -22,8 +22,9 @@ func got_parried():
 	print("Parried! State = " + str(name))
 	parriable = not parriable
 	
+	# WARNING: This 
 	var state = state_machine.current_state
-	state.transition.emit(state, "thinking")
+	state.transition.emit(state, "parried")
 
 
 		

@@ -11,7 +11,5 @@ func enter(_enter_params = null):
 	animation_player.play("attack_"+Constants.get_string_from_dir(rand_dir))
 	
 	
-
-
 func _on_animation_player_animation_finished(anim_name):
 	transition.emit(self, "thinking")
