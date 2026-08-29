@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://vityx4jkfg7a" path="res://scenes/actors/enemies/enemy/parried.gd" id="5_ysyjw"]
 [ext_resource type="Texture2D" uid="uid://k7it2vgv78qk" path="res://scenes/actors/enemies/enemy/assets/sprite_sheet_2.png" id="6_q42u2"]
 [ext_resource type="Script" uid="uid://kah4no1axwby" path="res://scenes/actors/enemies/enemy/broken.gd" id="6_rffag"]
+[ext_resource type="PackedScene" uid="uid://beccf3oeappg0" path="res://utils/components/progress_bar/pixel_progress_bar.tscn" id="9_t1tli"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xvex2"]
 atlas = ExtResource("6_q42u2")
@@ -258,7 +259,8 @@ script = ExtResource("6_rffag")
 
 [node name="BrokenTimer" type="Timer" parent="StateMachine/Broken" unique_id=730682868]
 
-[node name="HealthComponent" parent="." unique_id=810108133 instance=ExtResource("5_hmtcp")]
+[node name="HealthComponent" parent="." unique_id=810108133 node_paths=PackedStringArray("pixel_progress_bar") instance=ExtResource("5_hmtcp")]
+pixel_progress_bar = NodePath("../PixelProgressBar")
 
 [node name="CharacterSprite" type="Sprite2D" parent="." unique_id=391592614]
 texture = SubResource("AtlasTexture_xvex2")
@@ -266,7 +268,14 @@ texture = SubResource("AtlasTexture_xvex2")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1827542258]
 libraries/ = SubResource("AnimationLibrary_utf64")
 
+[node name="PixelProgressBar" parent="." unique_id=211127907 instance=ExtResource("9_t1tli")]
+offset_left = -384.0
+offset_top = -336.0
+offset_right = 384.0
+offset_bottom = -285.0
+
 [connection signal="timeout" from="StateMachine/Thinking/ThinkingTimer" to="StateMachine/Thinking" method="_on_thinking_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Parried/ParriedTimer" to="StateMachine/Parried" method="_on_parried_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Broken/BrokenTimer" to="StateMachine/Broken" method="_on_broken_timer_timeout"]
+[connection signal="die" from="HealthComponent" to="." method="_on_health_component_die"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Attacking" method="_on_animation_player_animation_finished"]

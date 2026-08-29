@@ -41,15 +41,18 @@ func press_arrow(dir: int = 0) -> void:
 	# Clear that arrow. 
 	for arrow: ArrowArea in arrow_detector_area.get_overlapping_areas():
 		arrow.triggered.emit(dir) 
-	
+
+
+@onready var player_atk_basic: PlayerAtkBasic = $PlayerAtkBasic
+
 func attack_basic(dir: int = 0): 
 	attacked_enemy.emit(dir)
+	player_atk_basic.attack(dir) 
+	
 
 
 func got_attacked_basic():
 	pass
-
-
 
 
 
@@ -66,5 +69,3 @@ func temp_attack_break():
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		temp_attack_break()
-
-	

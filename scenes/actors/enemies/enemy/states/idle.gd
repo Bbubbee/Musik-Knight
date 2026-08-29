@@ -8,6 +8,13 @@ func enter(_enter_params = null):
 	thinking_timer.start(1)
 
 
+func physics_process(_delta: float):
+	# The enemy has been parried a number of times.
+	# They have become broken. 
+	if actor.parried_counter >= actor.break_limit: 
+		transition.emit(self, "broken") 
+
+
 func attack_break():
 	# Code basic special attack combo.
 	var attk_break = [

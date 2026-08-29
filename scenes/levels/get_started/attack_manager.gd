@@ -84,6 +84,7 @@ func _on_player_attacked_enemy(dir: Constants.DIR) -> void:
 	# If no parry window, just deal damage normally.
 	if not enemy.parriable:
 		print("scratched enemy")
+		enemy.got_hit() 
 		return
 		
 	# There is a parry window. Attemp to parry. If incorrect parry, 
@@ -92,4 +93,4 @@ func _on_player_attacked_enemy(dir: Constants.DIR) -> void:
 		enemy.got_parried()
 		
 	else:
-		print("scratched enemy ...")
+		enemy.got_hit() 

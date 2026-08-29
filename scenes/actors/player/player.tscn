@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://dh1igm36i5b6e"]
 
-[ext_resource type="Script" uid="uid://ct0k54t4153wi" path="res://scenes/actors/player_controller/player.gd" id="1_p3i1c"]
-[ext_resource type="PackedScene" uid="uid://beccf3oeappg0" path="res://utils/components/progress_bar/pixel_progress_bar.tscn" id="2_6e08y"]
+[ext_resource type="Script" uid="uid://ct0k54t4153wi" path="res://scenes/actors/player/player.gd" id="1_l17oj"]
+[ext_resource type="PackedScene" uid="uid://beccf3oeappg0" path="res://utils/components/progress_bar/pixel_progress_bar.tscn" id="2_oj104"]
+[ext_resource type="PackedScene" uid="uid://dbafiibyaxj8k" path="res://scenes/actors/player/attacks/player_atk_basic/player_basic_atk.tscn" id="3_oj104"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p3i1c"]
 size = Vector2(858, 130)
 
 [node name="Player" type="Node2D" unique_id=370596373]
-script = ExtResource("1_p3i1c")
+script = ExtResource("1_l17oj")
 
 [node name="ArrowDetectorArea" type="Area2D" parent="." unique_id=702086124]
 collision_mask = 2
@@ -17,7 +18,7 @@ position = Vector2(384, 984)
 shape = SubResource("RectangleShape2D_p3i1c")
 debug_color = Color(0.5372549, 1, 0.8047794, 0.41960785)
 
-[node name="PixelProgressBar" parent="." unique_id=211127907 instance=ExtResource("2_6e08y")]
+[node name="PixelProgressBar" parent="." unique_id=211127907 instance=ExtResource("2_oj104")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -30,3 +31,6 @@ offset_bottom = 1068.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 4
+
+[node name="PlayerAtkBasic" parent="." unique_id=40946407 instance=ExtResource("3_oj104")]
+position = Vector2(376, 440)

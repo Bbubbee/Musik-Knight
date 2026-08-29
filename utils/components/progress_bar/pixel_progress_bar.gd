@@ -1,4 +1,5 @@
 extends TextureProgressBar
+class_name PixelProgressBar
 
 func _ready():
 	value = max_value
