@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://ct0k54t4153wi" path="res://scenes/actors/player/player.gd" id="1_l17oj"]
 [ext_resource type="PackedScene" uid="uid://beccf3oeappg0" path="res://utils/components/progress_bar/pixel_progress_bar.tscn" id="2_oj104"]
 [ext_resource type="PackedScene" uid="uid://dbafiibyaxj8k" path="res://scenes/actors/player/attacks/player_atk_basic/player_basic_atk.tscn" id="3_oj104"]
+[ext_resource type="PackedScene" uid="uid://nwos0wjtvdob" path="res://utils/components/state_machines/player_state_machine/player_state_machine.tscn" id="4_mpktj"]
+[ext_resource type="Script" uid="uid://dj321ocddfdn" path="res://scenes/actors/player/states/idle.gd" id="5_yg5k4"]
+[ext_resource type="Script" uid="uid://7njjcbuqwv2e" path="res://scenes/actors/player/attack.gd" id="6_qdyt2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p3i1c"]
 size = Vector2(858, 130)
@@ -34,3 +37,12 @@ size_flags_vertical = 4
 
 [node name="PlayerAtkBasic" parent="." unique_id=40946407 instance=ExtResource("3_oj104")]
 position = Vector2(376, 440)
+
+[node name="PlayerStateMachine" parent="." unique_id=1348697902 node_paths=PackedStringArray("initial_state") instance=ExtResource("4_mpktj")]
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="PlayerStateMachine" unique_id=957271531]
+script = ExtResource("5_yg5k4")
+
+[node name="Attack" type="Node" parent="PlayerStateMachine" unique_id=2011711286]
+script = ExtResource("6_qdyt2")

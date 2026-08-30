@@ -2,12 +2,15 @@ extends Node2D
 class_name Player
 
 signal attacked_enemy
+signal is_contacting_enemy(bool)
 
 @onready var arrow_detector_area: Area2D = $ArrowDetectorArea
 @onready var pixel_progress_bar: TextureProgressBar = $PixelProgressBar
+@onready var player_state_machine: PlayerStateMachine = $PlayerStateMachine
 
 func _ready() -> void:
 	Events.change_players_health.connect(_on_change_players_health)
+	player_state_machine.init(self)
 	
 
 func _on_change_players_health(change: int):
@@ -46,13 +49,15 @@ func press_arrow(dir: int = 0) -> void:
 @onready var player_atk_basic: PlayerAtkBasic = $PlayerAtkBasic
 
 func attack_basic(dir: int = 0): 
-	attacked_enemy.emit(dir)
-	player_atk_basic.attack(dir) 
+	return
+	if not player_atk_basic._on_cooldown: 
+		attacked_enemy.emit(dir)
+		player_atk_basic.attack(dir) 
 	
-
 
 func got_attacked_basic():
 	pass
+	
 
 
 

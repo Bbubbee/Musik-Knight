@@ -36,3 +36,10 @@ that whilst I wait for my food.
 28/08/26
 Who should keep track of the number of times an enemy has been parried?
 Attack manager or the enemy itself? I'll try the enemy. 
+
+
+29/08/26
+How should I handle processing attacks? 
+
+The player attacks. There is a set period for when the attack making
+contact. 

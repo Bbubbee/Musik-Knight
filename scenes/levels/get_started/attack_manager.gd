@@ -94,3 +94,14 @@ func _on_player_attacked_enemy(dir: Constants.DIR) -> void:
 		
 	else:
 		enemy.got_hit() 
+		
+		
+"""
+	New System: 
+		
+		Enemy and Player = 2 signals:
+			1. Indicate contact 
+			2. Indicate end of contact
+		
+		If contact period overlaps, then attempt a parry.
+"""
