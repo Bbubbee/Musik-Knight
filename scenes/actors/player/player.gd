@@ -1,12 +1,10 @@
 extends Node2D
 class_name Player
 
-signal attacked_enemy
-signal _is_attack_contacting_enemy(bool)
 
 @onready var arrow_detector_area: Area2D = $ArrowDetectorArea
-@onready var pixel_progress_bar: TextureProgressBar = $PixelProgressBar
 @onready var player_state_machine: PlayerStateMachine = $PlayerStateMachine
+@onready var health_component: Node = $HealthComponent
 
 func _ready() -> void:
 	Events.change_players_health.connect(_on_change_players_health)
@@ -14,19 +12,19 @@ func _ready() -> void:
 	
 
 func _on_change_players_health(change: int):
-	pixel_progress_bar.deplete(change)
+	health_component.health += change
 
 
 func _physics_process(_delta: float) -> void:
 	
 	# NOTE: Changed all "elif" to "if" to handle concurrent presses. 
-	if Input.is_action_just_pressed("left"):
+	if Input.is_action_just_pressed("arrow_left"):
 		press_arrow(0)
-	if Input.is_action_just_pressed("up"):
+	if Input.is_action_just_pressed("arrow_up"):
 		press_arrow(1)
-	if Input.is_action_just_pressed("down"):
+	if Input.is_action_just_pressed("arrow_down"):
 		press_arrow(2)
-	if Input.is_action_just_pressed("right"):
+	if Input.is_action_just_pressed("arrow_right"):
 		press_arrow(3)
 
 
@@ -44,8 +42,6 @@ func press_arrow(dir: int = 0) -> void:
 
 @onready var player_atk_basic: PlayerAtkBasic = $PlayerAtkBasic
 
-	
-# NOTE: Needed. Used in attack manager
-func got_attacked_basic():
-	pass
-	
+
+func _on_health_component_die() -> void:
+	self.queue_free()

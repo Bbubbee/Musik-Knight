@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ct0k54t4153wi" path="res://scenes/actors/player/player.gd" id="1_l17oj"]
 [ext_resource type="PackedScene" uid="uid://beccf3oeappg0" path="res://utils/components/progress_bar/pixel_progress_bar.tscn" id="2_oj104"]
+[ext_resource type="PackedScene" uid="uid://238esogyd7if" path="res://utils/components/health_component/health_component.tscn" id="3_g2g7f"]
 [ext_resource type="PackedScene" uid="uid://dbafiibyaxj8k" path="res://scenes/actors/player/attacks/player_atk_basic/player_basic_atk.tscn" id="3_oj104"]
 [ext_resource type="PackedScene" uid="uid://nwos0wjtvdob" path="res://utils/components/state_machines/player_state_machine/player_state_machine.tscn" id="4_mpktj"]
 [ext_resource type="Script" uid="uid://dj321ocddfdn" path="res://scenes/actors/player/states/idle.gd" id="5_yg5k4"]
@@ -35,6 +36,9 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 4
 
+[node name="HealthComponent" parent="." unique_id=2086389814 node_paths=PackedStringArray("pixel_progress_bar") instance=ExtResource("3_g2g7f")]
+pixel_progress_bar = NodePath("../PixelProgressBar")
+
 [node name="PlayerAtkBasic" parent="." unique_id=40946407 instance=ExtResource("3_oj104")]
 position = Vector2(376, 440)
 
@@ -46,3 +50,5 @@ script = ExtResource("5_yg5k4")
 
 [node name="Attack" type="Node" parent="PlayerStateMachine" unique_id=2011711286]
 script = ExtResource("6_qdyt2")
+
+[connection signal="die" from="HealthComponent" to="." method="_on_health_component_die"]

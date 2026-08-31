@@ -29,7 +29,6 @@ scale = Vector2(0.8, 0.8)
 [node name="Player" parent="FolderActors" unique_id=370596373 instance=ExtResource("3_065e5")]
 
 [node name="DevIndicator" type="Node2D" parent="." unique_id=939033307]
-visible = false
 
 [node name="EnemyAttkIndi" type="Sprite2D" parent="DevIndicator" unique_id=2111970021]
 visible = false

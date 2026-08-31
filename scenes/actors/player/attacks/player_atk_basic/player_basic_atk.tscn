@@ -71,5 +71,6 @@ texture = SubResource("AtlasTexture_nha2f")
 [node name="Animator" type="AnimationPlayer" parent="." unique_id=1932471322]
 libraries/ = SubResource("AnimationLibrary_076nm")
 autoplay = &"RESET"
+speed_scale = 1.5
 
 [connection signal="animation_finished" from="Animator" to="." method="_on_animator_animation_finished"]

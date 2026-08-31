@@ -240,6 +240,7 @@ initial_state = NodePath("Thinking")
 
 [node name="Thinking" type="Node" parent="StateMachine" unique_id=1418791308]
 script = ExtResource("3_20wx3")
+thinking_length = 0.25
 
 [node name="ThinkingTimer" type="Timer" parent="StateMachine/Thinking" unique_id=502423294]
 one_shot = true
@@ -267,6 +268,7 @@ texture = SubResource("AtlasTexture_xvex2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1827542258]
 libraries/ = SubResource("AnimationLibrary_utf64")
+speed_scale = 1.25
 
 [node name="PixelProgressBar" parent="." unique_id=211127907 instance=ExtResource("9_t1tli")]
 offset_left = -384.0

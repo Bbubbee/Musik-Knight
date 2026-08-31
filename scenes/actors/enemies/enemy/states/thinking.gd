@@ -3,9 +3,11 @@ extends State
 @onready var animation_player = $"../../AnimationPlayer"
 @onready var thinking_timer = $ThinkingTimer
 
+@export var thinking_length: float = 1
+
 func enter(_enter_params = null):
 	animation_player.play("idle")
-	thinking_timer.start(1)
+	thinking_timer.start(thinking_length)
 
 
 func physics_process(_delta: float):

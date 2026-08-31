@@ -7,7 +7,6 @@ func init() -> void:
 
 func enter(_enter_params = null):
 	var dir = _enter_params
-	actor.attacked_enemy.emit(dir)
 	actor.player_atk_basic.attack(dir) 
 
 

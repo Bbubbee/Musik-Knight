@@ -20,17 +20,27 @@ func attack(dir: Constants.DIR):
 	_direction_attacking = dir
 	_on_cooldown = true
 	
+	
 	# TEMP: Sprite's default direction is left. 
 	var r: int = 0
 	match dir:
 		Constants.DIR.LEFT:
 			r = 0
+			sprite.position = Vector2(-100, 0)
+			sprite.flip_v = false
 		Constants.DIR.UP: 
 			r = 90
+			sprite.position = Vector2(0, -100)
+			
 		Constants.DIR.DOWN:
 			r = 270
+			sprite.position = Vector2(0, 100)
+			
 		Constants.DIR.RIGHT: 
 			r = 180
+			sprite.position = Vector2(100, 0)
+			sprite.flip_v = true
+
 			
 	#sprite.rotation_degrees = Constants.get_rotation_from_dir(_direction_attacking)
 	sprite.rotation_degrees = r
