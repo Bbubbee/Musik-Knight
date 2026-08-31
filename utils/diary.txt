@@ -43,3 +43,6 @@ How should I handle processing attacks?
 
 The player attacks. There is a set period for when the attack making
 contact. 
+
+30/08/26
+NEXT: Code clean up. Start/end contact period for player attacks.

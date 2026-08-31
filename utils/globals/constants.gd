@@ -5,7 +5,8 @@ enum DIR {
 	LEFT,
 	UP,
 	DOWN,
-	RIGHT
+	RIGHT,
+	NONE
 }
 
 func get_rand_dir() -> DIR:

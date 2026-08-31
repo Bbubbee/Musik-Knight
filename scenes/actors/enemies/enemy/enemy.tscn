@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://dg848ovgdynpj" path="res://scenes/actors/enemies/enemy/enemy.gd" id="1_umc6n"]
 [ext_resource type="PackedScene" uid="uid://dw5fdg8s00p7i" path="res://utils/components/state_machines/state_machine.tscn" id="2_wca1c"]
-[ext_resource type="Script" uid="uid://ch76ingdwgwvn" path="res://scenes/actors/enemies/enemy/states/idle.gd" id="3_20wx3"]
+[ext_resource type="Script" uid="uid://ch76ingdwgwvn" path="res://scenes/actors/enemies/enemy/states/thinking.gd" id="3_20wx3"]
 [ext_resource type="Script" uid="uid://dk36wugbm7gae" path="res://scenes/actors/enemies/enemy/states/attacking.gd" id="4_22d5t"]
 [ext_resource type="PackedScene" uid="uid://238esogyd7if" path="res://utils/components/health_component/health_component.tscn" id="5_hmtcp"]
 [ext_resource type="Script" uid="uid://vityx4jkfg7a" path="res://scenes/actors/enemies/enemy/parried.gd" id="5_ysyjw"]
 [ext_resource type="Texture2D" uid="uid://k7it2vgv78qk" path="res://scenes/actors/enemies/enemy/assets/sprite_sheet_2.png" id="6_q42u2"]
-[ext_resource type="Script" uid="uid://kah4no1axwby" path="res://scenes/actors/enemies/enemy/broken.gd" id="6_rffag"]
+[ext_resource type="Script" uid="uid://kah4no1axwby" path="res://scenes/actors/enemies/enemy/states/broken.gd" id="6_rffag"]
 [ext_resource type="PackedScene" uid="uid://beccf3oeappg0" path="res://utils/components/progress_bar/pixel_progress_bar.tscn" id="9_t1tli"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xvex2"]
@@ -67,11 +67,11 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.4, 1.1),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [],
-"method": &"set_parriable"
+"args": [true],
+"method": &"set_contact"
 }, {
-"args": [],
-"method": &"set_parriable"
+"args": [false],
+"method": &"set_contact"
 }]
 }
 
@@ -101,11 +101,11 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.4, 1.1),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [],
-"method": &"set_parriable"
+"args": [true],
+"method": &"set_contact"
 }, {
-"args": [],
-"method": &"set_parriable"
+"args": [false],
+"method": &"set_contact"
 }]
 }
 
@@ -135,11 +135,11 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.4, 1.1),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [],
-"method": &"set_parriable"
+"args": [true],
+"method": &"set_contact"
 }, {
-"args": [],
-"method": &"set_parriable"
+"args": [false],
+"method": &"set_contact"
 }]
 }
 
@@ -169,11 +169,11 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.4, 1.1),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [],
-"method": &"set_parriable"
+"args": [true],
+"method": &"set_contact"
 }, {
-"args": [],
-"method": &"set_parriable"
+"args": [false],
+"method": &"set_contact"
 }]
 }
 

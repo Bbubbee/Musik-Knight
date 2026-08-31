@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://tnat58o4ofsq" path="res://scenes/levels/get_started/attack_manager.gd" id="1_78vdk"]
 [ext_resource type="PackedScene" uid="uid://d4npp8eq3sf6w" path="res://scenes/actors/enemies/enemy/enemy.tscn" id="2_v2uub"]
 [ext_resource type="PackedScene" uid="uid://dh1igm36i5b6e" path="res://scenes/actors/player/player.tscn" id="3_065e5"]
+[ext_resource type="Texture2D" uid="uid://cx1irex1h1ea2" path="res://scenes/systems/arrow/arrowUp.png" id="5_065e5"]
 
 [node name="AttackManager" type="Node2D" unique_id=834580641 node_paths=PackedStringArray("player", "enemy")]
 script = ExtResource("1_78vdk")
@@ -26,5 +27,21 @@ position = Vector2(379, 282)
 scale = Vector2(0.8, 0.8)
 
 [node name="Player" parent="FolderActors" unique_id=370596373 instance=ExtResource("3_065e5")]
+
+[node name="DevIndicator" type="Node2D" parent="." unique_id=939033307]
+
+[node name="EnemyAttkIndi" type="Sprite2D" parent="DevIndicator" unique_id=2111970021]
+visible = false
+modulate = Color(0.9764706, 0.83858544, 0.2745098, 1)
+position = Vector2(344, 437)
+scale = Vector2(4, 4)
+texture = ExtResource("5_065e5")
+
+[node name="PlayerAttkIndi" type="Sprite2D" parent="DevIndicator" unique_id=872454802]
+visible = false
+modulate = Color(0.2745098, 0.9764706, 0.54401255, 1)
+position = Vector2(344, 662)
+scale = Vector2(4, 4)
+texture = ExtResource("5_065e5")
 
 [connection signal="timeout" from="TempNodes/ParryTimer" to="." method="_on_parry_timer_timeout"]

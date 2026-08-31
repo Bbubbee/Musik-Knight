@@ -24,6 +24,12 @@ func set_parriable():
 	parriable = not parriable
 
 
+func set_contact(contacting: bool):
+	parriable = contacting
+	Events._enemy_contact_player.emit(contacting, self._attack_dir)
+
+
+
 func got_parried():
 	parriable = not parriable
 	

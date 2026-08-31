@@ -41,6 +41,8 @@ func attack(dir: Constants.DIR):
 # Sets wether the attack is making contact with a trget based on the animation.
 func set_contact(c: bool):
 	_is_contacting = c
+	
+	Events._player_contact_enemy.emit(c, _direction_attacking)
 
 
 func _on_animator_animation_finished(anim_name: StringName) -> void:
