@@ -32,7 +32,7 @@ func set_contact(contacting: bool):
 func got_parried():
 	parriable = not parriable
 	
-	# TEMP: The enemy has been parried. Either go to parried or broken state.
+	# TEMP: Handle parry. Either go to parried or broken state.
 	# WARNING: could potentially transition within enter.
 	self.parried_counter += 1 
 	var state = state_machine.current_state

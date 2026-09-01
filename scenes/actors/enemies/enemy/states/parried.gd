@@ -8,10 +8,5 @@ func enter(_enter_params = null):
 	parried_timer.start(0.6)
 
 
-#func process(_delta: float):
-	#if actor.parried_counter > actor.break_limit: 
-		#transition.emit(self, "broken")
-
-
 func _on_parried_timer_timeout():
 	transition.emit(self, "thinking") 
