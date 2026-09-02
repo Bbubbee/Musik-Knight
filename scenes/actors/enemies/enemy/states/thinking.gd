@@ -20,7 +20,7 @@ func physics_process(_delta: float):
 
 
 
-func _input(event: InputEvent) -> void:
+func on_input(event: InputEvent) -> void:
 	if event.is_action_pressed("dev_enemy_atk_2"):
 		transition.emit(self, "specialattack") 
 		

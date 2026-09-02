@@ -7,7 +7,7 @@ func enter(_enter_params = null):
 
 func physics_process(_delta: float):
 	await get_tree().create_timer(2.0).timeout
-	transition.emit(self, "thinking") 
+	transition.emit(self, "idle") 
 	
 	
 func attack_break():
@@ -20,3 +20,7 @@ func attack_break():
 	]
 	
 	Events.attack_break.emit(attk_break, "e") 
+
+
+
+	

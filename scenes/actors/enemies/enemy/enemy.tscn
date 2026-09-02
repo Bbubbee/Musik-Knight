@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://vityx4jkfg7a" path="res://scenes/actors/enemies/enemy/states/parried.gd" id="5_ysyjw"]
 [ext_resource type="Script" uid="uid://kah4no1axwby" path="res://scenes/actors/enemies/enemy/states/broken.gd" id="6_rffag"]
 [ext_resource type="Script" uid="uid://b8om72qvo8dqw" path="res://scenes/actors/enemies/enemy/states/special_attack.gd" id="7_utf64"]
+[ext_resource type="Script" uid="uid://ck1vq383qbau4" path="res://scenes/actors/enemies/enemy/states/idle.gd" id="8_uw10i"]
 [ext_resource type="PackedScene" uid="uid://beccf3oeappg0" path="res://utils/components/progress_bar/pixel_progress_bar.tscn" id="9_t1tli"]
 [ext_resource type="Texture2D" uid="uid://cd3gwv62kmtho" path="res://scenes/actors/enemies/enemy/assets/sprite_sheet_3.png" id="9_utf64"]
 
@@ -296,7 +297,7 @@ _data = {
 script = ExtResource("1_umc6n")
 
 [node name="StateMachine" parent="." unique_id=1348697902 node_paths=PackedStringArray("initial_state") instance=ExtResource("2_wca1c")]
-initial_state = NodePath("Thinking")
+initial_state = NodePath("Idle")
 
 [node name="Thinking" type="Node" parent="StateMachine" unique_id=1418791308]
 script = ExtResource("3_20wx3")
@@ -322,6 +323,9 @@ script = ExtResource("6_rffag")
 
 [node name="SpecialAttack" type="Node" parent="StateMachine" unique_id=1696534946]
 script = ExtResource("7_utf64")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1412133867]
+script = ExtResource("8_uw10i")
 
 [node name="HealthComponent" parent="." unique_id=810108133 node_paths=PackedStringArray("pixel_progress_bar") instance=ExtResource("5_hmtcp")]
 pixel_progress_bar = NodePath("../PixelProgressBar")

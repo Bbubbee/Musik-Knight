@@ -2,12 +2,14 @@ extends RigidBody2D
 class_name Arrow
 
 @onready var sprite: Sprite2D = $Sprite
+@onready var physics_shape: CollisionShape2D = $PhysicsShape
 
 var speed: float
 var direction: int
 var damage: int
 var move_direction: int
 var caster: String
+
 
 func init(d: int, c: String, s: float = 325, dmg: int = 5):
 	self.speed = s
