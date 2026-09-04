@@ -2,6 +2,7 @@ extends State
 
 func enter(_enter_params = null):
 	actor.animation_player.play("RESET") 
+	print("idle")
 
 
 func on_input(event: InputEvent) -> void:

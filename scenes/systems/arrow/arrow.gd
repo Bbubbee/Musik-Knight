@@ -8,20 +8,20 @@ var speed: float
 var direction: int
 var damage: int
 var move_direction: int
-var caster: String
+var caster: Actor
 
 
-func init(d: int, c: String, s: float = 325, dmg: int = 5):
+func init(d: int, c: Actor, s: float = 325, dmg: int = 5):
 	self.speed = s
 	self.direction = d  # NOTE: The lane the arrow is in determines it's "direction".
 	self.damage = dmg
 	self.caster = c 
 	
 	# Initialise arrow based on wether the caster is a player or enemy.
-	if c == "p": 
+	if c is Player: 
 		self.move_direction = -1
 		self.modulate = Color.AQUAMARINE
-	elif c == "e":
+	elif c is Enemy:
 		self.move_direction = 1 
 		self.modulate = Color.INDIAN_RED
 		

@@ -17,17 +17,9 @@ func attack_basic(dir: int = 0):
 		transition.emit(self, "attack", dir)
 
 
-# TEMP: Break attack
-func temp_attack_break():	
-	var attk_break = [
-		[[0, 1, 3], 0.5],
-		[[0, 1], 0.5],
-		[2, 0.25],
-		[[1, 2, 0], 0.5]
-	]
-	Events.attack_break.emit(attk_break, "p") 
+
 
 func on_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
-		temp_attack_break()
+		transition.emit(self, "breakattack")
 		

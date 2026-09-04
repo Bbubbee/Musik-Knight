@@ -17,14 +17,33 @@ func physics_process(_delta: float):
 		transition.emit(self, "broken") 
 
 
-
-
-
 func on_input(event: InputEvent) -> void:
 	if event.is_action_pressed("dev_enemy_atk_2"):
 		transition.emit(self, "specialattack") 
 		
 
-
 func _on_thinking_timer_timeout():
-	transition.emit(self, "attack") 
+	# Decide what to do.
+	var decision = randi_range(0, 100) 
+	
+	# Attack.
+	if decision <= 85:
+		transition.emit(self, "attack") 
+
+	# Special (Break) attack.
+	elif decision <= 100: 
+		transition.emit(self, "specialattack") 
+
+
+"""
+	How should an enemy think? 
+	When should a decision be made? Timer? 
+	Should the player determine decisions made? 
+		Say it's getting hit a lot, it will start attacking instead of idling. 
+	
+	What decisions can be made?:
+		1. Basic atack
+		2. Basic string
+		3. Break attaack
+		4. Idle 
+"""

@@ -48,7 +48,8 @@ func attack(dir: Constants.DIR):
 	animator.play("attack")
 
 
-# Sets wether the attack is making contact with a trget based on the animation.
+# Sets wether the attack is making contact with a target based on the animation.
+# NOTE: Used in animations.
 func set_contact(c: bool):
 	_is_contacting = c
 	

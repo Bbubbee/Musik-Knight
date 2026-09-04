@@ -1,4 +1,4 @@
-extends Node2D
+extends Actor
 class_name Enemy
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -17,6 +17,7 @@ func _ready() -> void:
 	state_machine.init(self)
 
 
+# NOTE: Used in animations. 
 func set_contact(contacting: bool):
 	Events._enemy_contact_player.emit(contacting, self._attack_dir)
 	
@@ -43,3 +44,12 @@ func got_hit():
 
 func _on_health_component_die():
 	self.queue_free()
+
+	
+"""
+	BLACKBOARD
+	
+	How many times hit / damage taken. I was thinking damage taken in a given period. 
+	Maybe an aggro bar? 
+	
+"""

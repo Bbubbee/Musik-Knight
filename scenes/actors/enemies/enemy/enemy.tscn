@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://ck1vq383qbau4" path="res://scenes/actors/enemies/enemy/states/idle.gd" id="8_uw10i"]
 [ext_resource type="PackedScene" uid="uid://beccf3oeappg0" path="res://utils/components/progress_bar/pixel_progress_bar.tscn" id="9_t1tli"]
 [ext_resource type="Texture2D" uid="uid://cd3gwv62kmtho" path="res://scenes/actors/enemies/enemy/assets/sprite_sheet_3.png" id="9_utf64"]
+[ext_resource type="Script" uid="uid://dndsb6j78hqg0" path="res://scenes/actors/enemies/enemy/aggro_component.gd" id="12_1br1u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xvex2"]
 atlas = ExtResource("9_utf64")
@@ -297,7 +298,7 @@ _data = {
 script = ExtResource("1_umc6n")
 
 [node name="StateMachine" parent="." unique_id=1348697902 node_paths=PackedStringArray("initial_state") instance=ExtResource("2_wca1c")]
-initial_state = NodePath("Idle")
+initial_state = NodePath("Thinking")
 
 [node name="Thinking" type="Node" parent="StateMachine" unique_id=1418791308]
 script = ExtResource("3_20wx3")
@@ -342,6 +343,9 @@ offset_left = -384.0
 offset_top = -336.0
 offset_right = 384.0
 offset_bottom = -285.0
+
+[node name="AggroComponent" type="Node2D" parent="." unique_id=1228193982]
+script = ExtResource("12_1br1u")
 
 [connection signal="timeout" from="StateMachine/Thinking/ThinkingTimer" to="StateMachine/Thinking" method="_on_thinking_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Parried/ParriedTimer" to="StateMachine/Parried" method="_on_parried_timer_timeout"]

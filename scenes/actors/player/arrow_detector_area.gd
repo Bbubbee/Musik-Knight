@@ -42,8 +42,7 @@ func press_arrow(dir: int = 0) -> void:
 		
 		# Get points based on how close it is to 0. (max is 106 TEMP)
 	
-		
-		if dist < max_dist*0.25:
+		if dist < max_dist*0.35:
 			print("PERFECT!")
 			Events.spawn_score_indicator.emit(dir, "PERFECT!")
 			
@@ -55,9 +54,6 @@ func press_arrow(dir: int = 0) -> void:
 			print("Good")
 			Events.spawn_score_indicator.emit(dir, "Good")
 
-		else:
-			print("Bad")
-			Events.spawn_score_indicator.emit(dir, "Bad...")
 
 
 		
