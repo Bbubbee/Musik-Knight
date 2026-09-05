@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cj2br8bq32bkn"]
+
+[ext_resource type="Script" uid="uid://ck05o15s5mk6r" path="res://scenes/actors/player/arrow_detector_area.gd" id="1_un5pu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p3i1c"]
+size = Vector2(858, 130)
+
+[node name="ArrowDetectorArea" type="Area2D" unique_id=1046222059]
+collision_mask = 2
+script = ExtResource("1_un5pu")
+
+[node name="ArrowDetectorShape" type="CollisionShape2D" parent="." unique_id=390283827]
+shape = SubResource("RectangleShape2D_p3i1c")
+debug_color = Color(0.5372549, 1, 0.8047794, 0.41960785)

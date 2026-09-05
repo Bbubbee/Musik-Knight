@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dh1igm36i5b6e"]
 
 [ext_resource type="Script" uid="uid://ct0k54t4153wi" path="res://scenes/actors/player/player.gd" id="1_l17oj"]
-[ext_resource type="Script" uid="uid://ck05o15s5mk6r" path="res://scenes/actors/player/arrow_detector_area.gd" id="2_fp13k"]
+[ext_resource type="PackedScene" uid="uid://cj2br8bq32bkn" path="res://scenes/actors/player/arrow_detector_area.tscn" id="2_i174x"]
 [ext_resource type="PackedScene" uid="uid://beccf3oeappg0" path="res://utils/components/progress_bar/pixel_progress_bar.tscn" id="2_oj104"]
 [ext_resource type="PackedScene" uid="uid://238esogyd7if" path="res://utils/components/health_component/health_component.tscn" id="3_g2g7f"]
 [ext_resource type="PackedScene" uid="uid://dbafiibyaxj8k" path="res://scenes/actors/player/attacks/player_atk_basic/player_basic_atk.tscn" id="3_oj104"]
@@ -11,20 +11,11 @@
 [ext_resource type="Script" uid="uid://b0rx7nif7g3kc" path="res://scenes/actors/player/score_indicators.gd" id="9_5bhx7"]
 [ext_resource type="Script" uid="uid://dbod1h5u7s2op" path="res://scenes/actors/player/states/break_attack.gd" id="9_i174x"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p3i1c"]
-size = Vector2(858, 130)
-
 [node name="Player" type="Node2D" unique_id=370596373]
 script = ExtResource("1_l17oj")
 
-[node name="ArrowDetectorArea" type="Area2D" parent="." unique_id=702086124]
-collision_mask = 2
-script = ExtResource("2_fp13k")
-
-[node name="ArrowDetectorShape" type="CollisionShape2D" parent="ArrowDetectorArea" unique_id=1839110822]
-position = Vector2(384, 984)
-shape = SubResource("RectangleShape2D_p3i1c")
-debug_color = Color(0.5372549, 1, 0.8047794, 0.41960785)
+[node name="ArrowDetectorArea" parent="." unique_id=1046222059 instance=ExtResource("2_i174x")]
+position = Vector2(334, 944)
 
 [node name="PixelProgressBar" parent="." unique_id=211127907 instance=ExtResource("2_oj104")]
 anchors_preset = 7
@@ -60,5 +51,8 @@ script = ExtResource("9_i174x")
 
 [node name="ScoreIndicators" type="Node2D" parent="." unique_id=892491426]
 script = ExtResource("9_5bhx7")
+
+[node name="ArrowDetectorArea2" parent="." unique_id=561286154 instance=ExtResource("2_i174x")]
+position = Vector2(338, 142)
 
 [connection signal="die" from="HealthComponent" to="." method="_on_health_component_die"]

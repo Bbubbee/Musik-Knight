@@ -2,6 +2,8 @@ extends Area2D
 
 @onready var arrow_detector_shape: CollisionShape2D = $ArrowDetectorShape
 
+
+
 	
 func _physics_process(_delta: float) -> void:
 	
