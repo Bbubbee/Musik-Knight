@@ -24,9 +24,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = 44.0
-offset_top = 987.0
-offset_right = 706.0
-offset_bottom = 1068.0
+offset_top = 1013.0
+offset_right = 696.0
+offset_bottom = 1063.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 4
@@ -51,8 +51,5 @@ script = ExtResource("9_i174x")
 
 [node name="ScoreIndicators" type="Node2D" parent="." unique_id=892491426]
 script = ExtResource("9_5bhx7")
-
-[node name="ArrowDetectorArea2" parent="." unique_id=561286154 instance=ExtResource("2_i174x")]
-position = Vector2(338, 142)
 
 [connection signal="die" from="HealthComponent" to="." method="_on_health_component_die"]

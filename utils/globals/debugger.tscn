@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c253qhp7feeay"]
+
+[ext_resource type="Script" uid="uid://wqu0146itfyc" path="res://utils/globals/debugger.gd" id="1_hlkew"]
+
+[node name="Debugger" type="Node" unique_id=26627168]
+script = ExtResource("1_hlkew")
+attack_pattern = "SpecialAttack"

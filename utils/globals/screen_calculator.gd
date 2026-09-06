@@ -23,10 +23,10 @@ func get_lanes(padding: Vector2, lane_count: int) -> Array[int]:
 		lanes.append(distance_between_lanes*x + padding.x)
 	
 	# Debugging.
-	print("Width of screen: " + str(vp.x))
+	#print("Width of screen: " + str(vp.x))
 	#print("Padding: " + str(padding.x))
-	print("Width of screen with padding: " + str(playable_width))
-	print("Distance between lanes: " + str(distance_between_lanes))
-	print("Lanes: ", str(lanes) + "\n")
+	#print("Width of screen with padding: " + str(playable_width))
+	#print("Distance between lanes: " + str(distance_between_lanes))
+	#print("Lanes: ", str(lanes) + "\n")
 	
 	return lanes 

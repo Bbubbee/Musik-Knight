@@ -23,6 +23,11 @@ func on_input(event: InputEvent) -> void:
 		
 
 func _on_thinking_timer_timeout():
+	# TEMP: control the states using debugger.
+	if not Debugger.attack_pattern == null:
+		transition.emit(self, Debugger.attack_pattern)
+	
+	
 	# Decide what to do.
 	var decision = randi_range(0, 100) 
 	

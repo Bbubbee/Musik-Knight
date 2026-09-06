@@ -332,6 +332,7 @@ script = ExtResource("8_uw10i")
 pixel_progress_bar = NodePath("../PixelProgressBar")
 
 [node name="CharacterSprite" type="Sprite2D" parent="." unique_id=391592614]
+scale = Vector2(0.8, 0.8)
 texture = SubResource("AtlasTexture_xvex2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1827542258]
@@ -339,9 +340,9 @@ libraries/ = SubResource("AnimationLibrary_utf64")
 speed_scale = 1.25
 
 [node name="PixelProgressBar" parent="." unique_id=211127907 instance=ExtResource("9_t1tli")]
-offset_left = -384.0
+offset_left = -338.0
 offset_top = -336.0
-offset_right = 384.0
+offset_right = 337.0
 offset_bottom = -285.0
 
 [node name="AggroComponent" type="Node2D" parent="." unique_id=1228193982]
