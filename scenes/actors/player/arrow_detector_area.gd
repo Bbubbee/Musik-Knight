@@ -2,8 +2,22 @@ extends Area2D
 
 @onready var arrow_detector_shape: CollisionShape2D = $ArrowDetectorShape
 
+@onready var lanes = ScreenCalculator.get_lanes(Vector2(0, 0), 4) 
+
+const ARROW_INDICATOR = preload("uid://doubj6sf6gxhr")
+@onready var folder_arrow_indicators: Node2D = $FolderArrowIndicators
 
 
+func _ready() -> void:
+	var screen_size = get_viewport().get_visible_rect().size
+	arrow_detector_shape.global_position.x = screen_size.x/2
+	arrow_detector_shape.shape.size.x = screen_size.x - 50
+	
+	for x in range(4):
+		var arrow_sprite = ARROW_INDICATOR.instantiate() 
+		folder_arrow_indicators.add_child(arrow_sprite)
+		arrow_sprite.init(x, lanes[x])
+		
 	
 func _physics_process(_delta: float) -> void:
 	
@@ -21,6 +35,9 @@ func _physics_process(_delta: float) -> void:
 ## An arrow has been pressed. Check if any arrows are in the detector area. 
 ## @param: dir - the direction of the arrow pressed. 
 func press_arrow(dir: int = 0) -> void:
+	
+	folder_arrow_indicators.get_child(dir).press_arrow()
+	
 	# Check if detector is colliding with anything. If not, return. 
 	if not self.has_overlapping_bodies(): return
 	

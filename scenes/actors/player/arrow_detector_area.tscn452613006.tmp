@@ -12,5 +12,3 @@ script = ExtResource("1_un5pu")
 [node name="ArrowDetectorShape" type="CollisionShape2D" parent="." unique_id=390283827]
 shape = SubResource("RectangleShape2D_p3i1c")
 debug_color = Color(0.5372549, 1, 0.8047794, 0.41960785)
-
-[node name="FolderArrowIndicators" type="Node2D" parent="." unique_id=32591479]

@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://doubj6sf6gxhr"]
+
+[ext_resource type="Texture2D" uid="uid://cx1irex1h1ea2" path="res://scenes/systems/arrow/arrowUp.png" id="1_urs8u"]
+[ext_resource type="Script" uid="uid://p5jm6ydl00hd" path="res://scenes/systems/arrow/arrow_indicator.gd" id="2_x11nd"]
+
+[sub_resource type="Animation" id="Animation_x11nd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3.5, 3.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_urs8u"]
+resource_name = "flash_green"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(3.5, 3.5), Vector2(5, 5), Vector2(3.5, 3.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23333335, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.20573579, 0.9910714, 0.32844448, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x11nd"]
+_data = {
+&"RESET": SubResource("Animation_x11nd"),
+&"flash_green": SubResource("Animation_urs8u")
+}
+
+[node name="ArrowIndicator" type="Sprite2D" unique_id=158304588]
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("1_urs8u")
+script = ExtResource("2_x11nd")
+
+[node name="Animator" type="AnimationPlayer" parent="." unique_id=1683357466]
+libraries/ = SubResource("AnimationLibrary_x11nd")
