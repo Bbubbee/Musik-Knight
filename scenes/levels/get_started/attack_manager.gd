@@ -38,7 +38,7 @@ var enemies_last_attack: Constants.DIR = Constants.DIR.NONE
 			FYI, this is called twice. Once when the animation first makes contact,
 			another time when it exits contact. 
 """
-func _on_player_contact_enemy(contacting: bool, dir: Constants.DIR):
+func _on_player_contact_enemy(contacting: bool, dir: Constants.DIR, dmg: float):
 	# Rotate the attack indicator to match the attack direction.
 	player_attk_indi.rotation_degrees = Constants.get_rotation_from_dir(dir) 
 	
@@ -62,7 +62,7 @@ func _on_player_contact_enemy(contacting: bool, dir: Constants.DIR):
 			players_last_attack = Constants.DIR.NONE
 			
 			if enemy: 
-				enemy.got_hit()
+				enemy.got_hit(dmg)
 
 func _on_enemy_contact_player(contacting: bool, dir: Constants.DIR):
 	enemy_attk_indi.rotation_degrees = Constants.get_rotation_from_dir(dir)
@@ -79,6 +79,7 @@ func _on_enemy_contact_player(contacting: bool, dir: Constants.DIR):
 				handle_successful_parry()
 	
 	# The enemy's attack has ended contact with the player. 	
+	# Deal damage to the player.
 	else:
 		enemy_attk_indi.visible = false
 		enemies_last_attack = Constants.DIR.NONE

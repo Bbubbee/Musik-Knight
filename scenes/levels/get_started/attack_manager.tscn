@@ -1,13 +1,10 @@
 [gd_scene format=3 uid="uid://bkb1l5gt2x1b1"]
 
 [ext_resource type="Script" uid="uid://tnat58o4ofsq" path="res://scenes/levels/get_started/attack_manager.gd" id="1_78vdk"]
-[ext_resource type="Script" uid="uid://dl0imkom2b50n" path="res://scenes/levels/get_started/attack_break_manager.gd" id="5_4xxb2"]
 [ext_resource type="Texture2D" uid="uid://cx1irex1h1ea2" path="res://scenes/systems/arrow/arrowUp.png" id="5_065e5"]
 
-[node name="AttackManager" type="Node2D" unique_id=834580641 node_paths=PackedStringArray("player", "enemy")]
+[node name="AttackManager" type="Node2D" unique_id=834580641]
 script = ExtResource("1_78vdk")
-player = NodePath("")
-enemy = NodePath("")
 
 [node name="ArrowSpawnerTimer" type="Timer" parent="." unique_id=1194297075]
 wait_time = 0.25
@@ -28,8 +25,3 @@ modulate = Color(0.2745098, 0.9764706, 0.54401255, 1)
 position = Vector2(344, 662)
 scale = Vector2(4, 4)
 texture = ExtResource("5_065e5")
-
-[node name="AttackBreakManager" type="Node2D" parent="." unique_id=345798453]
-script = ExtResource("5_4xxb2")
-
-[node name="Arrows" type="Node2D" parent="AttackBreakManager" unique_id=1473737146]

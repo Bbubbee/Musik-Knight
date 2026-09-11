@@ -54,23 +54,20 @@ func press_arrow(dir: int = 0) -> void:
 		var arrow_pos_y = arrow.physics_shape.global_position.y
 		
 		var dist = abs(detector_pos_y - arrow_pos_y)
-		print("Distance: " + str(dist))
+		#print("Distance: " + str(dist))
 		
 		var max_dist = arrow.physics_shape.shape.radius/2 + arrow_detector_shape.shape.size.y/2
-		print("Furthest distance: " + str(max_dist))
+		#print("Furthest distance: " + str(max_dist))
 		
 		# Get points based on how close it is to 0. (max is 106 TEMP)
 	
 		if dist < max_dist*0.35:
-			print("PERFECT!")
 			Events.spawn_score_indicator.emit(dir, "PERFECT!")
 			
 		elif dist < max_dist*0.5:
-			print("Great!") 
 			Events.spawn_score_indicator.emit(dir, "Great!")
 
 		elif dist < max_dist*0.75:
-			print("Good")
 			Events.spawn_score_indicator.emit(dir, "Good")
 
 

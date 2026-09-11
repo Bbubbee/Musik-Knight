@@ -11,7 +11,11 @@ func _ready():
 	Events.attack_break.connect(_on_attack_break) 
 	
 ## Initiate an attack break. [attk]
-func _on_attack_break(attk: Array, caster: Actor) -> void:	
+func _on_attack_break(attk: Array, caster: Actor = null) -> void:	
+	
+	if not caster: 
+		caster = Actor.new()
+	
 	# Spawn an arrow for each part of the attack.
 	for x: Array in attk:
 		# Multi attack: 

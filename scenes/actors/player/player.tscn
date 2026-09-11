@@ -10,6 +10,22 @@
 [ext_resource type="Script" uid="uid://7njjcbuqwv2e" path="res://scenes/actors/player/attack.gd" id="6_qdyt2"]
 [ext_resource type="Script" uid="uid://b0rx7nif7g3kc" path="res://scenes/actors/player/score_indicators.gd" id="9_5bhx7"]
 [ext_resource type="Script" uid="uid://dbod1h5u7s2op" path="res://scenes/actors/player/states/break_attack.gd" id="9_i174x"]
+[ext_resource type="Script" uid="uid://c2wvqwnmed0x4" path="res://scenes/actors/player/arrow_boundary.gd" id="11_8bj4u"]
+[ext_resource type="Script" uid="uid://bk4gxdbfg4vj8" path="res://scenes/actors/player/combo_visualiser.gd" id="12_inh5e"]
+[ext_resource type="Texture2D" uid="uid://cx1irex1h1ea2" path="res://scenes/systems/arrow/arrowUp.png" id="13_hcvpp"]
+[ext_resource type="Script" uid="uid://bxfrneofrx5tk" path="res://scenes/actors/player/explosion_particle.gd" id="14_4iwnj"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hcvpp"]
+particle_flag_disable_z = true
+angle_min = -365.9
+angle_max = 233.00002
+spread = 180.0
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_k3pjg"]
+a = Vector2(1053, 1305)
+b = Vector2(-250, 1300)
 
 [node name="Player" type="Node2D" unique_id=370596373]
 script = ExtResource("1_l17oj")
@@ -33,6 +49,7 @@ size_flags_vertical = 4
 
 [node name="HealthComponent" parent="." unique_id=2086389814 node_paths=PackedStringArray("pixel_progress_bar") instance=ExtResource("3_g2g7f")]
 pixel_progress_bar = NodePath("../PixelProgressBar")
+max_health = 1000.0
 
 [node name="PlayerAtkBasic" parent="." unique_id=40946407 instance=ExtResource("3_oj104")]
 position = Vector2(376, 440)
@@ -46,10 +63,48 @@ script = ExtResource("5_yg5k4")
 [node name="Attack" type="Node" parent="PlayerStateMachine" unique_id=2011711286]
 script = ExtResource("6_qdyt2")
 
+[node name="ExplosionParticle" type="GPUParticles2D" parent="PlayerStateMachine/Attack" unique_id=1156604401]
+position = Vector2(356, 291)
+emitting = false
+amount = 25
+texture = ExtResource("13_hcvpp")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_hcvpp")
+script = ExtResource("14_4iwnj")
+
 [node name="BreakAttack" type="Node" parent="PlayerStateMachine" unique_id=1792442115]
 script = ExtResource("9_i174x")
 
 [node name="ScoreIndicators" type="Node2D" parent="." unique_id=892491426]
 script = ExtResource("9_5bhx7")
 
+[node name="ArrowBoundary" type="Area2D" parent="." unique_id=1796248876]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("11_8bj4u")
+
+[node name="ArrowBoundaryShape" type="CollisionShape2D" parent="ArrowBoundary" unique_id=1139230977]
+shape = SubResource("SegmentShape2D_k3pjg")
+
+[node name="ComboVisualiser" type="Control" parent="." unique_id=1839219683]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 296.0
+offset_right = 720.0
+offset_bottom = 578.0
+script = ExtResource("12_inh5e")
+
+[node name="HBox" type="HBoxContainer" parent="ComboVisualiser" unique_id=2143620658]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+alignment = 1
+
 [connection signal="die" from="HealthComponent" to="." method="_on_health_component_die"]
+[connection signal="body_entered" from="ArrowBoundary" to="ArrowBoundary" method="_on_body_entered"]

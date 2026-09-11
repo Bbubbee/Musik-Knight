@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dw2i47cq3ce82"]
+
+[ext_resource type="PackedScene" uid="uid://dh1igm36i5b6e" path="res://scenes/actors/player/player.tscn" id="1_8cg7g"]
+[ext_resource type="Script" uid="uid://dlx2y715xesch" path="res://scenes/tests/test.gd" id="1_syyn5"]
+[ext_resource type="PackedScene" uid="uid://dhny7c8np0odk" path="res://scenes/levels/get_started/attack_break_manager.tscn" id="3_7wxeb"]
+
+[node name="Test" type="Node2D" unique_id=486419589]
+script = ExtResource("1_syyn5")
+
+[node name="AttackBreakManager" parent="." unique_id=1273089830 instance=ExtResource("3_7wxeb")]
+
+[node name="Player" parent="." unique_id=370596373 instance=ExtResource("1_8cg7g")]

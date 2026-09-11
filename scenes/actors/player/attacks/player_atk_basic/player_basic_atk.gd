@@ -16,9 +16,12 @@ var _is_contacting: bool
 # The direction this attack is going.
 var _direction_attacking: Constants.DIR
 
-func attack(dir: Constants.DIR):
+var damage: float 
+
+func attack(dir: Constants.DIR, d: float):
 	_direction_attacking = dir
 	_on_cooldown = true
+	self.damage = d
 	
 	
 	# TEMP: Sprite's default direction is left. 
@@ -53,7 +56,7 @@ func attack(dir: Constants.DIR):
 func set_contact(c: bool):
 	_is_contacting = c
 	
-	Events._player_contact_enemy.emit(c, _direction_attacking)
+	Events._player_contact_enemy.emit(c, _direction_attacking, damage)
 
 
 func _on_animator_animation_finished(anim_name: StringName) -> void:

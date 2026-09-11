@@ -330,6 +330,7 @@ script = ExtResource("8_uw10i")
 
 [node name="HealthComponent" parent="." unique_id=810108133 node_paths=PackedStringArray("pixel_progress_bar") instance=ExtResource("5_hmtcp")]
 pixel_progress_bar = NodePath("../PixelProgressBar")
+max_health = 1000.0
 
 [node name="CharacterSprite" type="Sprite2D" parent="." unique_id=391592614]
 scale = Vector2(0.8, 0.8)

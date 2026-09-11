@@ -46,3 +46,6 @@ contact.
 
 30/08/26
 NEXT: Code clean up. Start/end contact period for player attacks.
+
+07/09/26
+TODO: Add planned attacks > coordinating break attaks with basic attacks.

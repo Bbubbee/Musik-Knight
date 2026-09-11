@@ -33,13 +33,13 @@ func got_parried():
 		state.transition.emit(state, "parried")
 
 
-func got_hit():
+func got_hit(dmg: float):
 	var state: String = state_machine.current_state.name.to_lower()
-	
+
 	if state == "broken":
-		health_component.health -= 8
+		health_component.health -= dmg
 	else: 
-		health_component.health -= 1
+		health_component.health -= dmg/2
 
 
 func _on_health_component_die():
