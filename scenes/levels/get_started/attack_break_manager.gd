@@ -18,8 +18,17 @@ func _on_attack_break(attk: Array, caster: Actor = null) -> void:
 	
 	# Spawn an arrow for each part of the attack.
 	for x: Array in attk:
-		# Multi attack: 
-		if x[0] is Array: for y in x[0]: spawn_arrow(y, caster)
+		
+		# Check if the is_held element set.
+		# If it is, use it. If not, set it to false. 
+		var held: bool
+		if Utils.does_index_exist_in_arr(x, 2): held = x[2]
+		else: held = false
+			
+		# Multi attack:
+		if x[0] is Array: 
+			for y in x[0]: 
+				spawn_arrow(y, caster, held)
 		# Singular attack:
 		else: spawn_arrow(x[0], caster)
 			
@@ -31,7 +40,7 @@ func _on_attack_break(attk: Array, caster: Actor = null) -> void:
 	
 	
 ## Spawns an arrow in a lane. The arrow will spawn.
-func spawn_arrow(lane: int, caster: Actor):
+func spawn_arrow(lane: int, caster: Actor, is_held: bool = false ):
 	var x_pos: int = lanes[lane] 
 	var y_pos: int 
 	
@@ -47,4 +56,4 @@ func spawn_arrow(lane: int, caster: Actor):
 	arrow.position.y = y_pos
 	arrow.position.x = x_pos
 	arrows.add_child(arrow) 
-	arrow.init(lane, caster) 
+	arrow.init(lane, caster, is_held) 

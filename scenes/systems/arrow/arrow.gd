@@ -11,7 +11,7 @@ var move_direction: int
 var caster: Actor
 
 
-func init(d: int, c: Actor, s: float = 325, dmg: int = -5):
+func init(d: int, c: Actor, _is_held: bool = false, s: float = 325, dmg: int = -5):
 	self.speed = s
 	self.direction = d  # NOTE: The lane the arrow is in determines it's "direction".
 	self.damage = dmg
@@ -24,6 +24,12 @@ func init(d: int, c: Actor, s: float = 325, dmg: int = -5):
 	elif c is Enemy:
 		self.move_direction = 1 
 		self.modulate = Color.INDIAN_RED
+	
+	# TEST: is held
+	if _is_held:
+		self.modulate = Color.BLUE_VIOLET
+		sprite.scale.y = 20
+		
 		
 
 	# Set rotation of sprite based on the lane they are in.
