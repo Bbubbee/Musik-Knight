@@ -1,8 +1,8 @@
 extends Node
 
-func get_lanes(padding: Vector2, lane_count: int) -> Array[int]:
+func get_lanes(padding: Vector2, lane_count: int) -> Array[float]:
 	var vp = get_viewport().get_visible_rect().size
-	var playable_width: int
+	var playable_width: float
 	
 	if (padding.x*2) > vp.x/2:
 		print("Padding is larger than the width of the screen. Removing padding.
@@ -14,9 +14,9 @@ func get_lanes(padding: Vector2, lane_count: int) -> Array[int]:
 	# Segments are the sections between lanes. 
 	# There will always be one more segment than there are lanes.
 	var segments = lane_count + 1
-	var distance_between_lanes: int = playable_width / (segments)
+	var distance_between_lanes: float = playable_width / (segments)
 	
-	var lanes: Array[int] = []
+	var lanes: Array[float] = []
 
 	
 	for x in range(1, segments):

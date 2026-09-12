@@ -1,40 +1,14 @@
 extends State
 
-var break_attacks = [
-	#[
-		#[[0, 1], 0.5],
-		#[1, 0.25],
-		#[[2, 3], 0.25],
-		#[1, 0.5]
-	#],
-	#
-	#[
-		#[0, 0.5],
-		#[[0, 1], 0.5],
-		#[2, 0.25],
-		#[1, 0.5]
-	#],
-	#
-	#[
-		#[0, 0.25],
-		#[1, 0.25],
-		#[2, 0.25],
-		#[3, 0.25]
-	#]
-	
-	# TEST: Hold attacks
-	# [arrows, time until spawned, is held, held_length]
-	[
-		[0, 0.5, true, 3],
-		[[2, 3], 0.25],
-		[3, 0.5]
-	],
-	#[
-		#[
-			#ArrowAttackData.new().init([0, 1])
-		#]
-	#]
+@onready var break_attacks = [
+		[
+			ArrowAttackData.new().init([0], 0.25, true, 3),
+			ArrowAttackData.new().init([2, 3], 0.5),
+			ArrowAttackData.new().init([3], 0.5),
+		]
 ]
+
+# The problem is, it ceases to exist! 
 
 func _ready() -> void:
 	Events.attack_break_end.connect(_on_attack_break_end)
@@ -44,18 +18,16 @@ func enter(_enter_params = null):
 	actor.animation_player.play("special_attack") 
 	attack_break()
 
+
 func attack_break():
-	# Code basic special attack combo.
 	var attk_break = break_attacks.pick_random()
 	
 	Events.attack_break.emit(attk_break, actor) 
+	
+	
 
 
 func _on_attack_break_end(caster: Actor):
 	if caster == actor: 
 		await get_tree().create_timer(1).timeout
 		transition.emit(self, "thinking") 
-		
-
-
-	

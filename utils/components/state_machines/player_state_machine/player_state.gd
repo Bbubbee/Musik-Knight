@@ -1,6 +1,7 @@
 extends Node
 class_name PlayerState
 
+@warning_ignore("unused_signal")
 signal transition  # Use me to transition states. 
 
 var actor: Player  # Parent of this state. 

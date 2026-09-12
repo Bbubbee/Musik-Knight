@@ -35,15 +35,15 @@ var combo_string: Array[Constants.DIR] = []
 
 @onready var possible_combos
 
-func add_combo_string(dir: Constants.DIR) -> bool:
-	for combo in combos:
-		if combo_string.size() < combo.size():
-			continue
-
-		var recent_inputs = combo_string.slice(
-			combo_string.size() - combo.size()
-		)
-	return false
+#func add_combo_string(_dir: Constants.DIR) -> bool:
+	#for combo in combos:
+		#if combo_string.size() < combo.size():
+			#continue
+#
+		#var recent_inputs = combo_string.slice(
+			#combo_string.size() - combo.size()
+		#)
+	#return false
 
 
 

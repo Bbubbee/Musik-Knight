@@ -1,6 +1,6 @@
 extends Node2D
 
-var lanes: Array[int]
+var lanes: Array[float]
 
 func _ready() -> void:
 	Events.spawn_score_indicator.connect(_on_spawn_score_indi)
@@ -9,7 +9,7 @@ func _ready() -> void:
 	
 
 func _on_spawn_score_indi(dir: Constants.DIR, score: String):
-	var x_pos: int = lanes[dir] 
+	var x_pos: float = lanes[dir] 
 	var my_label = Label.new()
 	my_label.text = score
 	my_label.add_theme_font_size_override("font_size", 42)

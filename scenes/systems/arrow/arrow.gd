@@ -7,7 +7,7 @@ class_name Arrow
 
 var speed: float
 var direction: int
-var damage: int
+var damage: float
 var move_direction: int
 var caster: Actor
 
@@ -23,15 +23,13 @@ var caster: Actor
 func init(
 		d: int, 
 		c: Actor, 
-		_is_held: bool = false, 
-		held_duration: float = 0.0, 
-		s: float = 325, 
-		dmg: int = -5
+		attack_data: ArrowAttackData
 	):
 		
-	self.speed = s
-	self.direction = d  # NOTE: The lane the arrow is in determines it's "direction".
-	self.damage = dmg
+	self.direction = d
+		
+	self.speed = attack_data.speed
+	self.damage = attack_data.damage
 	self.caster = c 
 	
 	# Initialise arrow based on wether the caster is a player or enemy.
@@ -43,13 +41,13 @@ func init(
 		self.modulate = Color.INDIAN_RED
 	
 	# TEST: is held
-	if _is_held:
-		self.modulate = Color.BLUE_VIOLET
+	if attack_data.is_held:
+		self.modulate = Color.GREEN_YELLOW
 		held_sprite.visible = true
 		
 		# Position the held arrow a certain distance away based on time held.
 		# d = s/t
-		held_sprite.position.y = held_duration * 60
+		held_sprite.position.y = -(attack_data.held_duration * 60)
 	
 	else:
 		held_sprite.visible = false
