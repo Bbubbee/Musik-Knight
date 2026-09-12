@@ -21,3 +21,8 @@ debug_color = Color(0.89963233, 0.011764705, 1, 0.41960785)
 [node name="Sprite" type="Sprite2D" parent="." unique_id=2047294846]
 scale = Vector2(3, 3)
 texture = ExtResource("2_oshrn")
+
+[node name="HeldSprite" type="Sprite2D" parent="." unique_id=60067265]
+position = Vector2(0, -301)
+scale = Vector2(3, 3)
+texture = ExtResource("2_oshrn")

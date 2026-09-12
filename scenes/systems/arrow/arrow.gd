@@ -2,6 +2,7 @@ extends RigidBody2D
 class_name Arrow
 
 @onready var sprite: Sprite2D = $Sprite
+@onready var held_sprite: Sprite2D = $HeldSprite
 @onready var physics_shape: CollisionShape2D = $PhysicsShape
 
 var speed: float
@@ -10,8 +11,24 @@ var damage: int
 var move_direction: int
 var caster: Actor
 
+"""
+	Could make arrow data?
+	New script
+	
+	var arrows: []
+	var 
+"""
 
-func init(d: int, c: Actor, _is_held: bool = false, s: float = 325, dmg: int = -5):
+
+func init(
+		d: int, 
+		c: Actor, 
+		_is_held: bool = false, 
+		held_duration: float = 0.0, 
+		s: float = 325, 
+		dmg: int = -5
+	):
+		
 	self.speed = s
 	self.direction = d  # NOTE: The lane the arrow is in determines it's "direction".
 	self.damage = dmg
@@ -28,7 +45,16 @@ func init(d: int, c: Actor, _is_held: bool = false, s: float = 325, dmg: int = -
 	# TEST: is held
 	if _is_held:
 		self.modulate = Color.BLUE_VIOLET
-		sprite.scale.y = 20
+		held_sprite.visible = true
+		
+		# Position the held arrow a certain distance away based on time held.
+		# d = s/t
+		held_sprite.position.y = held_duration * 60
+	
+	else:
+		held_sprite.visible = false
+
+		
 		
 		
 
@@ -36,12 +62,16 @@ func init(d: int, c: Actor, _is_held: bool = false, s: float = 325, dmg: int = -
 	match d:
 		0:
 			sprite.rotation_degrees = 270
+			held_sprite.rotation_degrees = 270
 		1: 
 			sprite.rotation_degrees = 0
+			held_sprite.rotation_degrees = 0
 		2: 
 			sprite.rotation_degrees = 180
+			held_sprite.rotation_degrees = 180
 		3: 
 			sprite.rotation_degrees = 90
+			held_sprite.rotation_degrees = 90
 	
 	# Move the arrow. 
 	self.linear_velocity.y = speed*move_direction

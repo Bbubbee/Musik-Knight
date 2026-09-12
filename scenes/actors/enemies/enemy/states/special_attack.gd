@@ -23,12 +23,17 @@ var break_attacks = [
 	#]
 	
 	# TEST: Hold attacks
+	# [arrows, time until spawned, is held, held_length]
 	[
-		[[0, 1], 0.5, true],
-		[1, 0.25],
+		[0, 0.5, true, 3],
 		[[2, 3], 0.25],
-		[1, 0.5]
-	]
+		[3, 0.5]
+	],
+	#[
+		#[
+			#ArrowAttackData.new().init([0, 1])
+		#]
+	#]
 ]
 
 func _ready() -> void:
