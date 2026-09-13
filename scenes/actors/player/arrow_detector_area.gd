@@ -51,7 +51,6 @@ func release_arrow(dir: int):
 	for a in folder_arrow_indicators.get_children():
 		if a.dir == dir: 
 			# TODO: How come every direction is 0!?
-			print(a.dir)
 			a.release_arrow()
 	
 	# Check all indicators? But we need reference of what is held here anyways so. 

@@ -7,10 +7,11 @@ var dir: Constants.DIR
 func init(d: Constants.DIR, pos_x):
 	self.rotation_degrees = Constants.get_rotation_from_dir(d)
 	self.global_position.x = pos_x
-	self.dir = dir
+	self.dir = d
 
 
 func press_arrow():
+	print(self.dir)
 	animator.play("RESET")
 	animator.play("flash_green")
 
