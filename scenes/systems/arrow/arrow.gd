@@ -4,12 +4,18 @@ class_name Arrow
 @onready var sprite: Sprite2D = $Sprite
 @onready var held_sprite: Sprite2D = $HeldSprite
 @onready var physics_shape: CollisionShape2D = $PhysicsShape
+@onready var line_2d: Line2D = $Line2D
 
 var speed: float
 var direction: int
 var damage: float
 var move_direction: int
 var caster: Actor
+
+var is_held: bool 
+var held_duration: float
+
+var arrow_attack_data: ArrowAttackData
 
 """
 	Could make arrow data?
@@ -19,6 +25,8 @@ var caster: Actor
 	var 
 """
 
+func _ready() -> void:
+	line_2d.visible = false
 
 func init(
 		d: int, 
@@ -26,11 +34,17 @@ func init(
 		attack_data: ArrowAttackData
 	):
 		
-	self.direction = d
 		
+	self.direction = d
+	self.caster = c 
+	
+	# Attack Arrow Data. 
+	# TODO: Leave all data to the arrow_attack_data variable.
+	self.arrow_attack_data = attack_data
 	self.speed = attack_data.speed
 	self.damage = attack_data.damage
-	self.caster = c 
+	self.is_held = attack_data.is_held
+	self.held_duration = attack_data.held_duration
 	
 	# Initialise arrow based on wether the caster is a player or enemy.
 	if c is Player: 
@@ -40,21 +54,25 @@ func init(
 		self.move_direction = 1 
 		self.modulate = Color.INDIAN_RED
 	
-	# TEST: is held
+	# If the arrow is to be held.
 	if attack_data.is_held:
 		self.modulate = Color.GREEN_YELLOW
 		held_sprite.visible = true
 		
 		# Position the held arrow a certain distance away based on time held.
-		# d = s/t
-		held_sprite.position.y = -(attack_data.held_duration * 60)
-	
+		# d = s * t  Where should delta time lie? 
+		var distance: float
+		distance = self.speed * self.held_duration
+		held_sprite.position.y = -distance
+		
+		# Handle connecting line between held arrows.
+		line_2d.visible = true
+		#line_2d.points[1].y  = -distance+50 #"indices/1"
+		line_2d.set_point_position(1, Vector2(0, -distance))
+
+		#print(line_2d.points[1].y)
 	else:
 		held_sprite.visible = false
-
-		
-		
-		
 
 	# Set rotation of sprite based on the lane they are in.
 	match d:
@@ -72,17 +90,10 @@ func init(
 			held_sprite.rotation_degrees = 90
 	
 	# Move the arrow. 
-	self.linear_velocity.y = speed*move_direction
-			
-			
-## An ArrowArea was triggered.
-## Check if the correct direction was pressed.
-## If so, clear this arrow.
-## @param: The arrow direction that was triggered. 
-func _on_good_zone_area_triggered(d: int) -> void:
-	if d == direction:
-		queue_free()
+	self.linear_velocity.y = self.speed*move_direction
 
+func remove_arrow():
+	self.queue_free()
 
 func damage_player(): 
 	Events.change_players_health.emit(damage)

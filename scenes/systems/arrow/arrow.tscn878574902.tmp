@@ -29,5 +29,5 @@ texture = ExtResource("2_oshrn")
 [node name="Line2D" type="Line2D" parent="." unique_id=491145881]
 visible = false
 points = PackedVector2Array(0, 0, 0, -305)
-width = 95.0
+width = 85.0
 default_color = Color(1, 1, 1, 0.3764706)

@@ -2,7 +2,7 @@ extends State
 
 @onready var break_attacks = [
 		[
-			ArrowAttackData.new().init([0], 0.25, true, 3),
+			ArrowAttackData.new().init([0], 0.25, true, 0.75),
 			ArrowAttackData.new().init([2, 3], 0.5),
 			ArrowAttackData.new().init([3], 0.5),
 		]
