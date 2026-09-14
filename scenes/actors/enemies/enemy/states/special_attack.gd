@@ -35,9 +35,10 @@ func attack_break():
 	Events.attack_break.emit(attk_break, actor) 
 	
 	
-
-
 func _on_attack_break_end(caster: Actor):
+	if not actor.state_machine.current_state == self:
+		return
+	
 	if caster == actor: 
 		await get_tree().create_timer(1).timeout
 		transition.emit(self, "thinking") 

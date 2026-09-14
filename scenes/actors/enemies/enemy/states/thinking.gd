@@ -32,8 +32,12 @@ func _on_thinking_timer_timeout():
 	var decision = randi_range(0, 100) 
 	
 	# Attack.
-	if decision <= 85:
+	if decision <= 75:
 		transition.emit(self, "attack") 
+	
+	# Attack.
+	if decision <= 90:
+		transition.emit(self, "customattack") 
 
 	# Special (Break) attack.
 	elif decision <= 100: 

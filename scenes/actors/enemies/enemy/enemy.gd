@@ -44,12 +44,3 @@ func got_hit(dmg: float):
 
 func _on_health_component_die():
 	self.queue_free()
-
-	
-"""
-	BLACKBOARD
-	
-	How many times hit / damage taken. I was thinking damage taken in a given period. 
-	Maybe an aggro bar? 
-	
-"""

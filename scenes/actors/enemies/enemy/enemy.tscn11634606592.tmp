@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dg848ovgdynpj" path="res://scenes/actors/enemies/enemy/enemy.gd" id="1_umc6n"]
 [ext_resource type="PackedScene" uid="uid://dw5fdg8s00p7i" path="res://utils/components/state_machines/state_machine.tscn" id="2_wca1c"]
 [ext_resource type="Script" uid="uid://ch76ingdwgwvn" path="res://scenes/actors/enemies/enemy/states/thinking.gd" id="3_20wx3"]
-[ext_resource type="Script" uid="uid://dk36wugbm7gae" path="res://scenes/actors/enemies/enemy/states/attack.gd" id="4_22d5t"]
+[ext_resource type="Script" uid="uid://dk36wugbm7gae" path="res://scenes/actors/enemies/enemy/states/attacking.gd" id="4_22d5t"]
 [ext_resource type="PackedScene" uid="uid://238esogyd7if" path="res://utils/components/health_component/health_component.tscn" id="5_hmtcp"]
 [ext_resource type="Script" uid="uid://vityx4jkfg7a" path="res://scenes/actors/enemies/enemy/states/parried.gd" id="5_ysyjw"]
 [ext_resource type="Script" uid="uid://kah4no1axwby" path="res://scenes/actors/enemies/enemy/states/broken.gd" id="6_rffag"]
@@ -358,4 +358,3 @@ script = ExtResource("12_1br1u")
 [connection signal="timeout" from="StateMachine/Broken/BrokenTimer" to="StateMachine/Broken" method="_on_broken_timer_timeout"]
 [connection signal="die" from="HealthComponent" to="." method="_on_health_component_die"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Attack" method="_on_animation_player_animation_finished"]
-[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/CustomAttack" method="_on_animation_player_animation_finished"]
