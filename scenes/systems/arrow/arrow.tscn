@@ -2,10 +2,19 @@
 
 [ext_resource type="Script" uid="uid://bbheuh53qy5dj" path="res://scenes/systems/arrow/arrow.gd" id="1_wkrfx"]
 [ext_resource type="Texture2D" uid="uid://cx1irex1h1ea2" path="res://scenes/systems/arrow/arrowUp.png" id="2_oshrn"]
+[ext_resource type="Script" uid="uid://bxfrneofrx5tk" path="res://scenes/actors/player/explosion_particle.gd" id="3_yxfaw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_un5pu"]
 radius = 80.0
 height = 160.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fpm73"]
+particle_flag_disable_z = true
+angle_min = -365.9
+angle_max = 233.00002
+spread = 180.0
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
 
 [node name="Arrow" type="RigidBody2D" unique_id=10245467]
 collision_layer = 2
@@ -32,3 +41,13 @@ visible = false
 points = PackedVector2Array(0, 0, 0, -305)
 width = 95.0
 default_color = Color(1, 1, 1, 0.3764706)
+
+[node name="ExplosionParticle" type="GPUParticles2D" parent="." unique_id=2090125868]
+emitting = false
+amount = 15
+texture = ExtResource("2_oshrn")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_fpm73")
+script = ExtResource("3_yxfaw")

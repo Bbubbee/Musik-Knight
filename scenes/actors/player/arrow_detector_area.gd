@@ -6,7 +6,7 @@ const ARROW_INDICATOR = preload("uid://doubj6sf6gxhr")
 @onready var lanes = ScreenCalculator.get_lanes(Vector2(0, 0), 4) 
 @onready var folder_arrow_indicators: Node2D = $FolderArrowIndicators
 
-var held_arrows: Array[int]
+var held_arrows: Array[Arrow]
 
 func _ready() -> void:
 	# Position the arrow detector. 
@@ -52,6 +52,17 @@ func release_arrow(dir: int):
 	
 	arrow_indicator.release_arrow()
 	
+	if held_arrows.is_empty(): return
+	# Release any arrows being held.
+	for arrow: Arrow in held_arrows:
+		if not arrow.direction == dir: continue
+		
+		arrow.remove_arrow()
+		held_arrows.erase(arrow)
+
+	
+	
+	
 	
 ## An arrow has been pressed. Check if any arrows are in the detector area. 
 ## @param: dir - the direction of the arrow pressed. 
@@ -72,14 +83,19 @@ func press_arrow(dir: int = 0) -> void:
 		if not arrow.direction == dir: continue
 		
 		## HELD ARROWS:
-		if arrow.is_held:
+		if arrow.is_held and not arrow.is_currently_held:
 			folder_arrow_indicators.get_child(dir).hold_arrow()
+			arrow.handle_held_press()
+			held_arrows.append(arrow) 
+			
+			# Connect the signal? 
+			
+			
 			continue
 		
 		## NOT HELD ARROWS:	
 		
 		# Handle Scoring: 
-		
 		# Check the distance of the center of the arrow to the center of the detector area.
 		var detector_pos_y = arrow_detector_shape.global_position.y
 		
@@ -103,5 +119,17 @@ func press_arrow(dir: int = 0) -> void:
 		# Clear the arrow.
 		arrow.remove_arrow()
 
-		
-		
+	
+func handle_held_arrow():
+	pass
+
+
+func _on_body_exited(body: Node2D) -> void:
+	# Return if body is NOT an Arrow, and NOT held.
+	if not body is Arrow: return 
+	var held_arrow = body as Arrow
+	if not held_arrow.is_held: return
+	
+	release_arrow(held_arrow.direction)
+	
+	print("Held arrow left")

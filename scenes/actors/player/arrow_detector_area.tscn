@@ -14,3 +14,7 @@ shape = SubResource("RectangleShape2D_p3i1c")
 debug_color = Color(0.5372549, 1, 0.8047794, 0.41960785)
 
 [node name="FolderArrowIndicators" type="Node2D" parent="." unique_id=32591479]
+
+[node name="FolderHeldArrows" type="Node2D" parent="." unique_id=149534031]
+
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

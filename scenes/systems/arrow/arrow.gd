@@ -5,26 +5,20 @@ class_name Arrow
 @onready var held_sprite: Sprite2D = $HeldSprite
 @onready var physics_shape: CollisionShape2D = $PhysicsShape
 @onready var line_2d: Line2D = $Line2D
+@onready var explosion_particle: GPUParticles2D = $ExplosionParticle
 
 var speed: float
 var direction: int
 var damage: float
 var move_direction: int
 var caster: Actor
-
 var is_held: bool 
+var is_currently_held: bool 
 var held_duration: float
 var held_distance: float
-
+var is_active: bool = true
 var arrow_attack_data: ArrowAttackData
 
-"""
-	Could make arrow data?
-	New script
-	
-	var arrows: []
-	var 
-"""
 
 func _ready() -> void:
 	line_2d.visible = false
@@ -58,7 +52,6 @@ func init(
 	
 	# If the arrow is to be held.
 	if attack_data.is_held:
-		self.modulate = Color.GREEN_YELLOW
 		held_sprite.visible = true
 		
 		# Position the held arrow a certain distance away based on time held.
@@ -78,9 +71,6 @@ func init(
 		physics_shape.shape = new_shape
 		physics_shape.position.y = -held_distance/2
 
-	
-
-		#print(line_2d.points[1].y)
 	else:
 		held_sprite.visible = false
 
@@ -104,9 +94,24 @@ func init(
 
 
 func remove_arrow():
+	if not is_active: return
+	
+	is_active = false
+	explosion_particle.emitting = true 
+	sprite.hide()
+	held_sprite.hide()
+	line_2d.hide()
+	await explosion_particle.finished
 	self.queue_free()
 
 
 func damage_player(): 
 	Events.change_players_health.emit(damage)
 	self.queue_free()
+
+
+func handle_held_press():
+	is_currently_held = true 
+	self.modulate = Color.LAWN_GREEN
+	
+	print('handle held')
