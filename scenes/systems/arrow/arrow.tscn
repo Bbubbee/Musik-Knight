@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://bbheuh53qy5dj" path="res://scenes/systems/arrow/arrow.gd" id="1_wkrfx"]
 [ext_resource type="Texture2D" uid="uid://cx1irex1h1ea2" path="res://scenes/systems/arrow/arrowUp.png" id="2_oshrn"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0kgqq"]
-radius = 83.21658
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_un5pu"]
+radius = 80.0
+height = 160.0
 
 [node name="Arrow" type="RigidBody2D" unique_id=10245467]
 collision_layer = 2
@@ -14,7 +15,7 @@ linear_damp_mode = 1
 script = ExtResource("1_wkrfx")
 
 [node name="PhysicsShape" type="CollisionShape2D" parent="." unique_id=201142974]
-shape = SubResource("CircleShape2D_0kgqq")
+shape = SubResource("CapsuleShape2D_un5pu")
 debug_color = Color(0.89963233, 0.011764705, 1, 0.41960785)
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=2047294846]

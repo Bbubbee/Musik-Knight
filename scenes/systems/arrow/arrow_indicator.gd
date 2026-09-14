@@ -3,6 +3,8 @@ extends Sprite2D
 var dir: Constants.DIR
 @onready var animator: AnimationPlayer = $Animator
 
+var is_held: bool = false
+
 
 func init(d: Constants.DIR, pos_x):
 	self.rotation_degrees = Constants.get_rotation_from_dir(d)
@@ -11,13 +13,15 @@ func init(d: Constants.DIR, pos_x):
 
 
 func press_arrow():
-	print(self.dir)
 	animator.play("RESET")
 	animator.play("flash_green")
 
 
 func hold_arrow():
+	is_held = true 
 	animator.play("change_green")
 
+
 func release_arrow():
+	is_held = false
 	animator.play("change_white")

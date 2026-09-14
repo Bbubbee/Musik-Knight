@@ -34,7 +34,6 @@ func _physics_process(_delta: float) -> void:
 		press_arrow(3)
 	
 	
-	# NOTE: Changed all "elif" to "if" to handle concurrent presses. 
 	if Input.is_action_just_released("arrow_left"):
 		release_arrow(0)
 	if Input.is_action_just_released("arrow_up"):
@@ -44,17 +43,16 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_released("arrow_right"):
 		release_arrow(3)
 	
-	
-func release_arrow(dir: int):
-	held_arrows.erase(dir) 
-	
-	for a in folder_arrow_indicators.get_children():
-		if a.dir == dir: 
-			# TODO: How come every direction is 0!?
-			a.release_arrow()
-	
-	# Check all indicators? But we need reference of what is held here anyways so. 
 
+# Release the arrow if it is being held.
+# NOTE: An arrow can only be held if it is a held arrow. 
+func release_arrow(dir: int):
+	var arrow_indicator = folder_arrow_indicators.get_child(dir)
+	if not arrow_indicator.is_held: return
+	
+	arrow_indicator.release_arrow()
+	
+	
 ## An arrow has been pressed. Check if any arrows are in the detector area. 
 ## @param: dir - the direction of the arrow pressed. 
 func press_arrow(dir: int = 0) -> void:
@@ -75,10 +73,7 @@ func press_arrow(dir: int = 0) -> void:
 		
 		## HELD ARROWS:
 		if arrow.is_held:
-			print('hold me day')
-			held_arrows.append(dir) 
 			folder_arrow_indicators.get_child(dir).hold_arrow()
-		
 			continue
 		
 		## NOT HELD ARROWS:	
@@ -92,10 +87,8 @@ func press_arrow(dir: int = 0) -> void:
 		var arrow_pos_y = arrow.physics_shape.global_position.y
 		
 		var dist = abs(detector_pos_y - arrow_pos_y)
-		#print("Distance: " + str(dist))
-		
+	
 		var max_dist = arrow.physics_shape.shape.radius/2 + arrow_detector_shape.shape.size.y/2
-		#print("Furthest distance: " + str(max_dist))
 		
 		# Get points based on how close it is to 0. (max is 106 TEMP)
 		if dist < max_dist*0.35:
@@ -109,8 +102,6 @@ func press_arrow(dir: int = 0) -> void:
 		
 		# Clear the arrow.
 		arrow.remove_arrow()
-
-
 
 		
 		

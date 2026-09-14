@@ -14,6 +14,7 @@ var caster: Actor
 
 var is_held: bool 
 var held_duration: float
+var held_distance: float
 
 var arrow_attack_data: ArrowAttackData
 
@@ -27,6 +28,7 @@ var arrow_attack_data: ArrowAttackData
 
 func _ready() -> void:
 	line_2d.visible = false
+
 
 func init(
 		d: int, 
@@ -60,15 +62,23 @@ func init(
 		held_sprite.visible = true
 		
 		# Position the held arrow a certain distance away based on time held.
-		# d = s * t  Where should delta time lie? 
-		var distance: float
-		distance = self.speed * self.held_duration
-		held_sprite.position.y = -distance
+		self.held_distance = self.speed * self.held_duration
+		held_sprite.position.y = -held_distance
 		
 		# Handle connecting line between held arrows.
 		line_2d.visible = true
-		#line_2d.points[1].y  = -distance+50 #"indices/1"
-		line_2d.set_point_position(1, Vector2(0, -distance))
+		line_2d.set_point_position(1, Vector2(0, -held_distance))
+		
+		# Handle changed area shape to accomodate held arrow.
+		# NOTE: New shape had to be created. Editing the current shape edited the 
+		# shape shared by all Arrow instances. 
+		var new_shape = CapsuleShape2D.new()
+		new_shape.radius = physics_shape.shape.radius
+		new_shape.height = physics_shape.shape.height + held_distance
+		physics_shape.shape = new_shape
+		physics_shape.position.y = -held_distance/2
+
+	
 
 		#print(line_2d.points[1].y)
 	else:
@@ -92,8 +102,10 @@ func init(
 	# Move the arrow. 
 	self.linear_velocity.y = self.speed*move_direction
 
+
 func remove_arrow():
 	self.queue_free()
+
 
 func damage_player(): 
 	Events.change_players_health.emit(damage)

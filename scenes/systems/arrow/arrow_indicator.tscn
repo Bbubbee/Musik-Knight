@@ -132,3 +132,4 @@ script = ExtResource("2_x11nd")
 
 [node name="Animator" type="AnimationPlayer" parent="." unique_id=1683357466]
 libraries/ = SubResource("AnimationLibrary_x11nd")
+speed_scale = 2.0
