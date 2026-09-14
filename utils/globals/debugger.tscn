@@ -4,4 +4,3 @@
 
 [node name="Debugger" type="Node" unique_id=26627168]
 script = ExtResource("1_hlkew")
-attack_pattern = "SpecialAttack"

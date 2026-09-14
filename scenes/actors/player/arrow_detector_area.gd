@@ -15,58 +15,55 @@ func _ready() -> void:
 	arrow_detector_shape.shape.size.x = screen_size.x - 50
 	
 	# Spawn in arrow indicators for each lane.
-	for x in range(4):
+	# These inidicate when an arrow has been pressed.
+	for a_i in range(4):
 		var arrow_sprite = ARROW_INDICATOR.instantiate() 
 		folder_arrow_indicators.add_child(arrow_sprite)
-		arrow_sprite.init(x, lanes[x])
+		arrow_sprite.init(a_i, lanes[a_i])
 		
 	
 func _physics_process(_delta: float) -> void:
 	
 	# NOTE: Changed all "elif" to "if" to handle concurrent presses. 
 	if Input.is_action_just_pressed("arrow_left"):
-		press_arrow(0)
+		press_lane(0)
 	if Input.is_action_just_pressed("arrow_up"):
-		press_arrow(1)
+		press_lane(1)
 	if Input.is_action_just_pressed("arrow_down"):
-		press_arrow(2)
+		press_lane(2)
 	if Input.is_action_just_pressed("arrow_right"):
-		press_arrow(3)
+		press_lane(3)
 	
-	
+	# Checks if a lane has been released. 
 	if Input.is_action_just_released("arrow_left"):
-		release_arrow(0)
+		release_lane(0)
 	if Input.is_action_just_released("arrow_up"):
-		release_arrow(1)
+		release_lane(1)
 	if Input.is_action_just_released("arrow_down"):
-		release_arrow(2)
+		release_lane(2)
 	if Input.is_action_just_released("arrow_right"):
-		release_arrow(3)
+		release_lane(3)
 	
 
 # Release the arrow if it is being held.
-# NOTE: An arrow can only be held if it is a held arrow. 
-func release_arrow(dir: int):
+# NOTE: A lane can only be held if it is holding down a held arrow. 
+func release_lane(dir: int):
+	# Release arrow indicator.
 	var arrow_indicator = folder_arrow_indicators.get_child(dir)
 	if not arrow_indicator.is_held: return
-	
 	arrow_indicator.release_arrow()
 	
+	# Remove arrow from list of held arrows.
 	if held_arrows.is_empty(): return
 	# Release any arrows being held.
 	for arrow: Arrow in held_arrows:
 		if not arrow.direction == dir: continue
-		
-		arrow.remove_arrow()
+		arrow.remove_arrow(arrow_detector_shape.global_position.y)
 		held_arrows.erase(arrow)
 
-	
-	
-	
-	
-## An arrow has been pressed. Check if any arrows are in the detector area. 
-## @param: dir - the direction of the arrow pressed. 
-func press_arrow(dir: int = 0) -> void:
+
+# An arrow has been pressed. Check if any arrows are in the detector area. 
+func press_lane(dir: int = 0) -> void:
 	# Indicate that a directional arrow has been pressed. 
 	folder_arrow_indicators.get_child(dir).press_arrow()
 	
@@ -87,16 +84,11 @@ func press_arrow(dir: int = 0) -> void:
 			folder_arrow_indicators.get_child(dir).hold_arrow()
 			arrow.handle_held_press()
 			held_arrows.append(arrow) 
-			
-			# Connect the signal? 
-			
-			
 			continue
 		
 		## NOT HELD ARROWS:	
 		
 		# Handle Scoring: 
-		# Check the distance of the center of the arrow to the center of the detector area.
 		var detector_pos_y = arrow_detector_shape.global_position.y
 		
 		# Grab the position of the center (only y pos).
@@ -119,17 +111,12 @@ func press_arrow(dir: int = 0) -> void:
 		# Clear the arrow.
 		arrow.remove_arrow()
 
-	
-func handle_held_arrow():
-	pass
 
-
+# Checks if a body exited is a held arrow.
 func _on_body_exited(body: Node2D) -> void:
 	# Return if body is NOT an Arrow, and NOT held.
 	if not body is Arrow: return 
 	var held_arrow = body as Arrow
 	if not held_arrow.is_held: return
 	
-	release_arrow(held_arrow.direction)
-	
-	print("Held arrow left")
+	release_lane(held_arrow.direction)

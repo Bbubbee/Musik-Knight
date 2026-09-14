@@ -1,14 +1,24 @@
 extends State
 
 @onready var break_attacks = [
-		[
-			ArrowAttackData.new().init([0], 0.25, true, 0.75),
-			ArrowAttackData.new().init([2], 0.5, true, 0.75),
-			ArrowAttackData.new().init([3], 0.5),
-		]
-]
+	[
+		ArrowAttackData.new().init([1], 0.35, true, 0.65),
+		ArrowAttackData.new().init([3], 0.7),
+		ArrowAttackData.new().init([0], 0.4),
+	],
+	[
+		ArrowAttackData.new().init([0], 0.2,),
+		ArrowAttackData.new().init([3], 0.6),
+		ArrowAttackData.new().init([0], 0.3),
+	],
+	[ 
+		ArrowAttackData.new().init([3], 0.45),
+		ArrowAttackData.new().init([0], 0.8),
+		ArrowAttackData.new().init([2], 0.55),
+		ArrowAttackData.new().init([2], 0.55),
+	]
 
-# The problem is, it ceases to exist! 
+]
 
 func _ready() -> void:
 	Events.attack_break_end.connect(_on_attack_break_end)

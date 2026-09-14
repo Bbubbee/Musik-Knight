@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://b7ofdvohlq56v"]
+
+[ext_resource type="Texture2D" uid="uid://cx1irex1h1ea2" path="res://scenes/systems/arrow/arrowUp.png" id="1_im5ra"]
+[ext_resource type="Script" uid="uid://bxfrneofrx5tk" path="res://scenes/effects/explosion_particle/explosion_particle.gd" id="2_d415i"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fpm73"]
+particle_flag_disable_z = true
+angle_min = -365.9
+angle_max = 233.00002
+spread = 180.0
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+
+[node name="ExplosionParticle" type="GPUParticles2D" unique_id=558242968]
+emitting = false
+amount = 15
+texture = ExtResource("1_im5ra")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_fpm73")
+script = ExtResource("2_d415i")

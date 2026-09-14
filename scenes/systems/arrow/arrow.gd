@@ -38,7 +38,7 @@ func init(
 	# TODO: Leave all data to the arrow_attack_data variable.
 	self.arrow_attack_data = attack_data
 	self.speed = attack_data.speed
-	self.damage = attack_data.damage
+	self.damage = -attack_data.damage
 	self.is_held = attack_data.is_held
 	self.held_duration = attack_data.held_duration
 	
@@ -93,10 +93,17 @@ func init(
 	self.linear_velocity.y = self.speed*move_direction
 
 
-func remove_arrow():
+func remove_arrow(pos_y: float = 0.0):
+	# NOTE: Position is a shit way of spawning explosion particles where the arrow was pressed.
+	# I'm lazy.
+	if pos_y == 0.0: 
+		pos_y = self.position.y
+	
+	# Disables the arrow. Allows explosion particles to run and finish. 
 	if not is_active: return
 	
 	is_active = false
+	explosion_particle.global_position.y = pos_y
 	explosion_particle.emitting = true 
 	sprite.hide()
 	held_sprite.hide()
@@ -106,6 +113,7 @@ func remove_arrow():
 
 
 func damage_player(): 
+	print('dmg player')
 	Events.change_players_health.emit(damage)
 	self.queue_free()
 
@@ -114,4 +122,10 @@ func handle_held_press():
 	is_currently_held = true 
 	self.modulate = Color.LAWN_GREEN
 	
-	print('handle held')
+
+"""
+	How shall the held attack work? 
+	
+	
+"""
+	
