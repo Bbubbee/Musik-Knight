@@ -42,12 +42,13 @@ func init(
 	self.is_held = attack_data.is_held
 	self.held_duration = attack_data.held_duration
 	
+	self.move_direction = 1 
+	
+	
 	# Initialise arrow based on wether the caster is a player or enemy.
 	if c is Player: 
-		self.move_direction = -1
 		self.modulate = Color.AQUAMARINE
 	elif c is Enemy:
-		self.move_direction = 1 
 		self.modulate = Color.INDIAN_RED
 	
 	# If the arrow is to be held.
@@ -113,7 +114,6 @@ func remove_arrow(pos_y: float = 0.0):
 
 
 func damage_player(): 
-	print('dmg player')
 	Events.change_players_health.emit(damage)
 	self.queue_free()
 

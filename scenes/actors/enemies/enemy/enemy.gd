@@ -15,6 +15,8 @@ var parried_counter: int  # The number of times the enemy has been parried.
 
 func _ready() -> void:
 	state_machine.init(self)
+	
+	Events.attack_break.connect(_on_player_break_attack)
 
 
 # NOTE: Used in animations. 
@@ -44,3 +46,14 @@ func got_hit(dmg: float):
 
 func _on_health_component_die():
 	self.queue_free()
+	
+
+func _on_player_break_attack(_attk: Array, caster: Actor): 
+	if caster is Enemy: return 
+	
+	print("player broke attack")
+	call_deferred("safe_transition")
+
+
+func safe_transition():
+	pass

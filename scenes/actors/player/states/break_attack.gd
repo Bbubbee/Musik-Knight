@@ -9,13 +9,11 @@ func enter(_enter_params = null):
 
 func attack_break():	
 	
-	"""
-		[[0, 1, 3], 0.5],
-		[[0, 1], 0.5],
-		[2, 0.25],
-		[[1, 2, 0], 0.5],
-	"""
-
+	# The enemy should be stunned during the players attack break.
+	# How should this be done? 
+	# Enemy wait for the signal? 
+	# Attack manager do something about it? 
+	
 	var attk_break = [
 		[
 			ArrowAttackData.new().init([0, 1, 3], 0.5),

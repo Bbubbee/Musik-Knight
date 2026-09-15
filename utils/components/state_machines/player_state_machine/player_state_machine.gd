@@ -49,43 +49,39 @@ func _input(event: InputEvent) -> void:
 
 ## PlayerState transition. 
 ## Note: You can't change states from the enter function! 
-func on_child_transition(state: PlayerState, new_state_name: String, enter_params = null) -> void: 
-	finished_transitioning = false
-	
-	if state != current_state: 
-		finished_transitioning = true
+var is_transitioning := false
+var _queued_transition: Dictionary = {}
+
+func on_child_transition(state: PlayerState, new_state_name: String, enter_params = null) -> void:
+	if state != current_state:
 		return
-	
-	# Checks if the new state is invalid. 
+
 	var new_state = states.get(new_state_name.to_lower())
-	if not new_state: 
-		finished_transitioning = true		
+	if not new_state:
 		return
-	
-	# Leave the current state and go to the next. 
-	if current_state: current_state.exit()
+
+	if is_transitioning:
+		# Something inside enter()/exit() asked for another transition.
+		# Don't process it now — just remember the latest request.
+		_queued_transition = {"name": new_state_name, "params": enter_params}
+		return
+
+	is_transitioning = true
+
+	if current_state:
+		current_state.exit()
 	current_state = new_state
-	
 	new_state.enter(enter_params)
-	
-	finished_transitioning = true
+
+	is_transitioning = false
+
+	if not _queued_transition.is_empty():
+		var q = _queued_transition
+		_queued_transition = {}
+		on_child_transition(current_state, q.name, q.params)
 
 
-## Safe forced transition. 
-func force_transition(new_state_name: String, enter_params = null): 	
-	# Warning. Ensure finished_transitioning is set to true so this doesn't loop
-	# forever. It does so above. 
-	var backup = 50
-	while not finished_transitioning:
-		print("force transition is looping")
-		backup -= 1 
-		if backup < 0:
-			break
-	
-	current_state.transition.emit(current_state, new_state_name, enter_params)
-		
-		
-		
+
 	
 	
 	

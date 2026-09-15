@@ -19,9 +19,7 @@ func _on_attack_break(attacks: Array, caster: Actor = null) -> void:
 			var x_pos: float = lanes[arrow] 
 			var y_pos: float 
 			
-			# Change the spawn location of the arrow based if player or enemy.
-			if caster is Player: y_pos = get_viewport().get_visible_rect().size.y
-			elif caster is Enemy: y_pos = -30
+			y_pos = -30
 			
 			# Create the arrow. 
 			var arrow_object: Arrow = ARROW.instantiate()
