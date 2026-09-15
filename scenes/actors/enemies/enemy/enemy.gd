@@ -17,6 +17,7 @@ func _ready() -> void:
 	state_machine.init(self)
 	
 	Events.attack_break.connect(_on_player_break_attack)
+	Events.change_enemies_health.connect(_on_change_enemies_health)
 
 
 # NOTE: Used in animations. 
@@ -51,9 +52,14 @@ func _on_health_component_die():
 func _on_player_break_attack(_attk: Array, caster: Actor): 
 	if caster is Enemy: return 
 	
-	print("player broke attack")
-	call_deferred("safe_transition")
+	var state = state_machine.current_state
+	state.transition.emit(state, "broken")
 
 
-func safe_transition():
-	pass
+func _on_change_enemies_health(change: float):
+	var state: String = state_machine.current_state.name.to_lower()
+
+	if state == "broken":
+		health_component.health += change
+	else: 
+		health_component.health += change/2

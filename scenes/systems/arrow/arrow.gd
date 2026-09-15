@@ -100,17 +100,27 @@ func remove_arrow(pos_y: float = 0.0):
 	if pos_y == 0.0: 
 		pos_y = self.position.y
 	
-	# Disables the arrow. Allows explosion particles to run and finish. 
+	# Disables the arrow. Prevents the arrow from being clicked until it's 
+	# finished running it' code.
 	if not is_active: return
-	
 	is_active = false
+	
+	# NOTE: You might want to take care of this logic elsewhere.
+	# Damage the enemy if the arrow was cast by the player.
+	if caster is Player: 
+		Events.change_enemies_health.emit(damage) 
+	
 	explosion_particle.global_position.y = pos_y
 	explosion_particle.emitting = true 
+	
 	sprite.hide()
 	held_sprite.hide()
 	line_2d.hide()
+	
 	await explosion_particle.finished
+	
 	self.queue_free()
+	
 
 
 func damage_player(): 
@@ -123,9 +133,4 @@ func handle_held_press():
 	self.modulate = Color.LAWN_GREEN
 	
 
-"""
-	How shall the held attack work? 
-	
-	
-"""
 	
