@@ -3,27 +3,10 @@ extends Node2D
 @export var player: Player
 @export var enemy: Enemy 
 
-const ARROW = preload("uid://u8nduxgvfxdr")
-
 func _ready():
 	Events._player_contact_enemy.connect(_on_player_contact_enemy) 
 	Events._enemy_contact_player.connect(_on_enemy_contact_player) 
 
-
-## TEMP
-## An arrow has entered the players damage area.
-## Damage the player. 
-func _on_damage_player_area_body_entered(body: Node2D) -> void:
-	# The body is not an arrow.
-	if body is not Arrow: return
-	
-	# The body is an arrow.
-	var arrow = body as Arrow 
-	
-	# Only damage the player if the caster of the arrow is an enemy.
-	# Prevents the player from damaging themselves.
-	if arrow.caster == "e": 
-		arrow.damage_player()
 
 @onready var enemy_attk_indi: Sprite2D = $DevIndicator/EnemyAttkIndi
 @onready var player_attk_indi: Sprite2D = $DevIndicator/PlayerAttkIndi

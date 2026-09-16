@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bkb1l5gt2x1b1"]
 
-[ext_resource type="Script" uid="uid://tnat58o4ofsq" path="res://scenes/levels/get_started/attack_manager.gd" id="1_78vdk"]
+[ext_resource type="Script" uid="uid://tnat58o4ofsq" path="res://scenes/levels/get_started/battle_manager.gd" id="1_78vdk"]
 [ext_resource type="Texture2D" uid="uid://cx1irex1h1ea2" path="res://scenes/systems/arrow/arrowUp.png" id="5_065e5"]
 
-[node name="AttackManager" type="Node2D" unique_id=834580641]
+[node name="BattleManager" type="Node2D" unique_id=834580641]
 script = ExtResource("1_78vdk")
 
 [node name="ArrowSpawnerTimer" type="Timer" parent="." unique_id=1194297075]

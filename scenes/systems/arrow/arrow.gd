@@ -105,8 +105,8 @@ func remove_arrow(pos_y: float = 0.0):
 	if not is_active: return
 	is_active = false
 	
-	# NOTE: You might want to take care of this logic elsewhere.
 	# Damage the enemy if the arrow was cast by the player.
+	# NOTE: You might want to take care of this logic elsewhere.
 	if caster is Player: 
 		Events.change_enemies_health.emit(damage) 
 	

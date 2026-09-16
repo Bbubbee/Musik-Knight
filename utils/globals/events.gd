@@ -5,6 +5,7 @@ extends Node
 # Health changes.
 signal change_players_health(c: int)
 signal change_enemies_health(c: float)
+signal someone_died(actor: Actor) 
 
 # Attacks
 signal attack_break(attk: Array, caster: Actor)

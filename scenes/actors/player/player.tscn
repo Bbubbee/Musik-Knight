@@ -14,6 +14,11 @@
 [ext_resource type="Script" uid="uid://bk4gxdbfg4vj8" path="res://scenes/actors/player/combo_visualiser.gd" id="12_inh5e"]
 [ext_resource type="Texture2D" uid="uid://cx1irex1h1ea2" path="res://scenes/systems/arrow/arrowUp.png" id="13_hcvpp"]
 [ext_resource type="Script" uid="uid://bxfrneofrx5tk" path="res://scenes/effects/explosion_particle/explosion_particle.gd" id="14_4iwnj"]
+[ext_resource type="Script" uid="uid://mqnmuqlcl360" path="res://scenes/actors/player/combo_manager.gd" id="15_068wj"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_k3pjg"]
+a = Vector2(1050, 2000)
+b = Vector2(-250, 2000)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hcvpp"]
 particle_flag_disable_z = true
@@ -22,10 +27,6 @@ angle_max = 233.00002
 spread = 180.0
 initial_velocity_min = 1000.0
 initial_velocity_max = 1000.0
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_k3pjg"]
-a = Vector2(1050, 2000)
-b = Vector2(-250, 2000)
 
 [node name="Player" type="Node2D" unique_id=370596373]
 script = ExtResource("1_l17oj")
@@ -63,17 +64,6 @@ script = ExtResource("5_yg5k4")
 [node name="Attack" type="Node" parent="PlayerStateMachine" unique_id=2011711286]
 script = ExtResource("6_qdyt2")
 
-[node name="ExplosionParticle" type="GPUParticles2D" parent="PlayerStateMachine/Attack" unique_id=1156604401]
-position = Vector2(356, 291)
-emitting = false
-amount = 25
-texture = ExtResource("13_hcvpp")
-lifetime = 0.3
-one_shot = true
-explosiveness = 0.5
-process_material = SubResource("ParticleProcessMaterial_hcvpp")
-script = ExtResource("14_4iwnj")
-
 [node name="BreakAttack" type="Node" parent="PlayerStateMachine" unique_id=1792442115]
 script = ExtResource("9_i174x")
 
@@ -96,15 +86,35 @@ offset_right = 720.0
 offset_bottom = 578.0
 script = ExtResource("12_inh5e")
 
-[node name="HBox" type="HBoxContainer" parent="ComboVisualiser" unique_id=2143620658]
-layout_mode = 1
+[node name="ExplosionParticle" type="GPUParticles2D" parent="." unique_id=1156604401]
+position = Vector2(356, 291)
+emitting = false
+amount = 25
+texture = ExtResource("13_hcvpp")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_hcvpp")
+script = ExtResource("14_4iwnj")
+
+[node name="HBox" type="HBoxContainer" parent="." unique_id=2143620658]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 296.0
+offset_bottom = 296.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 alignment = 1
 
+[node name="ComboManager" type="Node" parent="." unique_id=438431916]
+script = ExtResource("15_068wj")
+
+[node name="ComboTimer" type="Timer" parent="ComboManager" unique_id=1316321372]
+one_shot = true
+
 [connection signal="die" from="HealthComponent" to="." method="_on_health_component_die"]
 [connection signal="body_entered" from="ArrowBoundary" to="ArrowBoundary" method="_on_body_entered"]
+[connection signal="combo_completed" from="ComboManager" to="." method="_on_combo_manager_combo_completed"]
+[connection signal="timeout" from="ComboManager/ComboTimer" to="ComboManager" method="_on_combo_timer_timeout"]
