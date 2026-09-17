@@ -16,11 +16,11 @@ func _ready() -> void:
 func _on_change_players_health(change: int):
 	health_component.health += change
 
-
 @onready var player_atk_basic: PlayerAtkBasic = $PlayerAtkBasic
 
 
 func _on_health_component_die() -> void:
+	Events.someone_died.emit(self) 
 	self.queue_free()
 	
 

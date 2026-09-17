@@ -1,10 +1,6 @@
 extends State
 
+
 func enter(_enter_params = null):
+	await actor.animation_player.animation_finished
 	actor.animation_player.play("RESET") 
-
-
-func on_input(event: InputEvent) -> void:
-	if event.is_action_pressed("dev_enemy_atk_2"):
-		transition.emit(self, "specialattack") 
-		

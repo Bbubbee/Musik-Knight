@@ -4,6 +4,7 @@ class_name Enemy
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var character_sprite: Sprite2D = $CharacterSprite
 @onready var state_machine: StateMachine = $StateMachine
+@onready var pixel_progress_bar: PixelProgressBar = $PixelProgressBar
 
 var _attack_dir: Constants.DIR
 
@@ -18,6 +19,8 @@ func _ready() -> void:
 	
 	Events.attack_break.connect(_on_player_break_attack)
 	Events.change_enemies_health.connect(_on_change_enemies_health)
+	Events.parried_enemy.connect(_on_got_parried)
+	Events.level_over.connect(_on_level_over)
 
 
 # NOTE: Used in animations. 
@@ -25,7 +28,7 @@ func set_contact(contacting: bool):
 	Events._enemy_contact_player.emit(contacting, self._attack_dir)
 	
 
-func got_parried():
+func _on_got_parried():
 	# TEMP: Handle parry. Either go to parried or broken state.
 	# WARNING: could potentially transition within enter.
 	self.parried_counter += 1 
@@ -36,18 +39,9 @@ func got_parried():
 		state.transition.emit(state, "parried")
 
 
-func got_hit(dmg: float):
-	var state: String = state_machine.current_state.name.to_lower()
-
-	if state == "broken":
-		health_component.health -= dmg
-	else: 
-		health_component.health -= dmg/2
-
-
 func _on_health_component_die():
-	self.queue_free()
-	
+	var state = state_machine.current_state
+	state.transition.emit(state, "die")
 
 func _on_player_break_attack(_attk: Array, caster: Actor): 
 	if caster is Enemy: return 
@@ -63,3 +57,8 @@ func _on_change_enemies_health(change: float):
 		health_component.health += change
 	else: 
 		health_component.health += change/2
+
+
+func _on_level_over():
+	var state = state_machine.current_state
+	state.transition.emit(state, "idle") 

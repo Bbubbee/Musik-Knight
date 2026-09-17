@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://dh1igm36i5b6e" path="res://scenes/actors/player/player.tscn" id="2_2h0i5"]
 [ext_resource type="PackedScene" uid="uid://d4npp8eq3sf6w" path="res://scenes/actors/enemies/enemy/enemy.tscn" id="3_e6j0y"]
 [ext_resource type="PackedScene" uid="uid://dhny7c8np0odk" path="res://scenes/levels/get_started/attack_break_manager.tscn" id="4_e6j0y"]
+[ext_resource type="Script" uid="uid://cuk85b5il40le" path="res://scenes/levels/get_started/game_manager.gd" id="5_66fcu"]
 
 [node name="Main" type="Node2D" unique_id=322242158]
 
-[node name="AttackManager" parent="." unique_id=834580641 node_paths=PackedStringArray("enemy") instance=ExtResource("1_vsbho")]
-enemy = NodePath("../FolderActors/Enemy")
+[node name="AttackManager" parent="." unique_id=834580641 instance=ExtResource("1_vsbho")]
 
 [node name="FolderActors" type="Node2D" parent="." unique_id=1894389725]
 
@@ -19,3 +19,6 @@ break_limit = 14
 [node name="Player" parent="FolderActors" unique_id=370596373 instance=ExtResource("2_2h0i5")]
 
 [node name="AttackBreakManager" parent="." unique_id=1273089830 instance=ExtResource("4_e6j0y")]
+
+[node name="GameManager" type="Node2D" parent="." unique_id=1440107936]
+script = ExtResource("5_66fcu")

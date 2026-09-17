@@ -1,8 +1,5 @@
 extends Node2D
 
-@export var player: Player
-@export var enemy: Enemy 
-
 func _ready():
 	Events._player_contact_enemy.connect(_on_player_contact_enemy) 
 	Events._enemy_contact_player.connect(_on_enemy_contact_player) 
@@ -44,9 +41,8 @@ func _on_player_contact_enemy(contacting: bool, dir: Constants.DIR, dmg: float):
 		if not players_last_attack == Constants.DIR.NONE: 
 			players_last_attack = Constants.DIR.NONE
 			
-			if enemy: 
-				#enemy.got_hit(dmg)
-				Events.change_enemies_health.emit(-dmg) 
+
+			Events.change_enemies_health.emit(-dmg) 
 
 func _on_enemy_contact_player(contacting: bool, dir: Constants.DIR):
 	enemy_attk_indi.rotation_degrees = Constants.get_rotation_from_dir(dir)
@@ -80,5 +76,5 @@ func handle_successful_parry():
 	player_attk_indi.visible = false
 	
 	# Tell the enemy they got parried. 
-	enemy.got_parried()	
+	Events.parried_enemy.emit()
 	

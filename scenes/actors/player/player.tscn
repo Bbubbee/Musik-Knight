@@ -50,7 +50,7 @@ size_flags_vertical = 4
 
 [node name="HealthComponent" parent="." unique_id=2086389814 node_paths=PackedStringArray("pixel_progress_bar") instance=ExtResource("3_g2g7f")]
 pixel_progress_bar = NodePath("../PixelProgressBar")
-max_health = 1000.0
+max_health = 400.0
 
 [node name="PlayerAtkBasic" parent="." unique_id=40946407 instance=ExtResource("3_oj104")]
 position = Vector2(376, 440)

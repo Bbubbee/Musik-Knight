@@ -39,14 +39,12 @@ func add_new_attack(dir: int):
 		
 	# Execute combo only if there is a match, and it can't continue. 
 	if combo_matches and not can_continue: 
-		print("Execute combo: ", str(current_combo))
 		current_combo = []
 		combo_timer.stop()
 		combo_completed.emit(current_combo)
 		
 	# Reset the combo only if there are no matches.
 	if not combo_matches:
-		print("Reset combo: ", str(current_combo))
 		combo_timer.stop()
 		
 		# When a combo fails, check if the newest input can be the start of the next combo.
@@ -73,10 +71,8 @@ func add_new_attack(dir: int):
 func _on_combo_timer_timeout() -> void:
 	for c in test_combos:
 		if current_combo == c: 
-			print("Execute this combo: ", str(current_combo))
 			combo_completed.emit(current_combo)
-			
-	print("Reset combo: ", str(current_combo))	
+
 	current_combo = []
 	pass
 	
