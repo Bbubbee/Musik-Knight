@@ -44,18 +44,29 @@ func add_new_attack(dir: int):
 		combo_timer.stop()
 		combo_completed.emit(current_combo)
 		
-		
 	# Reset the combo only if there are no matches.
 	if not combo_matches:
-		print("Reset combo")
+		print("Reset combo: ", str(current_combo))
 		combo_timer.stop()
-		current_combo = []
 		
-		# NOTE: If a combo fails, should check if can continue.
-		# Go backwards in the array, compare against the current combo. For example.
-	
+		# When a combo fails, check if the newest input can be the start of the next combo.
+		if current_combo.size() > 1:
+			current_combo = []
+			add_new_attack(dir)  # WARNING: Recursion.
+		else:
+			combo_timer.stop()
+			current_combo = []
+
 	# NOTE: Shorter shorter combo timer for extended combos.
 	# E.g.: [0, 3, 0] => [0, 3, 0, 3] 
+	
+	# BUG: NOTE that there are still bugs with this. 
+	# E.g. u, d, u, u, d doesn't work. Should trigger u, u, d
+	# IDK this should be intended behaviuor. 
+	# IDK if the above where it checks if the latest input could start a new combo
+	# should be intended behaviour.
+	# NOTE: To revert it, just remove the if/else statement and resent the current combo
+	# size and stop the combo timer.
 	
 
 	
@@ -65,9 +76,8 @@ func _on_combo_timer_timeout() -> void:
 			print("Execute this combo: ", str(current_combo))
 			combo_completed.emit(current_combo)
 			
-		
+	print("Reset combo: ", str(current_combo))	
 	current_combo = []
-	print("Reset combo")
 	pass
 	
 	
