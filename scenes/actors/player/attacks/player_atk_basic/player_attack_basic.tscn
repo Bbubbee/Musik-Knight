@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dbafiibyaxj8k"]
 
-[ext_resource type="Script" uid="uid://cpcocohpyovld" path="res://scenes/actors/player/attacks/player_atk_basic/player_basic_atk.gd" id="1_nha2f"]
+[ext_resource type="Script" uid="uid://cpcocohpyovld" path="res://scenes/actors/player/attacks/player_atk_basic/player_attack_basic.gd" id="1_nha2f"]
 [ext_resource type="Texture2D" uid="uid://cue4goj6n8m1g" path="res://scenes/actors/player/attacks/player_atk_basic/sprite_sheet_slash.png" id="1_rt4ta"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nha2f"]
@@ -62,7 +62,7 @@ _data = {
 &"attack": SubResource("Animation_nha2f")
 }
 
-[node name="PlayerAtkBasic" type="Node2D" unique_id=40946407]
+[node name="PlayerAttackkBasic" type="Node2D" unique_id=40946407]
 script = ExtResource("1_nha2f")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=508324654]

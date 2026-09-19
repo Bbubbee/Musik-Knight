@@ -4,17 +4,19 @@
 [ext_resource type="PackedScene" uid="uid://cj2br8bq32bkn" path="res://scenes/actors/player/arrow_detector_area.tscn" id="2_i174x"]
 [ext_resource type="PackedScene" uid="uid://beccf3oeappg0" path="res://utils/components/progress_bar/pixel_progress_bar.tscn" id="2_oj104"]
 [ext_resource type="PackedScene" uid="uid://238esogyd7if" path="res://utils/components/health_component/health_component.tscn" id="3_g2g7f"]
-[ext_resource type="PackedScene" uid="uid://dbafiibyaxj8k" path="res://scenes/actors/player/attacks/player_atk_basic/player_basic_atk.tscn" id="3_oj104"]
+[ext_resource type="PackedScene" uid="uid://dbafiibyaxj8k" path="res://scenes/actors/player/attacks/player_atk_basic/player_attack_basic.tscn" id="3_oj104"]
 [ext_resource type="PackedScene" uid="uid://nwos0wjtvdob" path="res://utils/components/state_machines/player_state_machine/player_state_machine.tscn" id="4_mpktj"]
 [ext_resource type="Script" uid="uid://dj321ocddfdn" path="res://scenes/actors/player/states/idle.gd" id="5_yg5k4"]
 [ext_resource type="Script" uid="uid://7njjcbuqwv2e" path="res://scenes/actors/player/attack.gd" id="6_qdyt2"]
 [ext_resource type="Script" uid="uid://b0rx7nif7g3kc" path="res://scenes/actors/player/score_indicators.gd" id="9_5bhx7"]
 [ext_resource type="Script" uid="uid://dbod1h5u7s2op" path="res://scenes/actors/player/states/break_attack.gd" id="9_i174x"]
+[ext_resource type="Script" uid="uid://c160c6ls8ooog" path="res://scenes/actors/player/states/game_end.gd" id="10_xducv"]
 [ext_resource type="Script" uid="uid://c2wvqwnmed0x4" path="res://scenes/actors/player/arrow_boundary.gd" id="11_8bj4u"]
 [ext_resource type="Script" uid="uid://bk4gxdbfg4vj8" path="res://scenes/actors/player/combo_visualiser.gd" id="12_inh5e"]
 [ext_resource type="Texture2D" uid="uid://cx1irex1h1ea2" path="res://scenes/systems/arrow/arrowUp.png" id="13_hcvpp"]
 [ext_resource type="Script" uid="uid://bxfrneofrx5tk" path="res://scenes/effects/explosion_particle/explosion_particle.gd" id="14_4iwnj"]
 [ext_resource type="Script" uid="uid://mqnmuqlcl360" path="res://scenes/actors/player/combo_manager.gd" id="15_068wj"]
+[ext_resource type="Script" uid="uid://bd3qsqhq5rbiy" path="res://scenes/actors/player/break_bar.gd" id="17_yab6n"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_k3pjg"]
 a = Vector2(1050, 2000)
@@ -52,7 +54,7 @@ size_flags_vertical = 4
 pixel_progress_bar = NodePath("../PixelProgressBar")
 max_health = 400.0
 
-[node name="PlayerAtkBasic" parent="." unique_id=40946407 instance=ExtResource("3_oj104")]
+[node name="PlayerAttackBasic" parent="." unique_id=40946407 instance=ExtResource("3_oj104")]
 position = Vector2(376, 440)
 
 [node name="PlayerStateMachine" parent="." unique_id=1348697902 node_paths=PackedStringArray("initial_state") instance=ExtResource("4_mpktj")]
@@ -63,9 +65,27 @@ script = ExtResource("5_yg5k4")
 
 [node name="Attack" type="Node" parent="PlayerStateMachine" unique_id=2011711286]
 script = ExtResource("6_qdyt2")
+damage = 25.0
+combo_damage = 75.0
 
 [node name="BreakAttack" type="Node" parent="PlayerStateMachine" unique_id=1792442115]
 script = ExtResource("9_i174x")
+
+[node name="BreakBar" type="Node2D" parent="PlayerStateMachine/BreakAttack" unique_id=927352817]
+position = Vector2(9, 481)
+script = ExtResource("17_yab6n")
+
+[node name="PixelProgressBar" parent="PlayerStateMachine/BreakAttack/BreakBar" unique_id=2077733708 instance=ExtResource("2_oj104")]
+offset_right = 59.0
+offset_bottom = 385.0
+value = 0.0
+fill_mode = 3
+tint_under = Color(0.45490196, 0.23455882, 0, 1)
+tint_over = Color(0.30980393, 0.23627453, 0.01568627, 1)
+tint_progress = Color(1, 0.80784315, 0.2313726, 1)
+
+[node name="GameEnd" type="Node" parent="PlayerStateMachine" unique_id=1294774447]
+script = ExtResource("10_xducv")
 
 [node name="ScoreIndicators" type="Node2D" parent="." unique_id=892491426]
 script = ExtResource("9_5bhx7")
@@ -113,7 +133,9 @@ script = ExtResource("15_068wj")
 [node name="ComboTimer" type="Timer" parent="ComboManager" unique_id=1316321372]
 one_shot = true
 
+[connection signal="arrow_pressed" from="ArrowDetectorArea" to="PlayerStateMachine/BreakAttack/BreakBar" method="_on_arrow_detector_area_arrow_pressed"]
 [connection signal="die" from="HealthComponent" to="." method="_on_health_component_die"]
 [connection signal="body_entered" from="ArrowBoundary" to="ArrowBoundary" method="_on_body_entered"]
 [connection signal="combo_completed" from="ComboManager" to="." method="_on_combo_manager_combo_completed"]
+[connection signal="combo_completed" from="ComboManager" to="PlayerAttackBasic" method="_on_combo_manager_combo_completed"]
 [connection signal="timeout" from="ComboManager/ComboTimer" to="ComboManager" method="_on_combo_timer_timeout"]

@@ -1,4 +1,5 @@
 extends Node
+class_name ComboManager
 
 signal combo_completed(combo: Array) 
 
@@ -39,9 +40,11 @@ func add_new_attack(dir: int):
 		
 	# Execute combo only if there is a match, and it can't continue. 
 	if combo_matches and not can_continue: 
+		var save_current_combo = current_combo
 		current_combo = []
 		combo_timer.stop()
 		combo_completed.emit(current_combo)
+		return save_current_combo
 		
 	# Reset the combo only if there are no matches.
 	if not combo_matches:
@@ -54,6 +57,8 @@ func add_new_attack(dir: int):
 		else:
 			combo_timer.stop()
 			current_combo = []
+	
+	return []
 
 	# NOTE: Shorter shorter combo timer for extended combos.
 	# E.g.: [0, 3, 0] => [0, 3, 0, 3] 

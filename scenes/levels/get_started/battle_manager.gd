@@ -40,9 +40,9 @@ func _on_player_contact_enemy(contacting: bool, dir: Constants.DIR, dmg: float):
 		# NOTE: This is needed so that we don't damage the enemy after succesfully parrying.
 		if not players_last_attack == Constants.DIR.NONE: 
 			players_last_attack = Constants.DIR.NONE
-			
 
 			Events.change_enemies_health.emit(-dmg) 
+
 
 func _on_enemy_contact_player(contacting: bool, dir: Constants.DIR):
 	enemy_attk_indi.rotation_degrees = Constants.get_rotation_from_dir(dir)

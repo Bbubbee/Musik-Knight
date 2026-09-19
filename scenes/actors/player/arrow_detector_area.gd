@@ -2,6 +2,8 @@ extends Area2D
 
 const ARROW_INDICATOR = preload("uid://doubj6sf6gxhr")
 
+signal arrow_pressed(grade: int) 
+
 @onready var arrow_detector_shape: CollisionShape2D = $ArrowDetectorShape
 @onready var lanes = ScreenCalculator.get_lanes(Vector2(0, 0), 4) 
 @onready var folder_arrow_indicators: Node2D = $FolderArrowIndicators
@@ -99,15 +101,21 @@ func press_lane(dir: int = 0) -> void:
 		var max_dist = arrow.physics_shape.shape.radius/2 + arrow_detector_shape.shape.size.y/2
 		
 		# Get points based on how close it is to 0. (max is 106 TEMP)
+		var grade: int # TEMP: Increase break meter based on how close to 0 the press is.
 		if dist < max_dist*0.35:
 			Events.spawn_score_indicator.emit(dir, "PERFECT!")
+			grade = 3
 			
 		elif dist < max_dist*0.5:
 			Events.spawn_score_indicator.emit(dir, "Great!")
+			grade = 2
 
 		elif dist < max_dist*0.75:
 			Events.spawn_score_indicator.emit(dir, "Good")
+			grade = 1
 		
+		if arrow.caster is Enemy:
+			arrow_pressed.emit(grade) 
 		# Clear the arrow.
 		arrow.remove_arrow()
 

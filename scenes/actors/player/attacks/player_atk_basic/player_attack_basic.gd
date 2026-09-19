@@ -1,5 +1,11 @@
 extends Node2D
-class_name PlayerAtkBasic
+class_name PlayerAttackBasic
+
+"""
+	NOTES: 
+	
+	
+"""
 
 
 @onready var animator: AnimationPlayer = $Animator
@@ -17,6 +23,7 @@ var _is_contacting: bool
 var _direction_attacking: Constants.DIR
 
 var damage: float 
+@export var base_damage: float = 5
 
 func attack(dir: Constants.DIR, d: float):
 	_direction_attacking = dir
@@ -64,4 +71,8 @@ func _on_animator_animation_finished(anim_name: StringName) -> void:
 	
 	finished_attacking.emit()
 	_on_cooldown = false
+	
+
+	
+	
 	

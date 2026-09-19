@@ -4,11 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://dh1igm36i5b6e" path="res://scenes/actors/player/player.tscn" id="2_2h0i5"]
 [ext_resource type="PackedScene" uid="uid://d4npp8eq3sf6w" path="res://scenes/actors/enemies/enemy/enemy.tscn" id="3_e6j0y"]
 [ext_resource type="PackedScene" uid="uid://dhny7c8np0odk" path="res://scenes/levels/get_started/attack_break_manager.tscn" id="4_e6j0y"]
-[ext_resource type="Script" uid="uid://cuk85b5il40le" path="res://scenes/levels/get_started/ui_manager.gd" id="5_66fcu"]
+[ext_resource type="Script" uid="uid://cuk85b5il40le" path="res://scenes/levels/get_started/level_manager.gd" id="5_66fcu"]
 
 [node name="Main" type="Node2D" unique_id=322242158]
-
-[node name="LevelManager" type="Node2D" parent="." unique_id=1985694401]
 
 [node name="AttackManager" parent="." unique_id=834580641 instance=ExtResource("1_vsbho")]
 
@@ -22,10 +20,13 @@ break_limit = 6
 
 [node name="AttackBreakManager" parent="." unique_id=1273089830 instance=ExtResource("4_e6j0y")]
 
-[node name="UIManager" type="CanvasLayer" parent="." unique_id=704116280]
+[node name="LevelManager" type="Node2D" parent="." unique_id=1440107936]
 script = ExtResource("5_66fcu")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UIManager" unique_id=95732814]
+[node name="UI" type="CanvasLayer" parent="LevelManager" unique_id=704116280]
+visible = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelManager/UI" unique_id=95732814]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -34,20 +35,18 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="UIManager/VBoxContainer" unique_id=1238036392]
+[node name="CenterContainer" type="CenterContainer" parent="LevelManager/UI/VBoxContainer" unique_id=1238036392]
 layout_mode = 2
 
-[node name="OutcomeLabel" type="Label" parent="UIManager/VBoxContainer/CenterContainer" unique_id=2026159885]
+[node name="OutcomeLabel" type="Label" parent="LevelManager/UI/VBoxContainer/CenterContainer" unique_id=2026159885]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "You Won!"
 
-[node name="CenterContainer2" type="CenterContainer" parent="UIManager/VBoxContainer" unique_id=1641877228]
+[node name="CenterContainer2" type="CenterContainer" parent="LevelManager/UI/VBoxContainer" unique_id=1641877228]
 layout_mode = 2
 
-[node name="PlayAgainButton" type="Button" parent="UIManager/VBoxContainer/CenterContainer2" unique_id=569708165]
+[node name="PlayAgainButton" type="Button" parent="LevelManager/UI/VBoxContainer/CenterContainer2" unique_id=569708165]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Play Again?"
-
-[connection signal="pressed" from="UIManager/VBoxContainer/CenterContainer2/PlayAgainButton" to="UIManager" method="_on_play_again_button_pressed"]

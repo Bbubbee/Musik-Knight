@@ -2,9 +2,10 @@ extends Node
 
 @warning_ignore_start("unused_signal")
 
-# Health changes
+# Stat changes
 signal change_players_health(c: int)
 signal change_enemies_health(c: float)
+signal change_players_break_meter(c: float) 
 
 # Attacks
 signal attack_break(attk: Array, caster: Actor)
