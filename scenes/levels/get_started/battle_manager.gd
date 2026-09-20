@@ -36,12 +36,18 @@ func _on_player_contact_enemy(contacting: bool, dir: Constants.DIR, dmg: float):
 	# The player has ended contact with the enemy.
 	else:
 		player_attk_indi.visible = false
+		
 		# The player deals scratch damage to the enemy.
 		# NOTE: This is needed so that we don't damage the enemy after succesfully parrying.
 		if not players_last_attack == Constants.DIR.NONE: 
 			players_last_attack = Constants.DIR.NONE
-
+		
+			# Deal scratch damage to the enemy.
 			Events.change_enemies_health.emit(-dmg) 
+			
+			# Failed to parry enemy. 
+			Events.parried_enemy.emit(false)
+			
 
 
 func _on_enemy_contact_player(contacting: bool, dir: Constants.DIR):
@@ -76,5 +82,5 @@ func handle_successful_parry():
 	player_attk_indi.visible = false
 	
 	# Tell the enemy they got parried. 
-	Events.parried_enemy.emit()
+	Events.parried_enemy.emit(true)
 	

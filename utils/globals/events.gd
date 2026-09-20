@@ -5,13 +5,13 @@ extends Node
 # Stat changes
 signal change_players_health(c: int)
 signal change_enemies_health(c: float)
-signal change_players_break_meter(c: float) 
+signal change_players_break_value(c: float) 
 
 # Attacks
 signal attack_break(attk: Array, caster: Actor)
 signal attack_break_end(caster: Actor) 
 signal attack_basic(attk_dir: Constants.DIR, attacker: Node2D) 
-signal parried_enemy
+signal parried_enemy(succes: bool) 
 
 # Contact points
 signal _player_contact_enemy 

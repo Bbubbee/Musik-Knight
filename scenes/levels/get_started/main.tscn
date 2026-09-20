@@ -8,8 +8,6 @@
 
 [node name="Main" type="Node2D" unique_id=322242158]
 
-[node name="LevelManager" type="Node2D" parent="." unique_id=1985694401]
-
 [node name="AttackManager" parent="." unique_id=834580641 instance=ExtResource("1_vsbho")]
 
 [node name="FolderActors" type="Node2D" parent="." unique_id=1894389725]

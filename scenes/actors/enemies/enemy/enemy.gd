@@ -28,15 +28,16 @@ func set_contact(contacting: bool):
 	Events._enemy_contact_player.emit(contacting, self._attack_dir)
 	
 
-func _on_got_parried():
+func _on_got_parried(success: bool):
 	# TEMP: Handle parry. Either go to parried or broken state.
 	# WARNING: could potentially transition within enter.
-	self.parried_counter += 1 
-	var state = state_machine.current_state
-	if self.parried_counter >= break_limit:
-		state.transition.emit(state, "broken")
-	else:
-		state.transition.emit(state, "parried")
+	if success:
+		self.parried_counter += 1 
+		var state = state_machine.current_state
+		if self.parried_counter >= break_limit:
+			state.transition.emit(state, "broken")
+		else:
+			state.transition.emit(state, "parried")
 
 
 func _on_health_component_die():

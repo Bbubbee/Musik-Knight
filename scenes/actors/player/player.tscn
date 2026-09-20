@@ -65,8 +65,6 @@ script = ExtResource("5_yg5k4")
 
 [node name="Attack" type="Node" parent="PlayerStateMachine" unique_id=2011711286]
 script = ExtResource("6_qdyt2")
-damage = 25.0
-combo_damage = 75.0
 
 [node name="BreakAttack" type="Node" parent="PlayerStateMachine" unique_id=1792442115]
 script = ExtResource("9_i174x")
@@ -133,7 +131,6 @@ script = ExtResource("15_068wj")
 [node name="ComboTimer" type="Timer" parent="ComboManager" unique_id=1316321372]
 one_shot = true
 
-[connection signal="arrow_pressed" from="ArrowDetectorArea" to="PlayerStateMachine/BreakAttack/BreakBar" method="_on_arrow_detector_area_arrow_pressed"]
 [connection signal="die" from="HealthComponent" to="." method="_on_health_component_die"]
 [connection signal="body_entered" from="ArrowBoundary" to="ArrowBoundary" method="_on_body_entered"]
 [connection signal="combo_completed" from="ComboManager" to="." method="_on_combo_manager_combo_completed"]

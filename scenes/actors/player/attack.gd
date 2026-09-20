@@ -1,7 +1,7 @@
 extends PlayerState
 
-@export var damage: float = 200
-@export var combo_damage: float = 500
+@export var damage: float = 25
+@export var combo_damage: float = 75
 
 
 
@@ -21,4 +21,6 @@ func enter(_enter_params = null):
 
 func _on_attack_finished():
 	if actor.player_state_machine.current_state != self: return
+	Events.change_players_break_value.emit(4)
 	transition.emit(self, "idle") 
+	

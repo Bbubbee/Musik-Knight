@@ -2,20 +2,45 @@ extends State
 
 @onready var break_attacks = [
 	[
-		ArrowAttackData.new().init([1], 0.35, true, 0.65),
-		ArrowAttackData.new().init([3], 0.7),
-		ArrowAttackData.new().init([0], 0.4),
-	],
-	[
-		ArrowAttackData.new().init([0], 0.2,),
-		ArrowAttackData.new().init([3], 0.6),
+		ArrowAttackData.new().init([1], 0.25, true, 0.65),
+		ArrowAttackData.new().init([3], 0.35),
 		ArrowAttackData.new().init([0], 0.3),
+		ArrowAttackData.new().init([2], 0.4),
+		ArrowAttackData.new().init([3], 0.3),
+		ArrowAttackData.new().init([1], 0.35),
 	],
-	[ 
-		ArrowAttackData.new().init([3], 0.45),
-		ArrowAttackData.new().init([0], 0.8),
-		ArrowAttackData.new().init([2], 0.55),
-		ArrowAttackData.new().init([2], 0.55),
+
+	[
+		ArrowAttackData.new().init([0], 0.25),
+		ArrowAttackData.new().init([2], 0.3),
+		ArrowAttackData.new().init([0], 0.25),
+		ArrowAttackData.new().init([3], 0.35),
+		ArrowAttackData.new().init([1], 0.3),
+		ArrowAttackData.new().init([3], 0.25),
+		ArrowAttackData.new().init([2], 0.4),
+	],
+
+	[
+		ArrowAttackData.new().init([3], 0.3),
+		ArrowAttackData.new().init([0], 0.3),
+		ArrowAttackData.new().init([2], 0.25),
+		ArrowAttackData.new().init([2], 0.3),
+		ArrowAttackData.new().init([1], 0.25),
+		ArrowAttackData.new().init([0], 0.3),
+		ArrowAttackData.new().init([3], 0.25),
+		ArrowAttackData.new().init([1], 0.4),
+	],
+
+	[
+		ArrowAttackData.new().init([0], 0.25),
+		ArrowAttackData.new().init([3], 0.3),
+		ArrowAttackData.new().init([1], 0.3, true, 0.6),
+		ArrowAttackData.new().init([2], 0.25),
+		ArrowAttackData.new().init([0], 0.3),
+		ArrowAttackData.new().init([2], 0.25),
+		ArrowAttackData.new().init([3], 0.3),
+		ArrowAttackData.new().init([1], 0.25),
+		ArrowAttackData.new().init([0], 0.4),
 	]
 
 ]
