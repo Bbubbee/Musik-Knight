@@ -12,7 +12,7 @@ func enter(_enter_params = null):
 	actor.animation_player.play("attack_"+Constants.get_string_from_dir(rand_dir))
 
 
-func _on_enemy_contact_player(contacting: bool, _dir: Constants.DIR):
+func _on_enemy_contact_player(contacting: bool, _dir: Constants.DIR, _dmg: float):
 	if not actor.state_machine.current_state == self: return
 	
 	if not contacting: return

@@ -65,6 +65,8 @@ script = ExtResource("5_yg5k4")
 
 [node name="Attack" type="Node" parent="PlayerStateMachine" unique_id=2011711286]
 script = ExtResource("6_qdyt2")
+damage = 38.0
+combo_damage = 100.0
 
 [node name="BreakAttack" type="Node" parent="PlayerStateMachine" unique_id=1792442115]
 script = ExtResource("9_i174x")

@@ -12,4 +12,5 @@ func enter(_enter_params = null):
 	
 func _on_animation_player_animation_finished(_anim_name):
 	if not actor.state_machine.current_state == self: return
+	actor.parried_counter -= 1
 	transition.emit(self, "thinking")

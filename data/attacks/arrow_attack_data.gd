@@ -16,8 +16,8 @@ func init(
 		# Not Required:
 		held: bool = false, 
 		held_dur: float = 0.0,
-		s: float = 500.0,
-		dmg: float = 5
+		s: float = 600.0,
+		dmg: float = 38
 	):	
 	
 	self.arrows = arrs

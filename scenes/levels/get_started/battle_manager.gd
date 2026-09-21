@@ -50,7 +50,7 @@ func _on_player_contact_enemy(contacting: bool, dir: Constants.DIR, dmg: float):
 			
 
 
-func _on_enemy_contact_player(contacting: bool, dir: Constants.DIR):
+func _on_enemy_contact_player(contacting: bool, dir: Constants.DIR, dmg: float):
 	enemy_attk_indi.rotation_degrees = Constants.get_rotation_from_dir(dir)
 	
 	# The enemy's attack has started contact with the player. 
@@ -69,7 +69,7 @@ func _on_enemy_contact_player(contacting: bool, dir: Constants.DIR):
 	else:
 		enemy_attk_indi.visible = false
 		enemies_last_attack = Constants.DIR.NONE
-		Events.change_players_health.emit(-16)
+		Events.change_players_health.emit(-dmg)
 
 # If a parry is successful, there are a variety of actions that must take place.
 func handle_successful_parry():

@@ -2,7 +2,10 @@ extends Actor
 class_name Enemy
 
 @export var break_limit: int = 4  # The number of times needed to be parried to be broken.
+@export var parry_refresh_length: float = 6
+@export var attack_damage: float = 30
 
+@onready var parry_refresh_timer: Timer = $ParryRefreshTimer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var character_sprite: Sprite2D = $CharacterSprite
 @onready var state_machine: StateMachine = $StateMachine
@@ -10,7 +13,9 @@ class_name Enemy
 @onready var health_component = $HealthComponent
 
 var _attack_dir: Constants.DIR
-var parried_counter: int  # The number of times the enemy has been parried.
+var parried_counter: int:  # The number of times the enemy has been parried.
+	set(val):
+		parried_counter = max(0, val) 
 var is_dead: bool = false
 
 
@@ -25,13 +30,14 @@ func _ready() -> void:
 
 # NOTE: Used in animations. 
 func set_contact(contacting: bool):
-	Events._enemy_contact_player.emit(contacting, self._attack_dir)
+	Events._enemy_contact_player.emit(contacting, self._attack_dir, self.attack_damage)
 	
 
 func _on_got_parried(success: bool):
 	# TEMP: Handle parry. Either go to parried or broken state.
 	# WARNING: could potentially transition within enter.
 	if success:
+		self.parry_refresh_timer.start(parry_refresh_length)
 		self.parried_counter += 1 
 		var state = state_machine.current_state
 		if self.parried_counter >= break_limit:
@@ -44,6 +50,7 @@ func _on_health_component_die():
 	is_dead = true
 	var state = state_machine.current_state
 	state.transition.emit(state, "die")
+
 
 func _on_player_break_attack(_attk: Array, caster: Actor): 
 	if caster is Enemy: return 
@@ -71,3 +78,9 @@ func _on_level_over():
 	print(state_machine.current_state)
 	var state = state_machine.current_state
 	state.transition.emit(state, "idle") 
+
+
+func _on_parry_refresh_timer_timeout() -> void:
+	parry_refresh_timer.start(parry_refresh_length)
+	self.parried_counter -= 1
+	

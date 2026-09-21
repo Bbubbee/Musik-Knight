@@ -328,6 +328,11 @@ _data = {
 [node name="Enemy" type="Node2D" unique_id=1493822380]
 script = ExtResource("1_umc6n")
 break_limit = 6
+attack_damage = 40.0
+
+[node name="ParryRefreshTimer" type="Timer" parent="." unique_id=910510779]
+wait_time = 6.0
+one_shot = true
 
 [node name="StateMachine" parent="." unique_id=1348697902 node_paths=PackedStringArray("initial_state") instance=ExtResource("2_wca1c")]
 initial_state = NodePath("Thinking")
@@ -376,7 +381,7 @@ texture = SubResource("AtlasTexture_xvex2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1827542258]
 libraries/ = SubResource("AnimationLibrary_utf64")
-speed_scale = 1.25
+speed_scale = 1.35
 
 [node name="PixelProgressBar" parent="." unique_id=211127907 instance=ExtResource("9_t1tli")]
 offset_left = -338.0
@@ -384,6 +389,7 @@ offset_top = -336.0
 offset_right = 337.0
 offset_bottom = -285.0
 
+[connection signal="timeout" from="ParryRefreshTimer" to="." method="_on_parry_refresh_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Thinking/ThinkingTimer" to="StateMachine/Thinking" method="_on_thinking_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Parried/ParriedTimer" to="StateMachine/Parried" method="_on_parried_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Broken/BrokenTimer" to="StateMachine/Broken" method="_on_broken_timer_timeout"]

@@ -49,7 +49,7 @@ func init(
 	if c is Player: 
 		self.modulate = Color.AQUAMARINE
 	elif c is Enemy:
-		self.modulate = Color.INDIAN_RED
+		self.modulate = Color.MEDIUM_VIOLET_RED
 	
 	# If the arrow is to be held.
 	if attack_data.is_held:
