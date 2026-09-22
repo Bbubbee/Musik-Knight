@@ -14,7 +14,6 @@
 
 [node name="Enemy" parent="FolderActors" unique_id=1493822380 instance=ExtResource("3_e6j0y")]
 position = Vector2(355, 361)
-break_limit = 6
 
 [node name="Player" parent="FolderActors" unique_id=370596373 instance=ExtResource("2_2h0i5")]
 
