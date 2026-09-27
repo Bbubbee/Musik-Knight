@@ -13,6 +13,12 @@ func _ready():
 ## Initiate an attack break. [attk]
 func _on_attack_break(attacks: Array, caster: Actor = null) -> void:		
 	
+	# If player attack breaks, clear any existing attack breaks/arrows. 
+	if caster is Player: 
+		if arrows.get_child_count() > 0:
+			for a in arrows.get_children():
+				a.queue_free()
+	
 	for attack: ArrowAttackData in attacks:
 		for arrow in attack.arrows:
 
@@ -30,6 +36,7 @@ func _on_attack_break(attacks: Array, caster: Actor = null) -> void:
 			
 		await get_tree().create_timer(attack.time_until_next_attack).timeout
 	
+	# WARNING: Game will crash if arrow is actioned whilst the caster is freed.
 	Events.attack_break_end.emit(caster) 
 			
 			

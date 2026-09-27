@@ -49,3 +49,11 @@ NEXT: Code clean up. Start/end contact period for player attacks.
 
 07/09/26
 TODO: Add planned attacks > coordinating break attaks with basic attacks.
+
+23/09/26
+What's next? I have just released the first playable version to Derick.
+I don't know what to do now. Should I fine tune and quickly move into a 
+playtesting phase? 
+
+I think custom attacks might be the way to go. If I can figure out a way
+to do this. dddddddddddd

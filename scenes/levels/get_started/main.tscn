@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://b1kl60226tun2"]
 
-[ext_resource type="PackedScene" uid="uid://bkb1l5gt2x1b1" path="res://scenes/levels/get_started/battle_manager.tscn" id="1_vsbho"]
+[ext_resource type="Script" uid="uid://dthy7hu7r7iqq" path="res://scenes/levels/get_started/main.gd" id="1_qyf83"]
+[ext_resource type="PackedScene" uid="uid://bkb1l5gt2x1b1" path="res://scenes/systems/attacks/managers/attack_manager.tscn" id="1_vsbho"]
 [ext_resource type="PackedScene" uid="uid://dh1igm36i5b6e" path="res://scenes/actors/player/player.tscn" id="2_2h0i5"]
 [ext_resource type="PackedScene" uid="uid://d4npp8eq3sf6w" path="res://scenes/actors/enemies/enemy/enemy.tscn" id="3_e6j0y"]
-[ext_resource type="PackedScene" uid="uid://dhny7c8np0odk" path="res://scenes/levels/get_started/attack_break_manager.tscn" id="4_e6j0y"]
+[ext_resource type="PackedScene" uid="uid://dhny7c8np0odk" path="res://scenes/levels/get_started/break_attack_manager.tscn" id="4_e6j0y"]
 [ext_resource type="Script" uid="uid://cuk85b5il40le" path="res://scenes/levels/get_started/ui_manager.gd" id="5_66fcu"]
 
 [node name="Main" type="Node2D" unique_id=322242158]
+script = ExtResource("1_qyf83")
 
 [node name="AttackManager" parent="." unique_id=834580641 instance=ExtResource("1_vsbho")]
 
@@ -14,10 +16,12 @@
 
 [node name="Enemy" parent="FolderActors" unique_id=1493822380 instance=ExtResource("3_e6j0y")]
 position = Vector2(355, 361)
+parry_refresh_length = 6.0
+attack_damage = 30.0
 
 [node name="Player" parent="FolderActors" unique_id=370596373 instance=ExtResource("2_2h0i5")]
 
-[node name="AttackBreakManager" parent="." unique_id=1273089830 instance=ExtResource("4_e6j0y")]
+[node name="BreakAttackManager" parent="." unique_id=1273089830 instance=ExtResource("4_e6j0y")]
 
 [node name="UIManager" type="CanvasLayer" parent="." unique_id=704116280]
 script = ExtResource("5_66fcu")

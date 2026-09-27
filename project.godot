@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Musik Knight"
-run/main_scene="uid://dqparfsbmlkww"
+run/main_scene="uid://bo7b8rlu7j24y"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://scenes/loose/icon.svg"
 

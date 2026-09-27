@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://dhny7c8np0odk"]
-
-[ext_resource type="Script" uid="uid://dl0imkom2b50n" path="res://scenes/levels/get_started/attack_break_manager.gd" id="1_r0msg"]
-
-[node name="AttackBreakManager" type="Node2D" unique_id=1273089830]
-script = ExtResource("1_r0msg")
-
-[node name="Arrows" type="Node2D" parent="." unique_id=684765038]
