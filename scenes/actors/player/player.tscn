@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://bxfrneofrx5tk" path="res://scenes/effects/explosion_particle/explosion_particle.gd" id="14_4iwnj"]
 [ext_resource type="Script" uid="uid://mqnmuqlcl360" path="res://scenes/actors/player/combo_manager.gd" id="15_068wj"]
 [ext_resource type="Script" uid="uid://bd3qsqhq5rbiy" path="res://scenes/actors/player/break_bar.gd" id="17_yab6n"]
+[ext_resource type="Texture2D" uid="uid://8sc7p6a6b67b" path="res://scenes/actors/player/assets/frame_1.png" id="18_5mkge"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_k3pjg"]
 a = Vector2(1050, 2000)
@@ -32,6 +33,11 @@ initial_velocity_max = 1000.0
 
 [node name="Player" type="Node2D" unique_id=370596373]
 script = ExtResource("1_l17oj")
+
+[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=1257349355]
+position = Vector2(345, 646)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("18_5mkge")
 
 [node name="ArrowDetectorArea" parent="." unique_id=1046222059 instance=ExtResource("2_i174x")]
 position = Vector2(334, 944)

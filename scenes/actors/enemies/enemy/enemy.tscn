@@ -337,7 +337,7 @@ wait_time = 6.0
 one_shot = true
 
 [node name="StateMachine" parent="." unique_id=1348697902 node_paths=PackedStringArray("initial_state") instance=ExtResource("2_wca1c")]
-initial_state = NodePath("SyncAttack")
+initial_state = NodePath("Thinking")
 
 [node name="Thinking" type="Node" parent="StateMachine" unique_id=1418791308]
 script = ExtResource("3_20wx3")
