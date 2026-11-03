@@ -3,10 +3,15 @@ extends PlayerState
 @export var damage: float = 25
 @export var combo_damage: float = 75
 
+@export var attack_controller: AttackController
+
 
 
 func init() -> void:
 	actor.player_attack_basic.finished_attacking.connect(_on_attack_finished)
+	
+	if attack_controller:
+		attack_controller.attack_finished.connect(_on_attack_finished)
 
 
 func enter(_enter_params = null):
@@ -15,9 +20,12 @@ func enter(_enter_params = null):
 	
 	var damage_to_deal: float = damage
 	if current_combo: damage_to_deal = combo_damage
-	actor.player_attack_basic.attack(dir, damage_to_deal) 
-
+	#actor.player_attack_basic.attack(dir, damage_to_deal) 
 	
+	# New attack implementation.
+	attack_controller.attack(dir, damage_to_deal)
+	
+
 
 func _on_attack_finished():
 	if actor.player_state_machine.current_state != self: return
