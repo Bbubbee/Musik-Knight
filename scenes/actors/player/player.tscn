@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ct0k54t4153wi" path="res://scenes/actors/player/player.gd" id="1_l17oj"]
 [ext_resource type="PackedScene" uid="uid://cj2br8bq32bkn" path="res://scenes/actors/player/arrow_detector_area.tscn" id="2_i174x"]
+[ext_resource type="Texture2D" uid="uid://usq6s84fhgdw" path="res://scenes/actors/player/assets/silent_knight_ss_2.png" id="2_npmmh"]
 [ext_resource type="PackedScene" uid="uid://beccf3oeappg0" path="res://utils/components/progress_bar/pixel_progress_bar.tscn" id="2_oj104"]
 [ext_resource type="PackedScene" uid="uid://238esogyd7if" path="res://utils/components/health_component/health_component.tscn" id="3_g2g7f"]
 [ext_resource type="PackedScene" uid="uid://dbafiibyaxj8k" path="res://scenes/actors/player/attacks/player_atk_basic/player_attack_basic.tscn" id="3_oj104"]
@@ -17,12 +18,10 @@
 [ext_resource type="Script" uid="uid://bxfrneofrx5tk" path="res://scenes/effects/explosion_particle/explosion_particle.gd" id="14_4iwnj"]
 [ext_resource type="Script" uid="uid://mqnmuqlcl360" path="res://scenes/actors/player/combo_manager.gd" id="15_068wj"]
 [ext_resource type="Script" uid="uid://bd3qsqhq5rbiy" path="res://scenes/actors/player/break_bar.gd" id="17_yab6n"]
-[ext_resource type="Texture2D" uid="uid://8sc7p6a6b67b" path="res://scenes/actors/player/assets/frame_1.png" id="18_5mkge"]
-[ext_resource type="Texture2D" uid="uid://bocgad61igmar" path="res://scenes/actors/player/assets/silent_knight _ss.png" id="19_q2guw"]
 [ext_resource type="Script" uid="uid://8c2kkn18lrv0" path="res://scenes/actors/player/attack_controller.gd" id="20_npmmh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xvex2"]
-atlas = ExtResource("19_q2guw")
+atlas = ExtResource("2_npmmh")
 region = Rect2(0, 0, 1920, 1620)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_k3pjg"]
@@ -50,6 +49,40 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Rect2(0, 0, 1920, 1620)]
+}
+
+[sub_resource type="Animation" id="Animation_8bu7j"]
+resource_name = "attack_down"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteSheet:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 1920, 1620), Rect2(1920, 4860, 1920, 1620), Rect2(3840, 4860, 1920, 1620), Rect2(5760, 4860, 1920, 1620), Rect2(7680, 4860, 1920, 1620)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackController")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.29999998, 0.59999996),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"set_contact"
+}, {
+"args": [false],
+"method": &"set_contact"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_q2guw"]
@@ -157,6 +190,7 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_npmmh"]
 _data = {
 &"RESET": SubResource("Animation_npmmh"),
+&"attack_down": SubResource("Animation_8bu7j"),
 &"attack_left": SubResource("Animation_q2guw"),
 &"attack_right": SubResource("Animation_qxscg"),
 &"attack_up": SubResource("Animation_biscu")
@@ -166,15 +200,10 @@ _data = {
 script = ExtResource("1_l17oj")
 
 [node name="SpriteSheet" type="Sprite2D" parent="." unique_id=1360393421]
+modulate = Color(0.16365051, 0.40123355, 0.55859375, 1)
 position = Vector2(343, 539)
 scale = Vector2(0.6, 0.6)
 texture = SubResource("AtlasTexture_xvex2")
-
-[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=1257349355]
-visible = false
-position = Vector2(345, 646)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("18_5mkge")
 
 [node name="ArrowDetectorArea" parent="." unique_id=1046222059 instance=ExtResource("2_i174x")]
 position = Vector2(334, 944)

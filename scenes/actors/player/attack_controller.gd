@@ -25,9 +25,9 @@ func attack(dir: Constants.DIR, d: float):
 	elif dir == Constants.DIR.RIGHT:
 		animator.play("attack_right")
 	elif dir == Constants.DIR.UP:
-			animator.play("attack_up")
-	else: 
-		animator.play("attack_left")
+		animator.play("attack_up")
+	elif dir == Constants.DIR.DOWN:
+		animator.play("attack_down")
 
 
 func set_contact(c: bool):
