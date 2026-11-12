@@ -37,7 +37,7 @@ func _on_thinking_timer_timeout():
 	
 	# Attack.
 	if decision <= 95:
-		transition.emit(self, "syncattack") 
+		transition.emit(self, "customattack") 
 
 	# Special (Break) attack.
 	if decision <= 100: 

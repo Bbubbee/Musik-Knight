@@ -1,6 +1,8 @@
 extends PlayerState
 
 @onready var break_bar: BreakBar = $BreakBar
+@onready var break_menu: BreakMenu = $BreakMenu
+
 
 var attack_breaks = [
 		[
@@ -20,28 +22,26 @@ var attack_breaks = [
 		],
 	]
 
+
 func _ready() -> void:
 	Events.attack_break_end.connect(_on_attack_break_end)
 	
 
 func enter(_enter_params = null):
-	#attack_break()
-	
-	if break_bar.can_break_attack:
-		attack_break()
-	else: 
+	if not break_bar.can_break_attack: 
 		transition.emit(self, "idle")
+		return
+	
+	attack_break()
 
 func attack_break():	
+	break_menu.choose_break_ability()
+	print('yo')
+	await break_menu.option_chosen
 	
 	break_bar.break_value = 0
 	break_bar.can_break_attack = false
 	
-	# The enemy should be stunned during the players attack break.
-	# How should this be done? 
-	# Enemy wait for the signal? 
-	# Attack manager do something about it? 
-
 	Events.attack_break.emit(attack_breaks.pick_random(), actor) 
 
 
