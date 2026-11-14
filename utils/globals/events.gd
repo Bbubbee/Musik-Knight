@@ -16,6 +16,7 @@ signal parried_enemy(succes: bool)
 # Contact points
 signal _player_contact_enemy 
 signal _enemy_contact_player
+signal pause_game(paused: bool)
 
 # UI / Indicators
 signal spawn_score_indicator(dir: Constants.DIR)

@@ -36,8 +36,8 @@ func enter(_enter_params = null):
 
 func attack_break():	
 	break_menu.choose_break_ability()
-	print('yo')
-	await break_menu.option_chosen
+	var x = await break_menu.option_chosen
+	print(x) 
 	
 	break_bar.break_value = 0
 	break_bar.can_break_attack = false
@@ -47,6 +47,8 @@ func attack_break():
 
 func _on_attack_break_end(caster: Actor):
 	if caster == actor: 
+		
 		await get_tree().create_timer(1).timeout
+		Events.pause_game.emit(false) 
 		transition.emit(self, "idle") 
 		

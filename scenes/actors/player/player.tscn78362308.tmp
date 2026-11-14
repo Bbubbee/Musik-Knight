@@ -1,0 +1,363 @@
+[gd_scene format=3 uid="uid://dh1igm36i5b6e"]
+
+[ext_resource type="Script" uid="uid://ct0k54t4153wi" path="res://scenes/actors/player/player.gd" id="1_l17oj"]
+[ext_resource type="PackedScene" uid="uid://cj2br8bq32bkn" path="res://scenes/actors/player/arrow_detector_area.tscn" id="2_i174x"]
+[ext_resource type="PackedScene" uid="uid://beccf3oeappg0" path="res://utils/components/progress_bar/pixel_progress_bar.tscn" id="2_oj104"]
+[ext_resource type="Texture2D" uid="uid://dsx0ut6wcanbh" path="res://scenes/actors/player/assets/silent_knight _ss_3.png" id="2_q2guw"]
+[ext_resource type="PackedScene" uid="uid://238esogyd7if" path="res://utils/components/health_component/health_component.tscn" id="3_g2g7f"]
+[ext_resource type="PackedScene" uid="uid://dbafiibyaxj8k" path="res://scenes/actors/player/attacks/player_atk_basic/player_attack_basic.tscn" id="3_oj104"]
+[ext_resource type="PackedScene" uid="uid://nwos0wjtvdob" path="res://utils/components/state_machines/player_state_machine/player_state_machine.tscn" id="4_mpktj"]
+[ext_resource type="Script" uid="uid://dj321ocddfdn" path="res://scenes/actors/player/states/idle.gd" id="5_yg5k4"]
+[ext_resource type="Script" uid="uid://7njjcbuqwv2e" path="res://scenes/actors/player/attack.gd" id="6_qdyt2"]
+[ext_resource type="Script" uid="uid://ddk7wikyc6teo" path="res://scenes/actors/player/break_menu/break_menu.gd" id="8_npmmh"]
+[ext_resource type="Script" uid="uid://b0rx7nif7g3kc" path="res://scenes/actors/player/score_indicators.gd" id="9_5bhx7"]
+[ext_resource type="Script" uid="uid://dbod1h5u7s2op" path="res://scenes/actors/player/states/break_attack.gd" id="9_i174x"]
+[ext_resource type="Script" uid="uid://c160c6ls8ooog" path="res://scenes/actors/player/states/game_end.gd" id="10_xducv"]
+[ext_resource type="Script" uid="uid://c2wvqwnmed0x4" path="res://scenes/actors/player/arrow_boundary.gd" id="11_8bj4u"]
+[ext_resource type="Script" uid="uid://bk4gxdbfg4vj8" path="res://scenes/actors/player/combo_visualiser.gd" id="12_inh5e"]
+[ext_resource type="Texture2D" uid="uid://cx1irex1h1ea2" path="res://scenes/systems/arrow/arrowUp.png" id="13_hcvpp"]
+[ext_resource type="Script" uid="uid://bxfrneofrx5tk" path="res://scenes/effects/explosion_particle/explosion_particle.gd" id="14_4iwnj"]
+[ext_resource type="Script" uid="uid://mqnmuqlcl360" path="res://scenes/actors/player/combo_manager.gd" id="15_068wj"]
+[ext_resource type="Script" uid="uid://bd3qsqhq5rbiy" path="res://scenes/actors/player/break_bar.gd" id="17_yab6n"]
+[ext_resource type="Script" uid="uid://8c2kkn18lrv0" path="res://scenes/actors/player/attack_controller.gd" id="20_npmmh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvex2"]
+atlas = ExtResource("2_q2guw")
+region = Rect2(0, 0, 1920, 1620)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_k3pjg"]
+a = Vector2(1050, 2000)
+b = Vector2(-250, 2000)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hcvpp"]
+particle_flag_disable_z = true
+angle_min = -365.9
+angle_max = 233.00002
+spread = 180.0
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+
+[sub_resource type="Animation" id="Animation_npmmh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteSheet:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 1920, 1620)]
+}
+
+[sub_resource type="Animation" id="Animation_8bu7j"]
+resource_name = "attack_down"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteSheet:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 1920, 1620), Rect2(1920, 4860, 1920, 1620), Rect2(3840, 4860, 1920, 1620), Rect2(5760, 4860, 1920, 1620), Rect2(7680, 4860, 1920, 1620)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackController")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.29999998, 0.59999996),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"set_contact"
+}, {
+"args": [false],
+"method": &"set_contact"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_q2guw"]
+resource_name = "attack_left"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteSheet:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.09999998, 0.29999998, 0.5, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 1920, 1620), Rect2(1920, 1620, 1920, 1620), Rect2(3840, 1620, 1920, 1620), Rect2(5760, 1620, 1920, 1620), Rect2(7680, 1620, 1920, 1620)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackController")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.29999998, 0.59999996),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"set_contact"
+}, {
+"args": [false],
+"method": &"set_contact"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_qxscg"]
+resource_name = "attack_right"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteSheet:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 1920, 1620), Rect2(1920, 0, 1920, 1620), Rect2(3840, 0, 1920, 1620), Rect2(5760, 0, 1920, 1620), Rect2(7680, 0, 1920, 1620)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackController")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 0.59999996),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"set_contact"
+}, {
+"args": [false],
+"method": &"set_contact"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_biscu"]
+resource_name = "attack_up"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteSheet:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 1920, 1620), Rect2(1920, 3240, 1920, 1620), Rect2(3840, 3240, 1920, 1620), Rect2(5760, 3240, 1920, 1620), Rect2(7680, 3240, 1920, 1620)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackController")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 0.59999996),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"set_contact"
+}, {
+"args": [false],
+"method": &"set_contact"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_npmmh"]
+_data = {
+&"RESET": SubResource("Animation_npmmh"),
+&"attack_down": SubResource("Animation_8bu7j"),
+&"attack_left": SubResource("Animation_q2guw"),
+&"attack_right": SubResource("Animation_qxscg"),
+&"attack_up": SubResource("Animation_biscu")
+}
+
+[node name="Player" type="Node2D" unique_id=370596373]
+script = ExtResource("1_l17oj")
+
+[node name="PlayerStateMachine" parent="." unique_id=1348697902 node_paths=PackedStringArray("initial_state") instance=ExtResource("4_mpktj")]
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="PlayerStateMachine" unique_id=957271531]
+script = ExtResource("5_yg5k4")
+
+[node name="Attack" type="Node" parent="PlayerStateMachine" unique_id=2011711286 node_paths=PackedStringArray("attack_controller")]
+script = ExtResource("6_qdyt2")
+damage = 38.0
+combo_damage = 100.0
+attack_controller = NodePath("../../AttackController")
+
+[node name="BreakAttack" type="Node" parent="PlayerStateMachine" unique_id=1792442115]
+script = ExtResource("9_i174x")
+
+[node name="BreakBar" type="Node2D" parent="PlayerStateMachine/BreakAttack" unique_id=927352817]
+position = Vector2(9, 481)
+script = ExtResource("17_yab6n")
+starting_value = 0.0
+break_max_value = 4.0
+
+[node name="PixelProgressBar" parent="PlayerStateMachine/BreakAttack/BreakBar" unique_id=2077733708 instance=ExtResource("2_oj104")]
+offset_right = 59.0
+offset_bottom = 385.0
+value = 0.0
+fill_mode = 3
+tint_under = Color(0.45490196, 0.23455882, 0, 1)
+tint_over = Color(0.30980393, 0.23627453, 0.01568627, 1)
+tint_progress = Color(1, 0.80784315, 0.2313726, 1)
+
+[node name="BreakMenu" type="Node2D" parent="PlayerStateMachine/BreakAttack" unique_id=1194023389]
+script = ExtResource("8_npmmh")
+
+[node name="Timer" type="Timer" parent="PlayerStateMachine/BreakAttack/BreakMenu" unique_id=2137435215]
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="PlayerStateMachine/BreakAttack/BreakMenu" unique_id=2087458283]
+
+[node name="CenterContainer" type="CenterContainer" parent="PlayerStateMachine/BreakAttack/BreakMenu/CanvasLayer" unique_id=1669986234]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerStateMachine/BreakAttack/BreakMenu/CanvasLayer/CenterContainer" unique_id=1082785362]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="PlayerStateMachine/BreakAttack/BreakMenu/CanvasLayer/CenterContainer/VBoxContainer" unique_id=1436568477]
+layout_mode = 2
+text = "Choose an ability"
+
+[node name="AbilityLabel" type="Label" parent="PlayerStateMachine/BreakAttack/BreakMenu/CanvasLayer/CenterContainer/VBoxContainer" unique_id=1358534569]
+layout_mode = 2
+text = "Ability 1"
+horizontal_alignment = 1
+
+[node name="AbilityLabel2" type="Label" parent="PlayerStateMachine/BreakAttack/BreakMenu/CanvasLayer/CenterContainer/VBoxContainer" unique_id=299536232]
+layout_mode = 2
+text = "Ability 2"
+horizontal_alignment = 1
+
+[node name="AbilityLabel3" type="Label" parent="PlayerStateMachine/BreakAttack/BreakMenu/CanvasLayer/CenterContainer/VBoxContainer" unique_id=509527033]
+layout_mode = 2
+text = "Ability 3"
+horizontal_alignment = 1
+
+[node name="GameEnd" type="Node" parent="PlayerStateMachine" unique_id=1294774447]
+script = ExtResource("10_xducv")
+
+[node name="SpriteSheet" type="Sprite2D" parent="." unique_id=1360393421]
+modulate = Color(0.16365051, 0.40123355, 0.55859375, 1)
+position = Vector2(343, 539)
+scale = Vector2(0.6, 0.6)
+texture = SubResource("AtlasTexture_xvex2")
+
+[node name="ArrowDetectorArea" parent="." unique_id=1046222059 instance=ExtResource("2_i174x")]
+position = Vector2(334, 944)
+
+[node name="PixelProgressBar" parent="." unique_id=211127907 instance=ExtResource("2_oj104")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 44.0
+offset_top = 1013.0
+offset_right = 696.0
+offset_bottom = 1063.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 4
+
+[node name="HealthComponent" parent="." unique_id=2086389814 node_paths=PackedStringArray("pixel_progress_bar") instance=ExtResource("3_g2g7f")]
+pixel_progress_bar = NodePath("../PixelProgressBar")
+max_health = 400.0
+
+[node name="PlayerAttackBasic" parent="." unique_id=40946407 instance=ExtResource("3_oj104")]
+position = Vector2(376, 440)
+
+[node name="ScoreIndicators" type="Node2D" parent="." unique_id=892491426]
+script = ExtResource("9_5bhx7")
+
+[node name="ArrowBoundary" type="Area2D" parent="." unique_id=1796248876]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("11_8bj4u")
+
+[node name="ArrowBoundaryShape" type="CollisionShape2D" parent="ArrowBoundary" unique_id=1139230977]
+shape = SubResource("SegmentShape2D_k3pjg")
+
+[node name="ComboVisualiser" type="Control" parent="." unique_id=1839219683]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 296.0
+offset_right = 720.0
+offset_bottom = 578.0
+script = ExtResource("12_inh5e")
+
+[node name="HBox" type="HBoxContainer" parent="ComboVisualiser" unique_id=2143620658]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="ExplosionParticle" type="GPUParticles2D" parent="." unique_id=1156604401]
+position = Vector2(356, 291)
+emitting = false
+amount = 25
+texture = ExtResource("13_hcvpp")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_hcvpp")
+script = ExtResource("14_4iwnj")
+
+[node name="ComboManager" type="Node" parent="." unique_id=438431916]
+script = ExtResource("15_068wj")
+
+[node name="ComboTimer" type="Timer" parent="ComboManager" unique_id=1316321372]
+one_shot = true
+
+[node name="AttackController" type="Node2D" parent="." unique_id=1939099090]
+script = ExtResource("20_npmmh")
+
+[node name="Animator" type="AnimationPlayer" parent="AttackController" unique_id=1544632949]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_npmmh")
+speed_scale = 1.75
+
+[connection signal="timeout" from="PlayerStateMachine/BreakAttack/BreakMenu/Timer" to="PlayerStateMachine/BreakAttack/BreakMenu" method="_on_timer_timeout"]
+[connection signal="die" from="HealthComponent" to="." method="_on_health_component_die"]
+[connection signal="body_entered" from="ArrowBoundary" to="ArrowBoundary" method="_on_body_entered"]
+[connection signal="combo_completed" from="ComboManager" to="." method="_on_combo_manager_combo_completed"]
+[connection signal="combo_completed" from="ComboManager" to="PlayerAttackBasic" method="_on_combo_manager_combo_completed"]
+[connection signal="timeout" from="ComboManager/ComboTimer" to="ComboManager" method="_on_combo_timer_timeout"]
+[connection signal="animation_finished" from="AttackController/Animator" to="AttackController" method="_on_animator_animation_finished"]

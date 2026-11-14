@@ -5,9 +5,15 @@ extends State
 
 
 func enter(_enter_params = null):
-	broken_timer.start(broken_duration)
-	actor.animation_player.play("broken") 
 	actor.parried_counter = 0
+	actor.animation_player.play("broken") 
+	
+	# If has enter params, the broken state is indefinite until advised otherwise. 
+	# If not, become unbroken after a given duration.
+	if _enter_params: 
+		return
+		
+	broken_timer.start(broken_duration)
 
 
 func _on_broken_timer_timeout():

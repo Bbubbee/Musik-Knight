@@ -1,7 +1,7 @@
 extends PlayerState
 
-@export var damage: float = 25
-@export var combo_damage: float = 75
+@export var damage: float = 38.0
+@export var combo_damage: float = 100.0
 
 @export var attack_controller: AttackController
 
@@ -20,11 +20,7 @@ func enter(_enter_params = null):
 	
 	var damage_to_deal: float = damage
 	if current_combo: damage_to_deal = combo_damage
-	#actor.player_attack_basic.attack(dir, damage_to_deal) 
-	
-	# New attack implementation.
 	attack_controller.attack(dir, damage_to_deal)
-	
 
 
 func _on_attack_finished():

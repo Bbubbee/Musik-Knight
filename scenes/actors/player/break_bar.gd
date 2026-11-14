@@ -4,10 +4,10 @@ class_name BreakBar
 @onready var pixel_progress_bar: PixelProgressBar = $PixelProgressBar
 
 @export var starting_value: float = 100
+@export var break_max_value: float = 100.0
 
 
 var can_break_attack: bool = false
-var break_max_value: float = 100.0
 var break_value: float = 0.0:
 	set = set_break_value
 

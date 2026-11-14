@@ -8,6 +8,8 @@ const ARROW_INDICATOR = preload("uid://doubj6sf6gxhr")
 
 var held_arrows: Array[Arrow]
 
+var enabled: bool
+
 func _ready() -> void:
 	# Position the arrow detector. 
 	var screen_size = get_viewport().get_visible_rect().size
@@ -20,11 +22,18 @@ func _ready() -> void:
 		var arrow_sprite = ARROW_INDICATOR.instantiate() 
 		folder_arrow_indicators.add_child(arrow_sprite)
 		arrow_sprite.init(a_i, lanes[a_i])
-		
+
+	Events.pause_game.connect(_on_pause_game)
+	
+	
+func _on_pause_game(paused: bool): 	
+	pass
+	# TODO: Handle pausing this node when needed.
+	# Currently it is when the break menu is open. 
+	
+	
 	
 func _physics_process(_delta: float) -> void:
-	
-	# NOTE: Changed all "elif" to "if" to handle concurrent presses. 
 	if Input.is_action_just_pressed("arrow_left"):
 		press_lane(0)
 	if Input.is_action_just_pressed("arrow_up"):

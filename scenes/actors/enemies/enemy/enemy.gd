@@ -22,7 +22,7 @@ var is_dead: bool = false
 func _ready() -> void:
 	state_machine.init(self)
 	
-	Events.attack_break.connect(_on_player_break_attack)
+	Events.pause_game.connect(_on_pause_game)
 	Events.change_enemies_health.connect(_on_change_enemies_health)
 	Events.parried_enemy.connect(_on_got_parried)
 	Events.level_over.connect(_on_level_over)
@@ -52,11 +52,13 @@ func _on_health_component_die():
 	state.transition.emit(state, "die")
 
 
-func _on_player_break_attack(_attk: Array, caster: Actor): 
-	if caster is Enemy: return 
-	
-	var state = state_machine.current_state
-	state.transition.emit(state, "broken")
+func _on_pause_game(paused: bool): 
+	if paused: 
+		var state = state_machine.current_state
+		state.transition.emit(state, "broken", {"manual_pause": true})
+	else: 
+		var state = state_machine.current_state
+		state.transition.emit(state, "thinking")
 
 
 func _on_change_enemies_health(change: float):
