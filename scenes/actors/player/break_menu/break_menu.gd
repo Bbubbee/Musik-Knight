@@ -16,30 +16,22 @@ func choose_break_ability():
 	Events.pause_game.emit(true) 
 	canvas_layer.show()
 
+func return_break_ability(temp_ability: String):
+	option_chosen.emit(temp_ability)
+	canvas_layer.hide()
+	enabled = false
+
 func _input(event: InputEvent) -> void:
 	if not enabled: return
 	
 	if event.is_action_pressed("arrow_left"):
-		option_chosen.emit()
-		canvas_layer.hide()
-		enabled = false
-		print("Heal!")
-		
+		return_break_ability("Heal")
+
 	if event.is_action_pressed("arrow_up"):
-		option_chosen.emit()
-		canvas_layer.hide()
-		enabled = false
-		print("Poison!")
-		
+		return_break_ability("Poison")
 
 	if event.is_action_pressed("arrow_right"):
-		option_chosen.emit()
-		canvas_layer.hide()
-		enabled = false
-		print("Damage!")
-		
+		return_break_ability("Damage")
+
 	if event.is_action_pressed("arrow_down"):
-		option_chosen.emit()
-		canvas_layer.hide()
-		enabled = false
-		print("Debuff!")
+		return_break_ability("Debuff")

@@ -26,7 +26,7 @@ func _ready() -> void:
 	Events.pause_game.connect(_on_pause_game)
 	
 	
-func _on_pause_game(paused: bool): 	
+func _on_pause_game(_paused: bool): 	
 	pass
 	# TODO: Handle pausing this node when needed.
 	# Currently it is when the break menu is open. 

@@ -29,3 +29,7 @@ func _ready() -> void:
 
 func _on_change_players_break_value(c: float):
 	break_value += c
+
+func reset_break_bar():
+	self.break_value = 0
+	self.can_break_attack = false
