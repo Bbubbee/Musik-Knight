@@ -1,6 +1,12 @@
 extends Node
 
 
+enum BREAK_TYPE {
+	BASIC,
+	SPECIAL
+}
+
+
 enum DIR {
 	LEFT,
 	UP,

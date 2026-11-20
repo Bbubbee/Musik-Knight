@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cj2br8bq32bkn" path="res://scenes/actors/player/arrow_detector_area.tscn" id="2_i174x"]
 [ext_resource type="PackedScene" uid="uid://beccf3oeappg0" path="res://utils/components/progress_bar/pixel_progress_bar.tscn" id="2_oj104"]
 [ext_resource type="Texture2D" uid="uid://dsx0ut6wcanbh" path="res://scenes/actors/player/assets/silent_knight _ss_3.png" id="2_q2guw"]
+[ext_resource type="Resource" uid="uid://c7jsn4w505ml3" path="res://resources/stats/data/player_stats.tres" id="2_qxscg"]
 [ext_resource type="PackedScene" uid="uid://238esogyd7if" path="res://utils/components/health_component/health_component.tscn" id="3_g2g7f"]
 [ext_resource type="PackedScene" uid="uid://dbafiibyaxj8k" path="res://scenes/actors/player/attacks/player_atk_basic/player_attack_basic.tscn" id="3_oj104"]
 [ext_resource type="PackedScene" uid="uid://nwos0wjtvdob" path="res://utils/components/state_machines/player_state_machine/player_state_machine.tscn" id="4_mpktj"]
@@ -11,14 +12,14 @@
 [ext_resource type="Script" uid="uid://7njjcbuqwv2e" path="res://scenes/actors/player/attack.gd" id="6_qdyt2"]
 [ext_resource type="Script" uid="uid://ddk7wikyc6teo" path="res://scenes/actors/player/break_menu/break_menu.gd" id="8_npmmh"]
 [ext_resource type="Script" uid="uid://b0rx7nif7g3kc" path="res://scenes/actors/player/score_indicators.gd" id="9_5bhx7"]
-[ext_resource type="Script" uid="uid://dbod1h5u7s2op" path="res://scenes/actors/player/states/break_attack.gd" id="9_i174x"]
+[ext_resource type="Script" uid="uid://dbod1h5u7s2op" path="res://scenes/actors/player/states/special_break_attack.gd" id="9_i174x"]
 [ext_resource type="Script" uid="uid://c160c6ls8ooog" path="res://scenes/actors/player/states/game_end.gd" id="10_xducv"]
 [ext_resource type="Script" uid="uid://c2wvqwnmed0x4" path="res://scenes/actors/player/arrow_boundary.gd" id="11_8bj4u"]
 [ext_resource type="Script" uid="uid://bk4gxdbfg4vj8" path="res://scenes/actors/player/combo_visualiser.gd" id="12_inh5e"]
 [ext_resource type="Texture2D" uid="uid://cx1irex1h1ea2" path="res://scenes/systems/arrow/arrowUp.png" id="13_hcvpp"]
 [ext_resource type="Script" uid="uid://bxfrneofrx5tk" path="res://scenes/effects/explosion_particle/explosion_particle.gd" id="14_4iwnj"]
-[ext_resource type="Script" uid="uid://mqnmuqlcl360" path="res://scenes/actors/player/combo_manager.gd" id="15_068wj"]
 [ext_resource type="Script" uid="uid://bd3qsqhq5rbiy" path="res://scenes/actors/player/break_bar.gd" id="17_yab6n"]
+[ext_resource type="PackedScene" uid="uid://bijj1v8efwgfm" path="res://scenes/actors/player/sequence_manager.tscn" id="19_npmmh"]
 [ext_resource type="Script" uid="uid://8c2kkn18lrv0" path="res://scenes/actors/player/attack_controller.gd" id="20_npmmh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xvex2"]
@@ -26,8 +27,8 @@ atlas = ExtResource("2_q2guw")
 region = Rect2(0, 0, 1920, 1620)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_k3pjg"]
-a = Vector2(1050, 2000)
-b = Vector2(-250, 2000)
+a = Vector2(1050, 1200)
+b = Vector2(-250, 1200)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hcvpp"]
 particle_flag_disable_z = true
@@ -199,6 +200,7 @@ _data = {
 
 [node name="Player" type="Node2D" unique_id=370596373]
 script = ExtResource("1_l17oj")
+stats = ExtResource("2_qxscg")
 
 [node name="PlayerStateMachine" parent="." unique_id=1348697902 node_paths=PackedStringArray("initial_state") instance=ExtResource("4_mpktj")]
 initial_state = NodePath("Idle")
@@ -210,16 +212,16 @@ script = ExtResource("5_yg5k4")
 script = ExtResource("6_qdyt2")
 attack_controller = NodePath("../../AttackController")
 
-[node name="BreakAttack" type="Node" parent="PlayerStateMachine" unique_id=1792442115]
+[node name="SpecialBreakAttack" type="Node" parent="PlayerStateMachine" unique_id=1792442115]
 script = ExtResource("9_i174x")
 
-[node name="BreakBar" type="Node2D" parent="PlayerStateMachine/BreakAttack" unique_id=927352817]
+[node name="BreakBar" type="Node2D" parent="PlayerStateMachine/SpecialBreakAttack" unique_id=927352817]
 position = Vector2(9, 481)
 script = ExtResource("17_yab6n")
 starting_value = 0.0
-break_max_value = 4.0
+break_max_value = 3.0
 
-[node name="PixelProgressBar" parent="PlayerStateMachine/BreakAttack/BreakBar" unique_id=2077733708 instance=ExtResource("2_oj104")]
+[node name="PixelProgressBar" parent="PlayerStateMachine/SpecialBreakAttack/BreakBar" unique_id=2077733708 instance=ExtResource("2_oj104")]
 offset_right = 59.0
 offset_bottom = 385.0
 value = 0.0
@@ -228,48 +230,48 @@ tint_under = Color(0.45490196, 0.23455882, 0, 1)
 tint_over = Color(0.30980393, 0.23627453, 0.01568627, 1)
 tint_progress = Color(1, 0.80784315, 0.2313726, 1)
 
-[node name="BreakMenu" type="Node2D" parent="PlayerStateMachine/BreakAttack" unique_id=1194023389]
+[node name="BreakMenu" type="Node2D" parent="PlayerStateMachine/SpecialBreakAttack" unique_id=1194023389]
 script = ExtResource("8_npmmh")
 
-[node name="Timer" type="Timer" parent="PlayerStateMachine/BreakAttack/BreakMenu" unique_id=2137435215]
+[node name="Timer" type="Timer" parent="PlayerStateMachine/SpecialBreakAttack/BreakMenu" unique_id=2137435215]
 one_shot = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="PlayerStateMachine/BreakAttack/BreakMenu" unique_id=2087458283]
+[node name="CanvasLayer" type="CanvasLayer" parent="PlayerStateMachine/SpecialBreakAttack/BreakMenu" unique_id=2087458283]
 
-[node name="CenterContainer" type="CenterContainer" parent="PlayerStateMachine/BreakAttack/BreakMenu/CanvasLayer" unique_id=1669986234]
+[node name="CenterContainer" type="CenterContainer" parent="PlayerStateMachine/SpecialBreakAttack/BreakMenu/CanvasLayer" unique_id=1669986234]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerStateMachine/BreakAttack/BreakMenu/CanvasLayer/CenterContainer" unique_id=1082785362]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerStateMachine/SpecialBreakAttack/BreakMenu/CanvasLayer/CenterContainer" unique_id=1082785362]
 layout_mode = 2
 
-[node name="TitleLabel" type="Label" parent="PlayerStateMachine/BreakAttack/BreakMenu/CanvasLayer/CenterContainer/VBoxContainer" unique_id=1436568477]
+[node name="TitleLabel" type="Label" parent="PlayerStateMachine/SpecialBreakAttack/BreakMenu/CanvasLayer/CenterContainer/VBoxContainer" unique_id=1436568477]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Choose an ability"
 
-[node name="AbilityLabel" type="Label" parent="PlayerStateMachine/BreakAttack/BreakMenu/CanvasLayer/CenterContainer/VBoxContainer" unique_id=1358534569]
+[node name="AbilityLabel" type="Label" parent="PlayerStateMachine/SpecialBreakAttack/BreakMenu/CanvasLayer/CenterContainer/VBoxContainer" unique_id=1358534569]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Heal!"
 horizontal_alignment = 1
 
-[node name="AbilityLabel2" type="Label" parent="PlayerStateMachine/BreakAttack/BreakMenu/CanvasLayer/CenterContainer/VBoxContainer" unique_id=299536232]
+[node name="AbilityLabel2" type="Label" parent="PlayerStateMachine/SpecialBreakAttack/BreakMenu/CanvasLayer/CenterContainer/VBoxContainer" unique_id=299536232]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Wealm!"
+text = "Buff!"
 horizontal_alignment = 1
 
-[node name="AbilityLabel3" type="Label" parent="PlayerStateMachine/BreakAttack/BreakMenu/CanvasLayer/CenterContainer/VBoxContainer" unique_id=509527033]
+[node name="AbilityLabel3" type="Label" parent="PlayerStateMachine/SpecialBreakAttack/BreakMenu/CanvasLayer/CenterContainer/VBoxContainer" unique_id=509527033]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Damage!"
 horizontal_alignment = 1
 
-[node name="AbilityLabel4" type="Label" parent="PlayerStateMachine/BreakAttack/BreakMenu/CanvasLayer/CenterContainer/VBoxContainer" unique_id=412480155]
+[node name="AbilityLabel4" type="Label" parent="PlayerStateMachine/SpecialBreakAttack/BreakMenu/CanvasLayer/CenterContainer/VBoxContainer" unique_id=412480155]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Debuff!"
@@ -348,11 +350,7 @@ explosiveness = 0.5
 process_material = SubResource("ParticleProcessMaterial_hcvpp")
 script = ExtResource("14_4iwnj")
 
-[node name="ComboManager" type="Node" parent="." unique_id=438431916]
-script = ExtResource("15_068wj")
-
-[node name="ComboTimer" type="Timer" parent="ComboManager" unique_id=1316321372]
-one_shot = true
+[node name="SequenceManager" parent="." unique_id=653627658 instance=ExtResource("19_npmmh")]
 
 [node name="AttackController" type="Node2D" parent="." unique_id=1939099090]
 script = ExtResource("20_npmmh")
@@ -362,10 +360,8 @@ root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_npmmh")
 speed_scale = 1.75
 
-[connection signal="timeout" from="PlayerStateMachine/BreakAttack/BreakMenu/Timer" to="PlayerStateMachine/BreakAttack/BreakMenu" method="_on_timer_timeout"]
+[connection signal="timeout" from="PlayerStateMachine/SpecialBreakAttack/BreakMenu/Timer" to="PlayerStateMachine/SpecialBreakAttack/BreakMenu" method="_on_timer_timeout"]
 [connection signal="die" from="HealthComponent" to="." method="_on_health_component_die"]
 [connection signal="body_entered" from="ArrowBoundary" to="ArrowBoundary" method="_on_body_entered"]
-[connection signal="combo_completed" from="ComboManager" to="." method="_on_combo_manager_combo_completed"]
-[connection signal="combo_completed" from="ComboManager" to="PlayerAttackBasic" method="_on_combo_manager_combo_completed"]
-[connection signal="timeout" from="ComboManager/ComboTimer" to="ComboManager" method="_on_combo_timer_timeout"]
+[connection signal="sequence_completed" from="SequenceManager" to="." method="_on_sequence_manager_sequence_completed"]
 [connection signal="animation_finished" from="AttackController/Animator" to="AttackController" method="_on_animator_animation_finished"]

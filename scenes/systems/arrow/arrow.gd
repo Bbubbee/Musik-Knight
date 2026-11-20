@@ -1,11 +1,14 @@
 extends RigidBody2D
 class_name Arrow
 
+signal arrow_removed(arrow: Arrow, score: int)
+
 @onready var sprite: Sprite2D = $Sprite
 @onready var held_sprite: Sprite2D = $HeldSprite
 @onready var physics_shape: CollisionShape2D = $PhysicsShape
 @onready var line_2d: Line2D = $Line2D
 @onready var explosion_particle: GPUParticles2D = $ExplosionParticle
+
 
 var speed: float
 var direction: int
@@ -18,6 +21,7 @@ var held_duration: float
 var held_distance: float
 var is_active: bool = true
 var arrow_attack_data: ArrowAttackData
+var break_type: Constants.BREAK_TYPE
 
 
 func _ready() -> void:
@@ -27,12 +31,14 @@ func _ready() -> void:
 func init(
 		d: int, 
 		c: Actor, 
-		attack_data: ArrowAttackData
+		attack_data: ArrowAttackData, 
+		b_t: Constants.BREAK_TYPE = Constants.BREAK_TYPE.BASIC
 	):
 		
 		
 	self.direction = d
 	self.caster = c 
+	self.break_type = b_t
 	
 	# Attack Arrow Data. 
 	# TODO: Leave all data to the arrow_attack_data variable.
@@ -94,14 +100,14 @@ func init(
 	self.linear_velocity.y = self.speed*move_direction
 
 
-func remove_arrow(pos_y: float = 0.0):
+func remove_arrow(pos_y: float = 0.0, score: int = 0):
 	# NOTE: Position is a shit way of spawning explosion particles where the arrow was pressed.
 	# I'm lazy.
 	if pos_y == 0.0: 
 		pos_y = self.position.y
 	
 	# Disables the arrow. Prevents the arrow from being clicked until it's 
-	# finished running it' code.
+	# finished running it's code.
 	if not is_active: return
 	is_active = false
 	
@@ -117,7 +123,17 @@ func remove_arrow(pos_y: float = 0.0):
 	held_sprite.hide()
 	line_2d.hide()
 	
+	arrow_removed.emit(self, score)
+	
 	await explosion_particle.finished
+	
+	# When arrow is removed, give the outcome to the break attack for storage. 
+	# Outcome is based on how it was/wasn't pressed. "The score". 
+	
+	# Damage the player if the score is negative.
+	if score < 0: 
+		Events.change_players_health.emit(damage)
+		
 	
 	self.queue_free()
 	

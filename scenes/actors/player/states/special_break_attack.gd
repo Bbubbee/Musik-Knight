@@ -21,10 +21,6 @@ var attack_breaks = [
 			ArrowAttackData.new().init([2], 0.15, false, 0.0, 700, 30),
 		],
 	]
-
-
-func _ready() -> void:
-	Events.attack_break_end.connect(_on_attack_break_end)
 	
 
 func enter(_enter_params = null):
@@ -35,16 +31,31 @@ func enter(_enter_params = null):
 	attack_break()
 
 func attack_break():	
+	Events.clear_all_attack_breaks.emit()
 	break_menu.choose_break_ability()
 	var _ability = await break_menu.option_chosen
 	
 	break_bar.reset_break_bar()
-	Events.attack_break.emit(attack_breaks.pick_random(), actor) 
+	Events.attack_break.emit(attack_breaks.pick_random(), actor, Constants.BREAK_TYPE.SPECIAL) 
+	
+	# The special attack break has been completed by the player. 
+	# Determine the outcome of the 
+	var _score = await Events.attack_break_completed
+	
+	if _ability == "Heal": 
+		Events.change_players_health.emit(75)
+	elif _ability == "Buff":
+		Events.change_players_health.emit(80)
+	elif _ability == "Damage":
+		Events.change_enemies_health.emit(-80)
+	elif _ability == "Debuff":
+		Events.change_enemies_health.emit(-80)
 
+	
+	# Resume playing from the special break attack.
+	Events.pause_game.emit(false) 
+	transition.emit(self, "idle") 
+	
+	
 
-func _on_attack_break_end(caster: Actor):
-	if caster == actor: 
-		await get_tree().create_timer(1).timeout
-		Events.pause_game.emit(false) 
-		transition.emit(self, "idle") 
 		

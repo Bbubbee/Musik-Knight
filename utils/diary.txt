@@ -56,4 +56,24 @@ I don't know what to do now. Should I fine tune and quickly move into a
 playtesting phase? 
 
 I think custom attacks might be the way to go. If I can figure out a way
-to do this. dddddddddddd
+to do this. 
+
+
+16/11/26
+I need to return the outcome of an attack break.
+I need to distinguish between attack breaks and intertwined arrow/basic attacks. 
+Attack breaks are the special attack that does something if successful.
+The regular attacks don't have an effect after. They are just to prevent damage from the enemy and build meter. 
+Should the arrow presser be in the break attack manager? 
+
+
+19/11/26
+What's next?
+
+To tell Chris: 
+	Because I don't have any internet to write it elsewhere. 
+	* I cannot communicate properly. That makes me frustrated. I feel like I'm going to lose my mind. I feel like I'm on an island.
+	There is no one for me.
+	* So tired. Physically sleepy. Emotionally exhausted. 
+	* I'm so alone. I'm afraid there is no one for me and I'm going to be alone forever. 
+	* I am afraid that I will never be able to express myself. These frustrations and agony is eating me alive. 

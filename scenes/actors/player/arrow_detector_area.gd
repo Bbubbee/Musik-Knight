@@ -107,21 +107,26 @@ func press_lane(dir: int = 0) -> void:
 	
 		var max_dist = arrow.physics_shape.shape.radius/2 + arrow_detector_shape.shape.size.y/2
 		
+		var score: int = 0 
+		
 		# Get points based on how close it is to 0. (max is 106 TEMP)
 		if dist < max_dist*0.35:
 			Events.spawn_score_indicator.emit(dir, "PERFECT!")
+			score = 3
 
 		elif dist < max_dist*0.5:
 			Events.spawn_score_indicator.emit(dir, "Great!")
+			score = 2
 
 		elif dist < max_dist*0.75:
 			Events.spawn_score_indicator.emit(dir, "Good")
+			score = 1
 		
 		if arrow.caster is Enemy:
 			Events.change_players_break_value.emit(5) 
 			
 		# Clear the arrow.
-		arrow.remove_arrow()
+		arrow.remove_arrow(0.0, score)
 
 
 # Checks if a body exited is a held arrow.

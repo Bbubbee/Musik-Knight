@@ -18,5 +18,5 @@ func attack_basic(dir: int = 0):
 
 func on_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
-		transition.emit(self, "breakattack")
+		transition.emit(self, "specialbreakattack")
 		

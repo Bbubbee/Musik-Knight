@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bijj1v8efwgfm"]
+
+[ext_resource type="Script" uid="uid://mqnmuqlcl360" path="res://scenes/actors/player/sequence_manager.gd" id="1_8vsnc"]
+
+[node name="ComboManager" type="Node" unique_id=653627658]
+script = ExtResource("1_8vsnc")
+
+[node name="ComboTimer" type="Timer" parent="." unique_id=725619645]
+one_shot = true
+
+[connection signal="timeout" from="ComboTimer" to="." method="_on_combo_timer_timeout"]
