@@ -22,7 +22,7 @@ signal health_changed(cur_health: float, max_health: float)
 
 @export var base_max_health: float = 100.0 
 @export var base_defense: float = 100.0
-@export var base_attack: float = 10.0
+@export var base_attack: float = 35.0
 @export var experience: float = 0.0: set = _on_experience_set
 
 var level: float: 
@@ -53,12 +53,12 @@ func _init():
 func add_buff(buff: StatBuff):
 	stat_buffs.append(buff) 
 	recalculate_stats.call_deferred()
-	print('adding buff')
 	
 
 func remove_buff(buff: StatBuff):
 	stat_buffs.erase(buff) 
-	recalculate_stats.call_deferred()
+	#recalculate_stats.call_deferred()
+	recalculate_stats()
 
 
 func setup_stats() -> void:
@@ -66,7 +66,6 @@ func setup_stats() -> void:
 	health = current_max_health
 
 func recalculate_stats():
-	print("recalculating stats")
 	var stat_multipliers: Dictionary = {}  # Amount to multiply included stats by.
 	var stat_addends: Dictionary = {}  # Amount to add to included stats.
 	
@@ -97,8 +96,6 @@ func recalculate_stats():
 	for stat_name in stat_multipliers: 
 		var cur_property_name: String = str("current_" + stat_name)
 		set(cur_property_name, get(cur_property_name) * stat_multipliers[stat_name] )
-		
-		print("I have a multipler buff: ", stat_name, ". Stat change: ", stat_multipliers[stat_name])
 	
 	for stat_name in stat_addends: 
 		var cur_property_name: String = str("current_" + stat_name)

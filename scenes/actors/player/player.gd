@@ -16,25 +16,6 @@ func _ready() -> void:
 	Events.change_players_health.connect(_on_change_players_health)
 	Events.level_over.connect(_on_level_over)
 	player_state_machine.init(self)
-	
-	#print(stats.current_attack)
-	
-	var new_buff = StatBuff.new(
-			Stats.BuffableStats.ATTACK, 
-			2, 
-			StatBuff.BuffType.MULTIPLY
-		)
-	
-	#print(new_buff.stat)
-	
-	stats.add_buff(new_buff) 
-	
-	
-	#print(stats.current_attack)
-
-	
-	
-	
 
 func _on_change_players_health(change: int):
 	health_component.health += change

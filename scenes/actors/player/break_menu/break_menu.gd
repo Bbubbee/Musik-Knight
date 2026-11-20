@@ -28,7 +28,7 @@ func _input(event: InputEvent) -> void:
 		return_break_ability("Heal")
 
 	if event.is_action_pressed("arrow_up"):
-		return_break_ability("Poison")
+		return_break_ability("Buff")
 
 	if event.is_action_pressed("arrow_right"):
 		return_break_ability("Damage")

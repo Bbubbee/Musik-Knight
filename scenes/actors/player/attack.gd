@@ -1,11 +1,9 @@
 extends PlayerState
 
-@export var damage: float = 38.0
-@export var combo_damage: float = 100.0
-
 @export var attack_controller: AttackController
 
-
+# Buff: 
+#StatBuff.new(Stats.BuffableStats.ATTACK, 2, StatBuff.BuffType.MULTIPLY)
 
 func init() -> void:
 	actor.player_attack_basic.finished_attacking.connect(_on_attack_finished)
@@ -18,8 +16,9 @@ func enter(_enter_params = null):
 	var dir = _enter_params
 	var current_combo = actor.combo_manager.add_new_attack(dir) 
 	
-	var damage_to_deal: float = damage
-	if current_combo: damage_to_deal = combo_damage
+	var damage_to_deal: float = actor.stats.current_attack
+	print(actor.stats.current_attack)
+	if current_combo: damage_to_deal = damage_to_deal * 3
 	attack_controller.attack(dir, damage_to_deal)
 
 

@@ -45,7 +45,7 @@ func attack_break():
 	if _ability == "Heal": 
 		Events.change_players_health.emit(75)
 	elif _ability == "Buff":
-		Events.change_players_health.emit(80)
+		actor.stats.add_buff(StatBuff.new(Stats.BuffableStats.ATTACK, 1.65, StatBuff.BuffType.MULTIPLY))
 	elif _ability == "Damage":
 		Events.change_enemies_health.emit(-80)
 	elif _ability == "Debuff":
