@@ -43,7 +43,6 @@ func _on_break_attack_done_spawning(break_attack: BreakAttack, success: bool):
 	if break_attack.type == Constants.BREAK_TYPE.SPECIAL: return
 	
 	if success: 
-		print("Successfully completed break attack")
 		Events.attack_break_end.emit(break_attack.caster)
 	else: print("Failed to complete break attack")
 

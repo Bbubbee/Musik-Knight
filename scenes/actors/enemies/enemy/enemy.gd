@@ -4,6 +4,7 @@ class_name Enemy
 @export var break_limit: int = 4  # The number of times needed to be parried to be broken.
 @export var parry_refresh_length: float = 6
 @export var attack_damage: float = 30
+@export var stats: Stats
 
 @onready var parry_refresh_timer: Timer = $ParryRefreshTimer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -67,9 +68,11 @@ func _on_change_enemies_health(change: float):
 	var state: String = state_machine.current_state.name.to_lower()
 
 	if state == "broken":
-		health_component.health += change
+		#health_component.health += change
+		self.stats.health += change 
 	else: 
-		health_component.health += change/2
+		#health_component.health += change/2
+		self.stats.health += change / 2
 
 
 # The level is over. 
@@ -77,7 +80,6 @@ func _on_change_enemies_health(change: float):
 # This is likely to be called if the enemy slays the player.
 func _on_level_over():
 	if is_dead: return
-	print(state_machine.current_state)
 	var state = state_machine.current_state
 	state.transition.emit(state, "idle") 
 

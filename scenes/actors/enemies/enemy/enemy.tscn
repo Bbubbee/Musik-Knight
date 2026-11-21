@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d4npp8eq3sf6w"]
 
 [ext_resource type="Script" uid="uid://dg848ovgdynpj" path="res://scenes/actors/enemies/enemy/enemy.gd" id="1_umc6n"]
+[ext_resource type="Resource" uid="uid://127abkk7rt58" path="res://resources/stats/data/enemy_stats.tres" id="2_fy6lv"]
 [ext_resource type="PackedScene" uid="uid://dw5fdg8s00p7i" path="res://utils/components/state_machines/state_machine.tscn" id="2_wca1c"]
 [ext_resource type="Script" uid="uid://ch76ingdwgwvn" path="res://scenes/actors/enemies/enemy/states/thinking.gd" id="3_20wx3"]
 [ext_resource type="Script" uid="uid://dk36wugbm7gae" path="res://scenes/actors/enemies/enemy/states/attack.gd" id="4_22d5t"]
@@ -331,6 +332,7 @@ script = ExtResource("1_umc6n")
 break_limit = 6
 parry_refresh_length = 5.5
 attack_damage = 46.0
+stats = ExtResource("2_fy6lv")
 
 [node name="ParryRefreshTimer" type="Timer" parent="." unique_id=910510779]
 wait_time = 6.0
@@ -378,6 +380,7 @@ script = ExtResource("11_gl32a")
 
 [node name="HealthComponent" parent="." unique_id=810108133 node_paths=PackedStringArray("pixel_progress_bar") instance=ExtResource("5_hmtcp")]
 pixel_progress_bar = NodePath("../PixelProgressBar")
+stats = ExtResource("2_fy6lv")
 max_health = 1000.0
 
 [node name="CharacterSprite" type="Sprite2D" parent="." unique_id=391592614]

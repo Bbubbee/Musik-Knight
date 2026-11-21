@@ -1,7 +1,7 @@
 extends Resource
 class_name Stats
 
-@warning_ignore_start("unused_signal")
+#@warning_ignore_start("unused_signal")
 
 const BASE_LEVEL_XP: float = 100.0
 
@@ -17,7 +17,6 @@ const STAT_CURVES: Dictionary[BuffableStats, Curve] = {
 	BuffableStats.DEFENSE: preload("uid://bpu75camf85yb"),
 }
 
-signal health_depleted 
 signal health_changed(cur_health: float, max_health: float)
 
 @export var base_max_health: float = 100.0 
@@ -35,8 +34,8 @@ var stat_buffs: Array[StatBuff]
 
 func _on_health_set(new_val: float) -> void:
 	health = clampf(new_val, 0, current_max_health)
-	if health <= 0: 
-		health_depleted.emit() 
+	#print(health)
+	health_changed.emit(health, base_max_health) 
 
 
 func _on_experience_set(new_val: float):
@@ -57,8 +56,8 @@ func add_buff(buff: StatBuff):
 
 func remove_buff(buff: StatBuff):
 	stat_buffs.erase(buff) 
-	#recalculate_stats.call_deferred()
-	recalculate_stats()
+	recalculate_stats.call_deferred()
+	#recalculate_stats()
 
 
 func setup_stats() -> void:
