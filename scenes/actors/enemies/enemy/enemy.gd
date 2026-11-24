@@ -12,7 +12,6 @@ class_name Enemy
 @onready var pixel_progress_bar: PixelProgressBar = $PixelProgressBar
 @onready var health_component = $HealthComponent
 
-var _attack_dir: Constants.DIR
 var parried_counter: int:  # The number of times the enemy has been parried.
 	set(val):
 		parried_counter = max(0, val) 
@@ -29,8 +28,8 @@ func _ready() -> void:
 
 
 # NOTE: Used in animations. 
-func set_contact(contacting: bool):
-	Events._enemy_contact_player.emit(contacting, self._attack_dir, stats.current_attack)
+func set_contact(is_contacting: bool, direction: Constants.DIR):
+	Events._enemy_contact_player.emit(is_contacting, direction, stats.current_attack)
 	
 
 func _on_got_parried(success: bool):
@@ -68,10 +67,10 @@ func _on_change_enemies_health(change: float):
 
 	if state == "broken":
 		health_component.health += change
-		#self.stats.health += change 
+		self.stats.health += change 
 	else: 
 		health_component.health += change/2
-		#self.stats.health += change / 2
+		self.stats.health += change / 2
 
 
 # The level is over. 
@@ -87,3 +86,8 @@ func _on_parry_refresh_timer_timeout() -> void:
 	parry_refresh_timer.start(parry_refresh_length)
 	self.parried_counter -= 1
 	
+
+# Causes the enemy to attack.
+# The animation player takes care of the logic for the attack.
+func attack(dir: Constants.DIR):
+	self.animation_player.play("attack_"+Constants.get_string_from_dir(dir))

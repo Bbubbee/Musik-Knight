@@ -15,9 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://cd3gwv62kmtho" path="res://scenes/actors/enemies/enemy/assets/sprite_sheet_3.png" id="9_utf64"]
 [ext_resource type="Script" uid="uid://c0e2kc4qkx6rv" path="res://scenes/actors/enemies/enemy/states/die.gd" id="10_gl32a"]
 [ext_resource type="Script" uid="uid://cgrjn2ep1s6f6" path="res://scenes/actors/enemies/enemy/states/sync_attack.gd" id="11_gl32a"]
+[ext_resource type="Script" uid="uid://dvo5k5ufv2qeq" path="res://scenes/actors/enemies/enemy/states/combo_attack.gd" id="13_5gylb"]
 [ext_resource type="Script" uid="uid://bd0ock4mip4yn" path="res://resources/stats/stats.gd" id="14_4mfix"]
 
-[sub_resource type="Resource" id="Resource_4mfix"]
+[sub_resource type="Resource" id="Resource_5gylb"]
 resource_local_to_scene = true
 script = ExtResource("14_4mfix")
 base_max_health = 1000.0
@@ -93,10 +94,10 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.4, 1.1),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [true],
+"args": [true, 2],
 "method": &"set_contact"
 }, {
-"args": [false],
+"args": [false, 2],
 "method": &"set_contact"
 }]
 }
@@ -127,10 +128,10 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.4, 1.1),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [true],
+"args": [true, 0],
 "method": &"set_contact"
 }, {
-"args": [false],
+"args": [false, 0],
 "method": &"set_contact"
 }]
 }
@@ -161,10 +162,10 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.4, 1.1),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [true],
+"args": [true, 3],
 "method": &"set_contact"
 }, {
-"args": [false],
+"args": [false, 3],
 "method": &"set_contact"
 }]
 }
@@ -195,10 +196,10 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.4, 1.1),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [true],
+"args": [true, 1],
 "method": &"set_contact"
 }, {
-"args": [false],
+"args": [false, 1],
 "method": &"set_contact"
 }]
 }
@@ -335,7 +336,7 @@ _data = {
 &"special_attack": SubResource("Animation_en2ea")
 }
 
-[sub_resource type="Resource" id="Resource_5gylb"]
+[sub_resource type="Resource" id="Resource_u4n3p"]
 resource_local_to_scene = true
 script = ExtResource("14_4mfix")
 base_max_health = 1000.0
@@ -392,9 +393,12 @@ script = ExtResource("10_gl32a")
 [node name="SyncAttack" type="Node" parent="StateMachine" unique_id=352523696]
 script = ExtResource("11_gl32a")
 
+[node name="ComboAttack" type="Node" parent="StateMachine" unique_id=491505281]
+script = ExtResource("13_5gylb")
+
 [node name="HealthComponent" parent="." unique_id=810108133 node_paths=PackedStringArray("pixel_progress_bar") instance=ExtResource("5_hmtcp")]
 pixel_progress_bar = NodePath("../PixelProgressBar")
-stats = SubResource("Resource_4mfix")
+stats = SubResource("Resource_5gylb")
 max_health = 1000.0
 
 [node name="CharacterSprite" type="Sprite2D" parent="." unique_id=391592614]
@@ -410,7 +414,7 @@ offset_left = -338.0
 offset_top = -336.0
 offset_right = 337.0
 offset_bottom = -285.0
-stats = SubResource("Resource_5gylb")
+stats = SubResource("Resource_u4n3p")
 
 [connection signal="timeout" from="ParryRefreshTimer" to="." method="_on_parry_refresh_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Thinking/ThinkingTimer" to="StateMachine/Thinking" method="_on_thinking_timer_timeout"]
@@ -420,3 +424,4 @@ stats = SubResource("Resource_5gylb")
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Attack" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/CustomAttack" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/SyncAttack" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/ComboAttack" method="_on_animation_player_animation_finished"]

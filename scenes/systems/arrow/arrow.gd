@@ -123,22 +123,19 @@ func remove_arrow(pos_y: float = 0.0, score: int = 0):
 	held_sprite.hide()
 	line_2d.hide()
 	
-	arrow_removed.emit(self, score)
-	
 	await explosion_particle.finished
 	
 	# When arrow is removed, give the outcome to the break attack for storage. 
 	# Outcome is based on how it was/wasn't pressed. "The score". 
+	arrow_removed.emit(self, score)
 	
 	# Damage the player if the score is negative.
 	if score < 0: 
 		Events.change_players_health.emit(damage)
-		
 	
 	self.queue_free()
 	
-
-
+	
 func damage_player(): 
 	Events.change_players_health.emit(damage)
 	self.queue_free()

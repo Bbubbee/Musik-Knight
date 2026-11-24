@@ -219,6 +219,7 @@ script = ExtResource("9_i174x")
 position = Vector2(9, 481)
 script = ExtResource("17_yab6n")
 starting_value = 0.0
+break_max_value = 3.0
 
 [node name="PixelProgressBar" parent="PlayerStateMachine/SpecialBreakAttack/BreakBar" unique_id=2077733708 instance=ExtResource("2_oj104")]
 offset_right = 59.0

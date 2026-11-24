@@ -33,15 +33,15 @@ func _on_thinking_timer_timeout():
 	
 	# Attack.
 	if decision <= 75:
-		transition.emit(self, "attack")  # Should be: attack
+		transition.emit(self, "comboattack")  # Should be: attack
 	
 	# Attack.
 	if decision <= 95:
-		transition.emit(self, "customattack")  # Should be: customattack
+		transition.emit(self, "comboattack")  # Should be: customattack
 
 	# Special (Break) attack.
 	if decision <= 100: 
-		transition.emit(self, "specialattack")  # Should be: specialattack
+		transition.emit(self, "comboattack")  # Should be: specialattack
 
 
 """
