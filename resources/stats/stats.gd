@@ -34,9 +34,8 @@ var stat_buffs: Array[StatBuff]
 
 func _on_health_set(new_val: float) -> void:
 	health = clampf(new_val, 0, current_max_health)
-	#print(health)
-	health_changed.emit(health, base_max_health) 
-
+	health_changed.emit(health, current_max_health) 	
+	
 
 func _on_experience_set(new_val: float):
 	var old_level: float = level
@@ -44,6 +43,7 @@ func _on_experience_set(new_val: float):
 	
 	if not old_level == level:
 		recalculate_stats()
+
 
 func _init():
 	setup_stats.call_deferred()
@@ -63,6 +63,7 @@ func remove_buff(buff: StatBuff):
 func setup_stats() -> void:
 	recalculate_stats()
 	health = current_max_health
+	
 
 func recalculate_stats():
 	var stat_multipliers: Dictionary = {}  # Amount to multiply included stats by.

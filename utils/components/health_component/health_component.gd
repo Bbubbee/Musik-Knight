@@ -20,8 +20,7 @@ func _ready():
 	if stats:
 		max_health = stats.current_max_health
 		if stats.has_signal("health_changed"):
-			print("Has this")
-		stats.health_changed.connect(_on_stats_health_changed)
+			stats.health_changed.connect(_on_stats_health_changed)
 		
 	if pixel_progress_bar:
 		pixel_progress_bar.max_value = max_health
@@ -29,7 +28,7 @@ func _ready():
 
 
 func _on_stats_health_changed(cur_health: float, _max_health: float):
-	print("cur_health")
+	print("do this")
 	if pixel_progress_bar:
 		pixel_progress_bar.set_value(cur_health)
 

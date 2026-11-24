@@ -44,7 +44,6 @@ func _on_break_attack_done_spawning(break_attack: BreakAttack, success: bool):
 	
 	if success: 
 		Events.attack_break_end.emit(break_attack.caster)
-	else: print("Failed to complete break attack")
 
 
 func _on_break_attack_return_outcome(break_attack: BreakAttack, score: int):

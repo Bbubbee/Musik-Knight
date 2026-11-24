@@ -2,10 +2,15 @@
 
 [ext_resource type="Script" uid="uid://dbo2c8wihjrvn" path="res://scenes/screens/main_menu/main_menu.gd" id="1_wf0jh"]
 [ext_resource type="Texture2D" uid="uid://cd3gwv62kmtho" path="res://scenes/actors/enemies/enemy/assets/sprite_sheet_3.png" id="2_xf7w6"]
+[ext_resource type="Texture2D" uid="uid://dsx0ut6wcanbh" path="res://scenes/actors/player/assets/silent_knight _ss_3.png" id="3_25jul"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_25jul"]
 atlas = ExtResource("2_xf7w6")
 region = Rect2(0, 0, 1555, 1800)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvex2"]
+atlas = ExtResource("3_25jul")
+region = Rect2(0, 0, 1920, 1620)
 
 [node name="MainMenu" type="Node2D" unique_id=1602974141]
 script = ExtResource("1_wf0jh")
@@ -14,6 +19,12 @@ script = ExtResource("1_wf0jh")
 position = Vector2(360, 329.3)
 scale = Vector2(0.8, 0.8)
 texture = SubResource("AtlasTexture_25jul")
+
+[node name="SpriteSheet" type="Sprite2D" parent="." unique_id=44646874]
+modulate = Color(0.16365051, 0.40123355, 0.55859375, 1)
+position = Vector2(329, 591.99994)
+scale = Vector2(0.59999996, 0.59999996)
+texture = SubResource("AtlasTexture_xvex2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=366283166]
 

@@ -6,19 +6,19 @@ extends PlayerState
 
 var attack_breaks = [
 		[
-			ArrowAttackData.new().init([0, 1, 3], 0.5, false, 0.0, 700, 30),
-			ArrowAttackData.new().init([0, 1], 0.5, false, 0.0, 700, 30),
-			ArrowAttackData.new().init([2], 0.25, false, 0.0, 700, 30),
-			ArrowAttackData.new().init([1, 2, 0], 0.5, false, 0.0, 700, 30),
+			ArrowAttackData.new().init([0, 1, 3], 0.5, false, 0.0, 700, 16),
+			ArrowAttackData.new().init([0, 1], 0.5, false, 0.0, 700, 16),
+			ArrowAttackData.new().init([2], 0.25, false, 0.0, 700, 16),
+			ArrowAttackData.new().init([1, 2, 0], 0.5, false, 0.0, 700, 16),
 		],
 		[
-			ArrowAttackData.new().init([0], 0.25, false, 0.0, 700, 30),
-			ArrowAttackData.new().init([0], 0.25, false, 0.0, 700, 30),
-			ArrowAttackData.new().init([3], 0.25, false, 0.0, 700, 30),
-			ArrowAttackData.new().init([0], 0.25, false, 0.0, 700, 30),
-			ArrowAttackData.new().init([1], 0.25, true, 0.5, 700, 30),
-			ArrowAttackData.new().init([2], 0.25, false, 0.0, 700, 30),
-			ArrowAttackData.new().init([2], 0.15, false, 0.0, 700, 30),
+			ArrowAttackData.new().init([0], 0.25, false, 0.0, 700, 16),
+			ArrowAttackData.new().init([0], 0.25, false, 0.0, 700, 16),
+			ArrowAttackData.new().init([3], 0.25, false, 0.0, 700, 16),
+			ArrowAttackData.new().init([0], 0.25, false, 0.0, 700, 16),
+			ArrowAttackData.new().init([1], 0.25, true, 0.5, 700, 16),
+			ArrowAttackData.new().init([2], 0.25, false, 0.0, 700, 16),
+			ArrowAttackData.new().init([2], 0.15, false, 0.0, 700, 16),
 		],
 	]
 	

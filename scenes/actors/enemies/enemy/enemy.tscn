@@ -15,6 +15,14 @@
 [ext_resource type="Texture2D" uid="uid://cd3gwv62kmtho" path="res://scenes/actors/enemies/enemy/assets/sprite_sheet_3.png" id="9_utf64"]
 [ext_resource type="Script" uid="uid://c0e2kc4qkx6rv" path="res://scenes/actors/enemies/enemy/states/die.gd" id="10_gl32a"]
 [ext_resource type="Script" uid="uid://cgrjn2ep1s6f6" path="res://scenes/actors/enemies/enemy/states/sync_attack.gd" id="11_gl32a"]
+[ext_resource type="Script" uid="uid://bd0ock4mip4yn" path="res://resources/stats/stats.gd" id="14_4mfix"]
+
+[sub_resource type="Resource" id="Resource_4mfix"]
+resource_local_to_scene = true
+script = ExtResource("14_4mfix")
+base_max_health = 1000.0
+base_attack = 48.0
+metadata/_custom_type_script = "uid://bd0ock4mip4yn"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xvex2"]
 atlas = ExtResource("9_utf64")
@@ -327,11 +335,17 @@ _data = {
 &"special_attack": SubResource("Animation_en2ea")
 }
 
+[sub_resource type="Resource" id="Resource_5gylb"]
+resource_local_to_scene = true
+script = ExtResource("14_4mfix")
+base_max_health = 1000.0
+base_attack = 48.0
+metadata/_custom_type_script = "uid://bd0ock4mip4yn"
+
 [node name="Enemy" type="Node2D" unique_id=1493822380]
 script = ExtResource("1_umc6n")
 break_limit = 6
 parry_refresh_length = 5.5
-attack_damage = 46.0
 stats = ExtResource("2_fy6lv")
 
 [node name="ParryRefreshTimer" type="Timer" parent="." unique_id=910510779]
@@ -380,7 +394,7 @@ script = ExtResource("11_gl32a")
 
 [node name="HealthComponent" parent="." unique_id=810108133 node_paths=PackedStringArray("pixel_progress_bar") instance=ExtResource("5_hmtcp")]
 pixel_progress_bar = NodePath("../PixelProgressBar")
-stats = ExtResource("2_fy6lv")
+stats = SubResource("Resource_4mfix")
 max_health = 1000.0
 
 [node name="CharacterSprite" type="Sprite2D" parent="." unique_id=391592614]
@@ -396,6 +410,7 @@ offset_left = -338.0
 offset_top = -336.0
 offset_right = 337.0
 offset_bottom = -285.0
+stats = SubResource("Resource_5gylb")
 
 [connection signal="timeout" from="ParryRefreshTimer" to="." method="_on_parry_refresh_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Thinking/ThinkingTimer" to="StateMachine/Thinking" method="_on_thinking_timer_timeout"]

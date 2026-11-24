@@ -219,7 +219,6 @@ script = ExtResource("9_i174x")
 position = Vector2(9, 481)
 script = ExtResource("17_yab6n")
 starting_value = 0.0
-break_max_value = 3.0
 
 [node name="PixelProgressBar" parent="PlayerStateMachine/SpecialBreakAttack/BreakBar" unique_id=2077733708 instance=ExtResource("2_oj104")]
 offset_right = 59.0
@@ -256,25 +255,25 @@ text = "Choose an ability"
 [node name="AbilityLabel" type="Label" parent="PlayerStateMachine/SpecialBreakAttack/BreakMenu/CanvasLayer/CenterContainer/VBoxContainer" unique_id=1358534569]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Heal!"
+text = "Heal! (left)"
 horizontal_alignment = 1
 
 [node name="AbilityLabel2" type="Label" parent="PlayerStateMachine/SpecialBreakAttack/BreakMenu/CanvasLayer/CenterContainer/VBoxContainer" unique_id=299536232]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Buff!"
+text = "Buff! (up)"
 horizontal_alignment = 1
 
 [node name="AbilityLabel3" type="Label" parent="PlayerStateMachine/SpecialBreakAttack/BreakMenu/CanvasLayer/CenterContainer/VBoxContainer" unique_id=509527033]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Damage!"
+text = "Damage! (right)"
 horizontal_alignment = 1
 
 [node name="AbilityLabel4" type="Label" parent="PlayerStateMachine/SpecialBreakAttack/BreakMenu/CanvasLayer/CenterContainer/VBoxContainer" unique_id=412480155]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Debuff!"
+text = "Debuff! (down)"
 horizontal_alignment = 1
 
 [node name="GameEnd" type="Node" parent="PlayerStateMachine" unique_id=1294774447]
