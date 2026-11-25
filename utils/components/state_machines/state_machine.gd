@@ -15,6 +15,7 @@ func _ready():
 	for child in get_children(): 
 		if child is State: 
 			states[child.name.to_lower()] = child
+			child.state_name = child.name.to_lower()
 			child.transition.connect(on_child_transition)
 
 

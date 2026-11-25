@@ -10,13 +10,6 @@ func enter(_enter_params = null):
 	thinking_timer.start(thinking_length)
 
 
-func physics_process(_delta: float):
-	# The enemy has been parried a number of times.
-	# They have become broken. 
-	if actor.parried_counter >= actor.break_limit: 
-		transition.emit(self, "broken") 
-
-
 func on_input(event: InputEvent) -> void:
 	if event.is_action_pressed("dev_enemy_atk_2"):
 		transition.emit(self, "specialattack") 
@@ -33,15 +26,15 @@ func _on_thinking_timer_timeout():
 	
 	# Attack.
 	if decision <= 75:
-		transition.emit(self, "comboattack")  # Should be: attack
+		transition.emit(self, "attack")  # Should be: attack
 	
 	# Attack.
 	if decision <= 95:
-		transition.emit(self, "comboattack")  # Should be: customattack
+		transition.emit(self, "customattack")  # Should be: customattack
 
 	# Special (Break) attack.
 	if decision <= 100: 
-		transition.emit(self, "comboattack")  # Should be: specialattack
+		transition.emit(self, "specialattack")  # Should be: specialattack
 
 
 """

@@ -38,11 +38,11 @@ func _on_got_parried(success: bool):
 	if success:
 		self.parry_refresh_timer.start(parry_refresh_length)
 		self.parried_counter += 1 
-		var state = state_machine.current_state
+		var state: State = state_machine.current_state
 		if self.parried_counter >= break_limit:
 			state.transition.emit(state, "broken")
 		else:
-			state.transition.emit(state, "parried")
+			state.transition.emit(state, "parried", {"previous_state": state.state_name})
 
 
 func _on_health_component_die():
